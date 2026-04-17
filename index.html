@@ -27,16 +27,16 @@
             min-height: 100vh;
         }
 
-        /* 1. WIDENED CORPORATE REGISTRY (Edge-to-Edge) */
+        /* 1. CORPORATE REGISTRY HEADER (Edge-to-Edge) */
         #corporate-registry {
             position: fixed;
             top: 0;
             width: 100%;
             height: 48px;
             display: flex;
-            justify-content: space-between; /* Pins items to the far left and right */
+            justify-content: space-between;
             align-items: center;
-            padding: 0 40px; /* Adjust this to hit your "walls" perfectly */
+            padding: 0 40px;
             font-size: 0.55rem;
             letter-spacing: 0.3em;
             color: #444;
@@ -47,7 +47,7 @@
 
         .corp-name { color: var(--platinum-gold); font-weight: 400; }
 
-        /* 2. TICKER */
+        /* 2. ALĒTHEIA™ TICKER */
         #aletheia-ticker {
             position: fixed;
             top: 48px;
@@ -78,7 +78,7 @@
 
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* 3. BRANDING */
+        /* 3. CENTERED BRANDING */
         header {
             margin-top: calc(1.5in + 80px);
             text-align: center;
@@ -103,10 +103,10 @@
             text-transform: uppercase;
         }
 
-        /* 4. MISSION CONTENT */
+        /* 4. CONTENT BODY */
         .content-body {
             max-width: 850px;
-            margin: 100px auto;
+            margin: 80px auto;
             text-align: center;
             padding: 0 60px;
         }
@@ -115,45 +115,37 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.5rem;
             letter-spacing: 0.15em;
-            color: var(--snow-white);
             margin-bottom: 40px;
             text-transform: uppercase;
         }
 
         .mission-section p {
             font-weight: 100;
-            line-height: 2;
+            line-height: 2.2;
             letter-spacing: 0.08em;
             font-size: 1.1rem;
             color: #AAA;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
-        .logic-separator {
-            width: 40px;
-            height: 1px;
-            background: var(--platinum-gold);
-            margin: 50px auto;
-        }
-
-        .mission-section strong { color: var(--platinum-gold); font-weight: 400; }
-
-        /* 5. TIGHTENED FOOTER */
+        /* 5. ULTRA-SLIM REBALANCED FOOTER */
         footer {
-            padding: 30px 40px; /* Reduced padding from 60px to 30px */
-            font-size: 0.55rem;
-            letter-spacing: 0.2em;
+            padding: 10px 40px; /* Highly shrunken padding */
+            min-height: 40px;   /* Targeted 1/3 height of previous */
+            font-size: 0.5rem;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            color: #555;
-            display: flex;
-            justify-content: space-between;
+            color: #444;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* Three balanced columns */
             align-items: center;
             border-top: 1px solid var(--border-glow);
             background: #000;
         }
 
-        .footer-column { display: flex; flex-direction: column; gap: 5px; }
-        .white-label { color: var(--platinum-gold); font-weight: 400; }
+        .footer-col { display: flex; flex-direction: column; gap: 2px; }
+        .white-label-callout { color: var(--platinum-gold); font-weight: 400; }
+        .text-center { text-align: center; }
         .text-right { text-align: right; }
         a { color: inherit; text-decoration: none; }
     </style>
@@ -174,7 +166,6 @@
             <span class="ticker-unit"><span style="color:var(--platinum-gold)">XMR/USD</span> 128.40</span>
             <span class="ticker-unit"><span style="color:var(--platinum-gold)">KAS/USD</span> 0.168</span>
             <span class="ticker-unit"><span style="color:var(--platinum-gold)">BTC/USD</span> 64,231.00</span>
-            <span class="ticker-unit"><span style="color:var(--platinum-gold)">ETH/USD</span> 3,452.12</span>
         </div>
     </div>
 
@@ -189,23 +180,25 @@
             <p>
                 The promise of decentralization has been betrayed. What began as a tool to dismantle the concentration of wealth has been co-opted by a new class of digital gatekeepers.
             </p>
-            <div class="logic-separator"></div>
             <p>
-                <strong>MAHIHKAN</strong> was authored on a handheld device by an architect with a mission to halt this divergence. We provide the raw, unmanipulated signal of the global ledger.
+                <strong>MAHIHKAN</strong> was authored on a handheld device by an architect with a mission to halt this divergence. This is the Great Correction.
             </p>
         </section>
     </main>
 
     <footer>
-        <div class="footer-column">
-            <span class="white-label">White-Label Enquiries</span>
-            <span><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></span>
+        <div class="footer-col">
             <span><a href="mailto:ArcherChainAnalytics@mahihkan.com">ArcherChainAnalytics@mahihkan.com</a></span>
+            <span>(306) 912-9347</span>
         </div>
         
-        <div class="footer-column text-right">
+        <div class="footer-col text-center">
+            <span class="white-label-callout">White-Label Enquiries</span>
+            <span><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></span>
+        </div>
+
+        <div class="footer-col text-right">
             <span>Saskatoon, Saskatchewan</span>
-            <span>(306) 912-9347</span>
             <span>© 2026 ARCHER FAMILY TRUST</span>
         </div>
     </footer>
