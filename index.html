@@ -3,51 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archer Chain Analytics | Enterprise Data Solutions</title>
+    <title>MAHIHKAN | ARCHER CHAIN ANALYTICS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Inter:wght@100;300;400;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #00ff88; --bg: #0d1117; --card: #161b22; --text: #c9d1d9; }
-        body { font-family: sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.6; }
-        .hero { padding: 80px 20px; text-align: center; background: radial-gradient(circle at top, #1e293b 0%, #0d1117 100%); border-bottom: 1px solid #30363d; }
-        h1 { color: #fff; font-size: 3rem; margin: 0; }
-        .enterprise-badge { display: inline-block; padding: 5px 15px; background: var(--primary); color: #000; font-weight: bold; border-radius: 20px; font-size: 0.8rem; margin-bottom: 20px; }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; }
-        .box { background: var(--card); padding: 30px; border-radius: 8px; border: 1px solid #30363d; }
-        h2 { color: #fff; }
-        .bank-info { border-left: 4px solid var(--primary); padding-left: 20px; margin: 40px 0; }
-        footer { text-align: center; padding: 40px; font-size: 0.9rem; border-top: 1px solid #30363d; }
+        :root {
+            --onyx: #050505;
+            --platinum-gold: #C5A059;
+            --snow-white: #FBFCFF;
+            --blood-red: #8B0000;
+            --border-glow: rgba(197, 160, 89, 0.08);
+            --ticker-bg: #000000;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--onyx);
+            color: var(--snow-white);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* 1. CORPORATE REGISTRY HEADER (Top 0.5") */
+        #corporate-registry {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 48px; /* Approx 0.5in */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
+            color: #444;
+            text-transform: uppercase;
+            z-index: 10001;
+            background: var(--onyx);
+        }
+
+        .corp-name { color: var(--platinum-gold); font-weight: 400; margin: 0 40px; }
+
+        /* 2. ALĒTHEIA™ LIVE TICKER (1" Height, 0.5" Offset) */
+        #aletheia-ticker {
+            position: fixed;
+            top: 48px;
+            height: 96px; /* Approx 1in */
+            width: 100%;
+            background: var(--ticker-bg);
+            border-top: 1px solid var(--border-glow);
+            border-bottom: 1px solid var(--border-glow);
+            display: flex;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .ticker-wrap {
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .ticker-move {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 120s linear infinite;
+        }
+
+        .ticker-unit {
+            display: inline-block;
+            padding: 0 50px;
+            font-weight: 100;
+            letter-spacing: 0.3em;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .symbol { color: var(--platinum-gold); margin-right: 12px; }
+        .down { color: var(--blood-red); font-weight: 900; }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* 3. MAIN HEADER & LOGO SECTION */
+        header {
+            margin-top: calc(1.5in + 100px);
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .brand-mark {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin: 0;
+            color: var(--snow-white);
+            text-transform: uppercase;
+        }
+
+        .ona-signature-center {
+            color: var(--blood-red);
+            font-weight: 900;
+            font-size: 1rem;
+            letter-spacing: 0.6em;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+
+        /* 4. MISSION & PHILOSOPHY (The Great Correction) */
+        .content-body {
+            max-width: 850px;
+            margin: 120px auto;
+            text-align: center;
+            padding: 0 60px;
+        }
+
+        .mission-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 2.8rem;
+            letter-spacing: 0.15em;
+            color: var(--snow-white);
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+
+        .mission-section p {
+            font-weight: 100;
+            line-height: 2.2;
+            letter-spacing: 0.08em;
+            font-size: 1.1rem;
+            color: #AAA;
+            margin-bottom: 30px;
+        }
+
+        .logic-separator {
+            width: 40px;
+            height: 1px;
+            background: var(--platinum-gold);
+            margin: 60px auto;
+        }
+
+        .mission-section strong { color: var(--platinum-gold); font-weight: 400; }
+        .mission-section em { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.4rem; color: var(--snow-white); }
+
+        /* 5. ACCESS GATEWAY */
+        .portal-entry {
+            margin: 80px 0 150px 0;
+            text-align: center;
+        }
+
+        .request-btn {
+            font-weight: 100;
+            color: #666;
+            text-decoration: none;
+            letter-spacing: 0.5em;
+            font-size: 0.7rem;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 10px;
+            transition: all 0.8s ease;
+            text-transform: uppercase;
+        }
+
+        .request-btn:hover {
+            color: var(--snow-white);
+            border-bottom: 1px solid var(--blood-red);
+        }
+
+        /* 6. INSTITUTIONAL FOOTER */
+        footer {
+            padding: 60px 80px;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #555;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: flex-end;
+            border-top: 1px solid var(--border-glow);
+            background: #000;
+        }
+
+        .footer-left span, .footer-right span { display: block; margin-bottom: 8px; }
+        .white-label { color: var(--platinum-gold); font-weight: 400; }
+        .footer-right { text-align: right; }
+        a { color: inherit; text-decoration: none; transition: color 0.3s; }
+        a:hover { color: var(--snow-white); }
+
+        @media (max-width: 768px) {
+            footer { grid-template-columns: 1fr; text-align: center; padding: 40px 20px; }
+            .footer-right { text-align: center; margin-top: 20px; }
+            header { margin-top: 2.5in; }
+        }
     </style>
 </head>
 <body>
 
-<section class="hero">
-    <div class="enterprise-badge">GITHUB ENTERPRISE PARTNER</div>
-    <h1>Archer Chain Analytics</h1>
-    <p style="font-size: 1.2rem; color: #8b949e;">Secure Data Staging | Intellectual Property Governance | Enterprise Solutions</p>
-</section>
-
-<div class="container">
-    <div class="bank-info">
-        <h2>Corporate Overview</h2>
-        <p>Archer Chain Analytics provides proprietary software solutions for secure digital asset management and GitHub Enterprise staging. We specialize in protecting intellectual property through automated governance and secure deployment pipelines.</p>
+    <div id="corporate-registry">
+        <span>BN# 754975035</span>
+        <span class="corp-name">Archer Chain Analytics</span>
+        <span>GST/HST 754975035 RT001</span>
     </div>
 
-    <div class="grid">
-        <div class="box">
-            <h3>GitHub Staging v1.0</h3>
-            <p>Our flagship tool for secure, manual-to-managed repository migration. Built for Enterprise-level IP protection.</p>
-        </div>
-        <div class="box">
-            <h3>Consultancy</h3>
-            <p>Providing deep-dive analytics and structural data oversight for independent and corporate entities.</p>
+    <div id="aletheia-ticker">
+        <div class="ticker-move">
+            <span class="ticker-unit"><span class="symbol">BTC/USD</span> 64,231.00</span>
+            <span class="ticker-unit"><span class="symbol">ETH/USD</span> 3,452.12 <span class="down">▼ 0.8%</span></span>
+            <span class="ticker-unit"><span class="symbol">SOL/USD</span> 142.05</span>
+            <span class="ticker-unit"><span class="symbol">XMR/USD</span> 128.40</span>
+            <span class="ticker-unit"><span class="symbol">KAS/USD</span> 0.168</span>
+            <span class="ticker-unit"><span class="symbol">ADA/USD</span> 0.45</span>
+            <span class="ticker-unit"><span class="symbol">DOT/USD</span> 7.12</span>
+            <span class="ticker-unit"><span class="symbol">BTC/USD</span> 64,231.00</span>
+            <span class="ticker-unit"><span class="symbol">ETH/USD</span> 3,452.12 <span class="down">▼ 0.8%</span></span>
+            <span class="ticker-unit"><span class="symbol">SOL/USD</span> 142.05</span>
+            <span class="ticker-unit"><span class="symbol">XMR/USD</span> 128.40</span>
         </div>
     </div>
-</div>
 
-<footer>
-    <p>&copy; 2026 Archer Chain Analytics. All Rights Reserved.</p>
-    <p>Administrative HQ: mahihkan.com</p>
-</footer>
+    <header>
+        <h1 class="brand-mark">MAHIHKAN</h1>
+        <div class="ona-signature-center">TANSI. ONA.</div>
+    </header>
+
+    <main class="content-body">
+        <section class="mission-section">
+            <h2>The Great Deviation</h2>
+            <p>
+                The promise of decentralization has been betrayed. What began as a tool to dismantle the concentration of wealth has been co-opted by a new class of digital gatekeepers. We have watched the "Institutional Elite" enter this space not to distribute power, but to colonize it—using blockchain to widen the very class divisions the technology was meant to heal.
+            </p>
+            
+            <div class="logic-separator"></div>
+
+            <p>
+                <strong>MAHIHKAN</strong> was not conceived in a corporate lab. It was born on the edge, authored on a handheld device by an architect with a mission to halt this divergence. In a world distracted by synthetic AI and "lipstick-covered" metrics, we provide the raw, unmanipulated signal of the global ledger.
+            </p>
+            <p>
+                We operate on the <em>Platinum Standard</em> because sovereignty cannot exist without uncorrupted information. This is the Great Correction.
+            </p>
+        </section>
+
+        <div class="portal-entry">
+            <a href="mailto:sales@mahihkan.com" class="request-btn">Request Institutional Access</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-left">
+            <span class="white-label">White-Label Enquiries</span>
+            <span><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></span>
+            <span><a href="mailto:ArcherChainAnalytics@mahihkan.com">ArcherChainAnalytics@mahihkan.com</a></span>
+        </div>
+        
+        <div class="footer-right">
+            <span>Saskatoon, Saskatchewan</span>
+            <span>(306) 912-9347</span>
+            <span>© 2026 ARCHER FAMILY TRUST</span>
+        </div>
+    </footer>
 
 </body>
 </html>
