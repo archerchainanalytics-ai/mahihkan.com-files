@@ -12,7 +12,6 @@
             --snow-white: #FBFCFF;
             --blood-red: #8B0000;
             --border-glow: rgba(197, 160, 89, 0.08);
-            --ticker-bg: #000000;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,7 +20,6 @@
             background-color: var(--onyx);
             color: var(--snow-white);
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             display: flex;
@@ -29,15 +27,16 @@
             min-height: 100vh;
         }
 
-        /* 1. CORPORATE REGISTRY HEADER (Top 0.5") */
+        /* 1. WIDENED CORPORATE REGISTRY (Edge-to-Edge) */
         #corporate-registry {
             position: fixed;
             top: 0;
             width: 100%;
-            height: 48px; /* Approx 0.5in */
+            height: 48px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between; /* Pins items to the far left and right */
             align-items: center;
+            padding: 0 40px; /* Adjust this to hit your "walls" perfectly */
             font-size: 0.55rem;
             letter-spacing: 0.3em;
             color: #444;
@@ -46,26 +45,20 @@
             background: var(--onyx);
         }
 
-        .corp-name { color: var(--platinum-gold); font-weight: 400; margin: 0 40px; }
+        .corp-name { color: var(--platinum-gold); font-weight: 400; }
 
-        /* 2. ALĒTHEIA™ LIVE TICKER (1" Height, 0.5" Offset) */
+        /* 2. TICKER */
         #aletheia-ticker {
             position: fixed;
             top: 48px;
-            height: 96px; /* Approx 1in */
+            height: 96px;
             width: 100%;
-            background: var(--ticker-bg);
+            background: #000;
             border-top: 1px solid var(--border-glow);
             border-bottom: 1px solid var(--border-glow);
             display: flex;
             align-items: center;
             z-index: 10000;
-        }
-
-        .ticker-wrap {
-            white-space: nowrap;
-            overflow: hidden;
-            display: inline-block;
         }
 
         .ticker-move {
@@ -83,19 +76,13 @@
             text-transform: uppercase;
         }
 
-        .symbol { color: var(--platinum-gold); margin-right: 12px; }
-        .down { color: var(--blood-red); font-weight: 900; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* 3. MAIN HEADER & LOGO SECTION */
+        /* 3. BRANDING */
         header {
-            margin-top: calc(1.5in + 100px);
+            margin-top: calc(1.5in + 80px);
             text-align: center;
-            padding: 0 20px;
+            flex-grow: 1;
         }
 
         .brand-mark {
@@ -104,7 +91,6 @@
             font-weight: 300;
             letter-spacing: -0.02em;
             margin: 0;
-            color: var(--snow-white);
             text-transform: uppercase;
         }
 
@@ -117,91 +103,59 @@
             text-transform: uppercase;
         }
 
-        /* 4. MISSION & PHILOSOPHY (The Great Correction) */
+        /* 4. MISSION CONTENT */
         .content-body {
             max-width: 850px;
-            margin: 120px auto;
+            margin: 100px auto;
             text-align: center;
             padding: 0 60px;
         }
 
         .mission-section h2 {
             font-family: 'Cormorant Garamond', serif;
-            font-weight: 300;
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             letter-spacing: 0.15em;
             color: var(--snow-white);
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             text-transform: uppercase;
         }
 
         .mission-section p {
             font-weight: 100;
-            line-height: 2.2;
+            line-height: 2;
             letter-spacing: 0.08em;
             font-size: 1.1rem;
             color: #AAA;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .logic-separator {
             width: 40px;
             height: 1px;
             background: var(--platinum-gold);
-            margin: 60px auto;
+            margin: 50px auto;
         }
 
         .mission-section strong { color: var(--platinum-gold); font-weight: 400; }
-        .mission-section em { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.4rem; color: var(--snow-white); }
 
-        /* 5. ACCESS GATEWAY */
-        .portal-entry {
-            margin: 80px 0 150px 0;
-            text-align: center;
-        }
-
-        .request-btn {
-            font-weight: 100;
-            color: #666;
-            text-decoration: none;
-            letter-spacing: 0.5em;
-            font-size: 0.7rem;
-            border-bottom: 1px solid transparent;
-            padding-bottom: 10px;
-            transition: all 0.8s ease;
-            text-transform: uppercase;
-        }
-
-        .request-btn:hover {
-            color: var(--snow-white);
-            border-bottom: 1px solid var(--blood-red);
-        }
-
-        /* 6. INSTITUTIONAL FOOTER */
+        /* 5. TIGHTENED FOOTER */
         footer {
-            padding: 60px 80px;
-            font-size: 0.6rem;
+            padding: 30px 40px; /* Reduced padding from 60px to 30px */
+            font-size: 0.55rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: #555;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: flex-end;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-top: 1px solid var(--border-glow);
             background: #000;
         }
 
-        .footer-left span, .footer-right span { display: block; margin-bottom: 8px; }
+        .footer-column { display: flex; flex-direction: column; gap: 5px; }
         .white-label { color: var(--platinum-gold); font-weight: 400; }
-        .footer-right { text-align: right; }
-        a { color: inherit; text-decoration: none; transition: color 0.3s; }
-        a:hover { color: var(--snow-white); }
-
-        @media (max-width: 768px) {
-            footer { grid-template-columns: 1fr; text-align: center; padding: 40px 20px; }
-            .footer-right { text-align: center; margin-top: 20px; }
-            header { margin-top: 2.5in; }
-        }
+        .text-right { text-align: right; }
+        a { color: inherit; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -214,17 +168,13 @@
 
     <div id="aletheia-ticker">
         <div class="ticker-move">
-            <span class="ticker-unit"><span class="symbol">BTC/USD</span> 64,231.00</span>
-            <span class="ticker-unit"><span class="symbol">ETH/USD</span> 3,452.12 <span class="down">▼ 0.8%</span></span>
-            <span class="ticker-unit"><span class="symbol">SOL/USD</span> 142.05</span>
-            <span class="ticker-unit"><span class="symbol">XMR/USD</span> 128.40</span>
-            <span class="ticker-unit"><span class="symbol">KAS/USD</span> 0.168</span>
-            <span class="ticker-unit"><span class="symbol">ADA/USD</span> 0.45</span>
-            <span class="ticker-unit"><span class="symbol">DOT/USD</span> 7.12</span>
-            <span class="ticker-unit"><span class="symbol">BTC/USD</span> 64,231.00</span>
-            <span class="ticker-unit"><span class="symbol">ETH/USD</span> 3,452.12 <span class="down">▼ 0.8%</span></span>
-            <span class="ticker-unit"><span class="symbol">SOL/USD</span> 142.05</span>
-            <span class="ticker-unit"><span class="symbol">XMR/USD</span> 128.40</span>
+            <span class="ticker-unit"><span style="color:var(--platinum-gold)">BTC/USD</span> 64,231.00</span>
+            <span class="ticker-unit"><span style="color:var(--platinum-gold)">ETH/USD</span> 3,452.12</span>
+            <span class="ticker-unit"><span style="color:var(--platinum-gold)">SOL/USD</span> 142.05</span>
+            <span class="ticker-unit"><span style="color:var(--platinum-gold)">XMR/USD</span> 128.40</span>
+            <span class="ticker-unit"><span style="color:var(--platinum-gold)">KAS/USD</span> 0.168</span>
+            <span class="ticker-unit"><span style="color:var(--platinum-gold)">BTC/USD</span> 64,231.00</span>
+            <span class="ticker-unit"><span style="color:var(--platinum-gold)">ETH/USD</span> 3,452.12</span>
         </div>
     </div>
 
@@ -237,32 +187,23 @@
         <section class="mission-section">
             <h2>The Great Deviation</h2>
             <p>
-                The promise of decentralization has been betrayed. What began as a tool to dismantle the concentration of wealth has been co-opted by a new class of digital gatekeepers. We have watched the "Institutional Elite" enter this space not to distribute power, but to colonize it—using blockchain to widen the very class divisions the technology was meant to heal.
+                The promise of decentralization has been betrayed. What began as a tool to dismantle the concentration of wealth has been co-opted by a new class of digital gatekeepers.
             </p>
-            
             <div class="logic-separator"></div>
-
             <p>
-                <strong>MAHIHKAN</strong> was not conceived in a corporate lab. It was born on the edge, authored on a handheld device by an architect with a mission to halt this divergence. In a world distracted by synthetic AI and "lipstick-covered" metrics, we provide the raw, unmanipulated signal of the global ledger.
-            </p>
-            <p>
-                We operate on the <em>Platinum Standard</em> because sovereignty cannot exist without uncorrupted information. This is the Great Correction.
+                <strong>MAHIHKAN</strong> was authored on a handheld device by an architect with a mission to halt this divergence. We provide the raw, unmanipulated signal of the global ledger.
             </p>
         </section>
-
-        <div class="portal-entry">
-            <a href="mailto:sales@mahihkan.com" class="request-btn">Request Institutional Access</a>
-        </div>
     </main>
 
     <footer>
-        <div class="footer-left">
+        <div class="footer-column">
             <span class="white-label">White-Label Enquiries</span>
             <span><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></span>
             <span><a href="mailto:ArcherChainAnalytics@mahihkan.com">ArcherChainAnalytics@mahihkan.com</a></span>
         </div>
         
-        <div class="footer-right">
+        <div class="footer-column text-right">
             <span>Saskatoon, Saskatchewan</span>
             <span>(306) 912-9347</span>
             <span>© 2026 ARCHER FAMILY TRUST</span>
