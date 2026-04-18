@@ -9,7 +9,6 @@
         :root {
             --void:        #030304;
             --gold:        #a6894c;
-            --gold-dim:    rgba(166,137,76,0.12);
             --bitcoin-red: #FF0000;
             --text-mid:    #888890;
             --white:       #f0f0f4;
@@ -26,55 +25,42 @@
             font-family: var(--body);
             line-height: 1.7;
             overflow-x: hidden;
+        }
+
+        /* ── LIVE TICKER CONTAINER ── */
+        .ticker-container {
+            width: 100%;
+            height: 40px;
+            position: fixed;
+            top: 0;
+            z-index: 9999;
+            background: var(--void);
+            border-bottom: 1px solid var(--gold);
+        }
+
+        /* ── CENTERED HERO SECTION ── */
+        .hero {
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .corporate-header {
-            width: 100%;
-            padding: 15px 40px 5px 40px;
-            display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            font-family: var(--mono);
-            font-size: 8px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--gold);
+            text-align: center;
+            padding-top: 40px;
         }
-
-        .header-center {
-            font-family: var(--display);
-            font-size: 10px;
-            letter-spacing: 4px;
-            font-weight: 600;
-        }
-
-        .gold-line-top {
-            width: 100%;
-            height: 1px;
-            background: var(--gold);
-            opacity: 0.6;
-            margin-bottom: 80px;
-        }
-
-        header { text-align: center; margin-bottom: 100px; }
 
         .brand-logo {
             font-family: var(--display);
-            font-size: clamp(4rem, 10vw, 7rem);
-            letter-spacing: 0.4em;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            letter-spacing: 0.5em;
             color: var(--gold);
             text-transform: uppercase;
             font-weight: 400;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .quote-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
+            max-width: 750px;
             padding: 0 40px;
         }
 
@@ -95,54 +81,42 @@
             font-family: var(--mono);
             font-size: 0.75rem;
             margin-top: 15px;
-            letter-spacing: 0.12em;
         }
 
+        /* ── ARTICLE CONTENT ── */
         .content-body {
-            max-width: 900px;
-            margin: 100px auto 120px auto;
+            max-width: 850px;
+            margin: 0 auto 100px auto;
             padding: 0 60px;
-            flex-grow: 1;
         }
 
         .article-box h2 {
             font-family: var(--display);
             font-size: 2.2rem;
-            letter-spacing: 0.1em;
             color: var(--gold);
             margin-bottom: 60px;
             text-transform: uppercase;
             text-align: center;
-            line-height: 1.4;
         }
 
         .article-box p {
             font-weight: 300;
             line-height: 2.4;
-            letter-spacing: 0.08em;
             font-size: 1.15rem;
             color: var(--text-mid);
             margin-bottom: 40px;
             text-align: justify;
         }
 
+        /* ── FOOTER ── */
         footer {
-            width: 100%;
-            padding: 0 40px 20px 40px;
+            padding: 30px 40px;
+            border-top: 1px solid rgba(166,137,76,0.3);
             font-family: var(--mono);
-            font-size: 8px;
+            font-size: 9px;
             text-transform: uppercase;
-            letter-spacing: 2px;
             color: var(--gold);
-            margin-top: auto;
-        }
-
-        .footer-line-bottom {
-            width: 100%;
-            height: 1px;
-            background: var(--gold);
-            opacity: 0.6;
-            margin-bottom: 12px;
+            letter-spacing: 1px;
         }
 
         .footer-content {
@@ -151,34 +125,24 @@
             align-items: center;
         }
 
-        .footer-center {
-            font-family: var(--display);
-            font-size: 9px;
-            letter-spacing: 3px;
-        }
-
         a { color: inherit; text-decoration: none; }
     </style>
 </head>
 <body>
 
-    <div class="corporate-header">
-        <div>BIN754975035</div>
-        <div class="header-center">Archer Chain Analytics</div>
-        <div>GST/HST754975035RT0001</div>
+    <div class="ticker-container">
+        <script type="text/javascript" src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover="></script>
     </div>
-    <div class="gold-line-top"></div>
 
-    <header>
+    <section class="hero">
         <div class="brand-logo">MAHIHKAN</div>
-        
         <div class="quote-container">
             <span class="red-quote">
                 "A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution."
             </span>
             <span class="quote-attribution">— Satoshi N.</span>
         </div>
-    </header>
+    </section>
 
     <main class="content-body">
         <section class="article-box">
@@ -194,11 +158,10 @@
     </main>
 
     <footer>
-        <div class="footer-line-bottom"></div>
         <div class="footer-content">
-            <div class="footer-left"><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></div>
-            <div class="footer-center">Sovereignty // Integrity // Inexorabilis</div>
-            <div class="footer-right">© 2026 ALL RIGHTS RESERVED</div>
+            <div><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></div>
+            <div style="font-family: var(--display); font-size: 10px; letter-spacing: 3px;">Sovereignty // Integrity // Inexorabilis</div>
+            <div>© 2026 ALL RIGHTS RESERVED</div>
         </div>
     </footer>
 
