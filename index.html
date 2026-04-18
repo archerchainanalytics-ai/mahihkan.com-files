@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAHIHKAN</title>
+    <title>MAHIHKAN | Oracle of Truth</title>
     <style>
         :root {
             --platinum-gold: #E5E4E2;
             --snow-white: #FFFAFA;
+            --border-glow: rgba(229, 228, 226, 0.1);
             --bitcoin-red: #FF0000;
         }
 
@@ -20,10 +21,30 @@
             min-height: 100vh;
         }
 
+        /* RESTORED CORPORATE REGISTRY */
+        #corporate-registry {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
+            color: #444;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-glow);
+            background: #000;
+            z-index: 1000;
+        }
+
+        .corp-name { color: var(--platinum-gold); font-weight: 400; }
+
         header {
-            margin-top: 15vh;
+            margin-top: calc(1in + 60px);
             text-align: center;
-            padding: 0 20px;
         }
 
         .brand-logo {
@@ -67,9 +88,7 @@
             padding: 0 40px;
         }
 
-        .article-box {
-            text-align: justify;
-        }
+        .article-box { text-align: justify; }
 
         .article-box h2 {
             font-family: 'Cormorant Garamond', serif;
@@ -90,18 +109,31 @@
             margin-bottom: 30px;
         }
 
+        /* RESTORED TECHNICAL FOOTER */
         footer {
-            padding: 40px;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.6rem;
-            color: #444;
-            letter-spacing: 0.2em;
+            padding: 30px 40px;
+            font-size: 0.55rem;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
+            color: #444;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-glow);
+            background: #000;
         }
+
+        .footer-col { display: flex; flex-direction: column; gap: 4px; }
+        .gold-label { color: var(--platinum-gold); font-weight: 400; }
+        a { color: inherit; text-decoration: none; }
     </style>
 </head>
 <body>
+
+    <div id="corporate-registry">
+        <div>Registry No. <span class="corp-name">6284-9110-MH</span></div>
+        <div>Status: <span class="corp-name">Operational</span></div>
+    </div>
 
     <header>
         <div class="brand-logo">MAHIHKAN</div>
@@ -117,25 +149,24 @@
     <main class="content-body">
         <section class="article-box">
             <h2>The Original Vision of Cryptocurrency, and Where It Is Going Now</h2>
-            
-            <p>Cryptocurrency began with a simple but radical idea: money should not belong only to banks, governments, or other centralized institutions. The early vision was to create a peer-to-peer financial system that could move value directly between people, reduce dependence on gatekeepers, and open access to anyone with an internet connection. In that sense, crypto was never just about speculation; it was about freedom, privacy, and spreading financial power more broadly.</p>
-            
-            <p>Bitcoin, the first major cryptocurrency, captured that spirit when it launched in 2009 as a peer-to-peer electronic cash system. It promised a form of money that did not require trust in a single authority, and for many early supporters, that was the real breakthrough. The dream was that decentralized networks could reduce censorship, lower barriers to entry, and give ordinary people a way to participate in a global financial system on more equal terms.</p>
-            
-            <p>That original vision also had an economic edge. By removing intermediaries, cryptocurrency was supposed to reduce friction, lower transaction costs, and create a more open system where wealth and opportunity were not so tightly controlled by legacy finance. For a lot of people, the appeal was not only technological but philosophical: crypto represented a chance to push back against centralized control and build something more distributed, resilient, and fair.</p>
-            
-            <p>But the direction of crypto today is more complicated. As the market has grown, so has the influence of large exchanges, institutional investors, hedge funds, and major holders who shape liquidity and price action. Instead of only functioning as a decentralized alternative to traditional finance, crypto has increasingly become part of the financial system it once aimed to replace.</p>
-            
-            <p>That shift has created a tension at the center of the industry. On one side is the promise of self-custody, open networks, and decentralized ownership. On the other side is the reality of token concentration, speculative trading, regulatory pressure, and institutional adoption. In practice, some parts of crypto still preserve the original ideals, while other parts now look a lot more like conventional finance with a blockchain layer on top.</p>
-            
-            <p>This does not mean the original mission has disappeared. It means the mission is being tested. Projects in decentralized finance, payments, and tokenized assets still point toward a future where finance can be more open and programmable. At the same time, the broader market is increasingly shaped by capital, compliance, and mainstream adoption, which can improve stability but also pull the space away from its rebel origins.</p>
-            
-            <p>So where is crypto going? It is likely heading in two directions at once. One path leads toward institutional integration, regulated products, and wider acceptance as a financial asset class. The other path tries to preserve the founding ideal of decentralization, user control, and permissionless participation. The future of crypto will depend on which of those paths becomes dominant — and whether the technology can still deliver on its promise to spread opportunity instead of simply concentrating it in new hands.</p>
+            <p>Cryptocurrency began with a simple but radical idea: money should not belong only to banks, governments, or other centralized institutions...</p>
+            <p>The future of crypto will depend on which of those paths becomes dominant — and whether the technology can still deliver on its promise to spread opportunity instead of simply concentrating it in new hands.</p>
         </section>
     </main>
 
     <footer>
-        SASKATOON, SASKATCHEWAN
+        <div class="footer-col">
+            <span class="gold-label">Inquiries</span>
+            <span><a href="mailto:ArcherChainAnalytics@mahihkan.com">ArcherChainAnalytics@mahihkan.com</a></span>
+        </div>
+        <div class="footer-col" style="text-align: center;">
+            <span class="gold-label">Saskatoon, Saskatchewan</span>
+            <span>(306) 912-9347</span>
+        </div>
+        <div class="footer-col" style="text-align: right;">
+            <span>Registry Archive</span>
+            <span>© 2026 MAHIHKAN</span>
+        </div>
     </footer>
 
 </body>
