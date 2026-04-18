@@ -3,31 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAHIHKAN | ARCHER CHAIN ANALYTICS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Inter:wght@100;300;400;900&display=swap" rel="stylesheet">
+    <title>MAHIHKAN | Oracle of Truth</title>
     <style>
         :root {
-            --onyx: #050505;
-            --platinum-gold: #C5A059;
-            --snow-white: #FBFCFF;
-            --blood-red: #8B0000;
-            --border-glow: rgba(197, 160, 89, 0.08);
+            --platinum-gold: #E5E4E2;
+            --snow-white: #FFFAFA;
+            --border-glow: rgba(229, 228, 226, 0.1);
+            --bitcoin-red: #FF0000;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--onyx);
+            background-color: #000;
             color: var(--snow-white);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            display: flex;
-            flex-direction: column;
             min-height: 100vh;
         }
 
-        /* 1. CORPORATE REGISTRY HEADER (Edge-to-Edge) */
+        /* 1. CORPORATE REGISTRY HEADER */
         #corporate-registry {
             position: fixed;
             top: 0;
@@ -41,85 +36,78 @@
             letter-spacing: 0.3em;
             color: #444;
             text-transform: uppercase;
-            z-index: 10001;
-            background: var(--onyx);
+            border-bottom: 1px solid var(--border-glow);
+            background: #000;
+            z-index: 1000;
         }
 
         .corp-name { color: var(--platinum-gold); font-weight: 400; }
 
-        /* 2. ALĒTHEIA™ TICKER */
-        #aletheia-ticker {
-            position: fixed;
-            top: 48px;
-            height: 96px;
-            width: 100%;
-            background: #000;
-            border-top: 1px solid var(--border-glow);
-            border-bottom: 1px solid var(--border-glow);
-            display: flex;
-            align-items: center;
-            z-index: 10000;
-        }
-
-        .ticker-move {
-            display: inline-block;
-            white-space: nowrap;
-            animation: marquee 120s linear infinite;
-        }
-
-        .ticker-unit {
-            display: inline-block;
-            padding: 0 50px;
-            font-weight: 100;
-            letter-spacing: 0.3em;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-        }
-
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        /* 3. CENTERED BRANDING */
+        /* 2. CENTERED BRANDING */
         header {
-            margin-top: calc(1.5in + 80px);
+            margin-top: calc(1in + 60px);
             text-align: center;
-            flex-grow: 1;
         }
 
-        .brand-mark {
+        .brand-logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 300;
-            letter-spacing: -0.02em;
-            margin: 0;
+            font-size: 4.5rem;
+            letter-spacing: 0.4em;
+            color: var(--platinum-gold);
             text-transform: uppercase;
+            font-weight: 200;
         }
 
-        .ona-signature-center {
-            color: var(--blood-red);
-            font-weight: 900;
-            font-size: 1rem;
-            letter-spacing: 0.6em;
-            margin-top: 20px;
-            text-transform: uppercase;
+        /* 3. THE SATOSHI QUOTE (In Red) */
+        .quote-container {
+            max-width: 700px;
+            margin: 20px auto 40px auto;
+            text-align: center;
         }
 
-        /* 4. CONTENT BODY */
+        .red-quote {
+            color: var(--bitcoin-red);
+            font-family: monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            line-height: 1.6;
+        }
+
+        .quote-attribution {
+            display: block;
+            text-align: right;
+            color: var(--bitcoin-red);
+            font-family: monospace;
+            font-size: 0.7rem;
+            margin-top: 10px;
+            letter-spacing: 0.1em;
+        }
+
+        /* 4. CONTENT BODY & ARTICLE BOX */
         .content-body {
             max-width: 850px;
-            margin: 80px auto;
+            margin: 0 auto 100px auto;
             text-align: center;
             padding: 0 60px;
         }
 
-        .mission-section h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            letter-spacing: 0.15em;
-            margin-bottom: 40px;
-            text-transform: uppercase;
+        .article-box {
+            text-align: justify;
         }
 
-        .mission-section p {
+        .article-box h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            letter-spacing: 0.1em;
+            color: var(--platinum-gold);
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .article-box p {
             font-weight: 100;
             line-height: 2.2;
             letter-spacing: 0.08em;
@@ -128,22 +116,21 @@
             margin-bottom: 30px;
         }
 
-        /* 5. ULTRA-SLIM REBALANCED FOOTER */
+        /* 5. FOOTER */
         footer {
-            padding: 10px 40px; /* Highly shrunken padding */
-            min-height: 40px;   /* Targeted 1/3 height of previous */
+            padding: 20px 40px;
             font-size: 0.5rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: #444;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr; /* Three balanced columns */
+            grid-template-columns: 1fr 1fr 1fr;
             align-items: center;
             border-top: 1px solid var(--border-glow);
             background: #000;
         }
 
-        .footer-col { display: flex; flex-direction: column; gap: 2px; }
+        .footer-col { display: flex; flex-direction: column; gap: 4px; }
         .white-label-callout { color: var(--platinum-gold); font-weight: 400; }
         .text-center { text-align: center; }
         .text-right { text-align: right; }
@@ -153,36 +140,38 @@
 <body>
 
     <div id="corporate-registry">
-        <span>BN# 754975035</span>
-        <span class="corp-name">Archer Chain Analytics</span>
-        <span>GST/HST 754975035 RT001</span>
-    </div>
-
-    <div id="aletheia-ticker">
-        <div class="ticker-move">
-            <span class="ticker-unit"><span style="color:var(--platinum-gold)">BTC/USD</span> 64,231.00</span>
-            <span class="ticker-unit"><span style="color:var(--platinum-gold)">ETH/USD</span> 3,452.12</span>
-            <span class="ticker-unit"><span style="color:var(--platinum-gold)">SOL/USD</span> 142.05</span>
-            <span class="ticker-unit"><span style="color:var(--platinum-gold)">XMR/USD</span> 128.40</span>
-            <span class="ticker-unit"><span style="color:var(--platinum-gold)">KAS/USD</span> 0.168</span>
-            <span class="ticker-unit"><span style="color:var(--platinum-gold)">BTC/USD</span> 64,231.00</span>
-        </div>
+        <div>Registry No. <span class="corp-name">6284-9110-MH</span></div>
+        <div>Status: <span class="corp-name">Operational</span></div>
     </div>
 
     <header>
-        <h1 class="brand-mark">MAHIHKAN</h1>
-        <div class="ona-signature-center">TANSI. ONA.</div>
+        <div class="brand-logo">MAHIHKAN</div>
+        
+        <div class="quote-container">
+            <span class="red-quote">
+                "A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution."
+            </span>
+            <span class="quote-attribution">— Satoshi N.</span>
+        </div>
     </header>
 
     <main class="content-body">
-        <section class="mission-section">
-            <h2>The Great Deviation</h2>
-            <p>
-                The promise of decentralization has been betrayed. What began as a tool to dismantle the concentration of wealth has been co-opted by a new class of digital gatekeepers.
-            </p>
-            <p>
-                <strong>MAHIHKAN</strong> was authored on a handheld device by an architect with a mission to halt this divergence. This is the Great Correction.
-            </p>
+        <section class="article-box">
+            <h2>The Original Vision of Cryptocurrency, and Where It Is Going Now</h2>
+            
+            <p>Cryptocurrency began with a simple but radical idea: money should not belong only to banks, governments, or other centralized institutions. The early vision was to create a peer-to-peer financial system that could move value directly between people, reduce dependence on gatekeepers, and open access to anyone with an internet connection. In that sense, crypto was never just about speculation; it was about freedom, privacy, and spreading financial power more broadly.</p>
+            
+            <p>Bitcoin, the first major cryptocurrency, captured that spirit when it launched in 2009 as a peer-to-peer electronic cash system. It promised a form of money that did not require trust in a single authority, and for many early supporters, that was the real breakthrough. The dream was that decentralized networks could reduce censorship, lower barriers to entry, and give ordinary people a way to participate in a global financial system on more equal terms.</p>
+            
+            <p>That original vision also had an economic edge. By removing intermediaries, cryptocurrency was supposed to reduce friction, lower transaction costs, and create a more open system where wealth and opportunity were not so tightly controlled by legacy finance. For a lot of people, the appeal was not only technological but philosophical: crypto represented a chance to push back against centralized control and build something more distributed, resilient, and fair.</p>
+            
+            <p>But the direction of crypto today is more complicated. As the market has grown, so has the influence of large exchanges, institutional investors, hedge funds, and major holders who shape liquidity and price action. Instead of only functioning as a decentralized alternative to traditional finance, crypto has increasingly become part of the financial system it once aimed to replace.</p>
+            
+            <p>That shift has created a tension at the center of the industry. On one side is the promise of self-custody, open networks, and decentralized ownership. On the other side is the reality of token concentration, speculative trading, regulatory pressure, and institutional adoption. In practice, some parts of crypto still preserve the original ideals, while other parts now look a lot more like conventional finance with a blockchain layer on top.</p>
+            
+            <p>This does not mean the original mission has disappeared. It means the mission is being tested. Projects in decentralized finance, payments, and tokenized assets still point toward a future where finance can be more open and programmable. At the same time, the broader market is increasingly shaped by capital, compliance, and mainstream adoption, which can improve stability but also pull the space away from its rebel origins.</p>
+            
+            <p>So where is crypto going? It is likely heading in two directions at once. One path leads toward institutional integration, regulated products, and wider acceptance as a financial asset class. The other path tries to preserve the founding ideal of decentralization, user control, and permissionless participation. The future of crypto will depend on which of those paths becomes dominant — and whether the technology can still deliver on its promise to spread opportunity instead of simply concentrating it in new hands.</p>
         </section>
     </main>
 
@@ -191,7 +180,7 @@
             <span><a href="mailto:ArcherChainAnalytics@mahihkan.com">ArcherChainAnalytics@mahihkan.com</a></span>
             <span>(306) 912-9347</span>
         </div>
-        
+
         <div class="footer-col text-center">
             <span class="white-label-callout">White-Label Enquiries</span>
             <span><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></span>
