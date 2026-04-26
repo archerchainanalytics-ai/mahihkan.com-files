@@ -3,205 +3,146 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MAHIHKAN | Oracle of Truth</title>
+    <title>MAHIHKAN | Oracle of Truth — Archer Chain Analytics</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --void:        #030304;
-            --gold:        #a6894c;
-            --gold-dim:    rgba(166,137,76,0.12);
-            --bitcoin-red: #FF0000;
-            --text-mid:    #888890;
-            --white:       #f0f0f4;
-            --mono:        'IBM Plex Mono', monospace;
-            --display:     'Cinzel', serif;
-            --body:        'Barlow', sans-serif;
+            --void:#030304;--gold:#a6894c;--gold-dim:rgba(166,137,76,0.12);
+            --red:#FF0000;--mid:#888890;--white:#f0f0f4;--green:#4caf82;
+            --mono:'IBM Plex Mono',monospace;--display:'Cinzel',serif;--body:'Barlow',sans-serif;
         }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            background: var(--void);
-            color: var(--white);
-            font-family: var(--body);
-            line-height: 1.7;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* ── THE CORPORATE HEADER (The BIN/GST Look) ── */
-        .corporate-header {
-            width: 100%;
-            padding: 15px 40px 5px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: var(--mono);
-            font-size: 8px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--gold);
-        }
-
-        .header-center {
-            font-family: var(--display);
-            font-size: 10px;
-            letter-spacing: 4px;
-            font-weight: 600;
-        }
-
-        .gold-line-top {
-            width: 100%;
-            height: 1px;
-            background: var(--gold);
-            opacity: 0.6;
-            margin-bottom: 80px;
-        }
-
-        header { text-align: center; margin-bottom: 100px; }
-
-        .brand-logo {
-            font-family: var(--display);
-            font-size: clamp(4rem, 10vw, 7rem);
-            letter-spacing: 0.4em;
-            color: var(--gold);
-            text-transform: uppercase;
-            font-weight: 400;
-            margin-bottom: 40px;
-        }
-
-        .quote-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 0 40px;
-        }
-
-        .red-quote {
-            color: var(--bitcoin-red);
-            font-family: var(--mono);
-            font-size: 0.85rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            line-height: 1.8;
-            display: block;
-        }
-
-        .quote-attribution {
-            display: block;
-            text-align: right;
-            color: var(--bitcoin-red);
-            font-family: var(--mono);
-            font-size: 0.75rem;
-            margin-top: 15px;
-            letter-spacing: 0.12em;
-        }
-
-        .content-body {
-            max-width: 900px;
-            margin: 100px auto 120px auto;
-            padding: 0 60px;
-            flex-grow: 1;
-        }
-
-        .article-box h2 {
-            font-family: var(--display);
-            font-size: 2.2rem;
-            letter-spacing: 0.1em;
-            color: var(--gold);
-            margin-bottom: 60px;
-            text-transform: uppercase;
-            text-align: center;
-            line-height: 1.4;
-        }
-
-        .article-box p {
-            font-weight: 300;
-            line-height: 2.4;
-            letter-spacing: 0.08em;
-            font-size: 1.15rem;
-            color: var(--text-mid);
-            margin-bottom: 40px;
-            text-align: justify;
-        }
-
-        footer {
-            width: 100%;
-            padding: 0 40px 20px 40px;
-            font-family: var(--mono);
-            font-size: 8px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--gold);
-            margin-top: auto;
-        }
-
-        .footer-line-bottom {
-            width: 100%;
-            height: 1px;
-            background: var(--gold);
-            opacity: 0.6;
-            margin-bottom: 12px;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-center {
-            font-family: var(--display);
-            font-size: 9px;
-            letter-spacing: 3px;
-        }
-
-        a { color: inherit; text-decoration: none; }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        body{background:var(--void);color:var(--white);font-family:var(--body);line-height:1.7;overflow-x:hidden;display:flex;flex-direction:column;min-height:100vh;}
+        .corporate-header{width:100%;padding:15px 40px 5px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);}
+        .header-center{font-family:var(--display);font-size:10px;letter-spacing:4px;font-weight:600;}
+        .gold-line{width:100%;height:1px;background:var(--gold);opacity:0.6;}
+        .ticker-wrapper{width:100%;height:72px;background:#07070a;border-bottom:1px solid rgba(166,137,76,0.2);overflow:hidden;position:relative;display:flex;align-items:center;}
+        .ticker-wrapper::before,.ticker-wrapper::after{content:'';position:absolute;top:0;width:100px;height:100%;z-index:2;pointer-events:none;}
+        .ticker-wrapper::before{left:0;background:linear-gradient(to right,#07070a 40%,transparent);}
+        .ticker-wrapper::after{right:0;background:linear-gradient(to left,#07070a 40%,transparent);}
+        .ticker-track{display:flex;align-items:center;white-space:nowrap;will-change:transform;}
+        .ticker-track.animating{animation:ticker-scroll linear infinite;}
+        @keyframes ticker-scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+        .ticker-track:hover{animation-play-state:paused;}
+        .ticker-item{display:inline-flex;align-items:center;gap:10px;padding:0 32px;font-family:var(--mono);border-right:1px solid rgba(166,137,76,0.12);}
+        .ticker-symbol{color:var(--gold);font-weight:600;font-size:10px;letter-spacing:0.2em;}
+        .ticker-price{color:var(--white);font-size:12px;}
+        .ticker-change{font-size:10px;font-weight:500;}
+        .up{color:var(--green);}.down{color:var(--red);}
+        .ticker-loading{font-family:var(--mono);font-size:9px;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase;padding:0 40px;animation:pulse 1.4s ease-in-out infinite;}
+        @keyframes pulse{0%,100%{opacity:0.2}50%{opacity:0.7}}
+        .site-nav{width:100%;background:#0a0a0d;border-bottom:1px solid rgba(166,137,76,0.3);position:relative;z-index:100;}
+        .nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:stretch;padding:0 40px;}
+        .nav-item{position:relative;}
+        .nav-trigger{display:flex;align-items:center;gap:8px;padding:18px 28px;font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);cursor:pointer;border:none;background:none;transition:background 0.2s;white-space:nowrap;}
+        .nav-trigger:hover{background:var(--gold-dim);}
+        .nav-trigger .chevron{font-size:7px;opacity:0.6;transition:transform 0.2s;display:inline-block;}
+        .nav-item:hover .chevron{transform:rotate(180deg);}
+        .nav-dropdown{display:none;position:absolute;top:100%;left:0;min-width:280px;background:#0d0d10;border:1px solid rgba(166,137,76,0.25);border-top:2px solid var(--gold);z-index:200;}
+        .nav-item:hover .nav-dropdown{display:block;}
+        .nav-dropdown a{display:block;padding:14px 24px;font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;border-bottom:1px solid rgba(166,137,76,0.08);transition:color 0.2s,background 0.2s;}
+        .nav-dropdown a:hover{color:var(--gold);background:var(--gold-dim);}
+        .nav-dropdown a:last-child{border-bottom:none;}
+        .dd-label{display:block;padding:10px 24px 6px;font-family:var(--mono);font-size:7px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(166,137,76,0.4);border-bottom:1px solid rgba(166,137,76,0.1);}
+        .nav-item.hor .nav-dropdown{min-width:340px;}
+        header{text-align:center;margin:80px 0 100px;}
+        .brand-logo{font-family:var(--display);font-size:clamp(4rem,10vw,7rem);letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;font-weight:400;margin-bottom:40px;}
+        .quote-container{max-width:800px;margin:0 auto;text-align:center;padding:0 40px;}
+        .red-quote{color:var(--red);font-family:var(--mono);font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;line-height:1.8;display:block;}
+        .quote-attribution{display:block;text-align:right;color:var(--red);font-family:var(--mono);font-size:0.75rem;margin-top:15px;letter-spacing:0.12em;}
+        .content-body{max-width:900px;margin:100px auto 120px;padding:0 60px;flex-grow:1;}
+        .article-box h2{font-family:var(--display);font-size:2.2rem;letter-spacing:0.1em;color:var(--gold);margin-bottom:60px;text-transform:uppercase;text-align:center;line-height:1.4;}
+        .article-box p{font-weight:300;line-height:2.4;letter-spacing:0.08em;font-size:1.15rem;color:var(--mid);margin-bottom:40px;text-align:justify;}
+        footer{width:100%;padding:0 40px 20px;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-top:auto;}
+        .footer-line{width:100%;height:1px;background:var(--gold);opacity:0.6;margin-bottom:12px;}
+        .footer-content{display:flex;justify-content:space-between;align-items:center;}
+        .footer-center{font-family:var(--display);font-size:9px;letter-spacing:3px;}
+        a{color:inherit;text-decoration:none;}
     </style>
 </head>
 <body>
-
-    <div class="corporate-header">
-        <div>BIN754975035</div>
-        <div class="header-center">Archer Chain Analytics</div>
-        <div>GST/HST754975035RT0001</div>
+<div class="corporate-header">
+    <div>BIN754975035</div>
+    <div class="header-center">Archer Chain Analytics</div>
+    <div>GST/HST754975035RT0001</div>
+</div>
+<div class="gold-line"></div>
+<div class="ticker-wrapper">
+    <div class="ticker-track" id="tickerTrack">
+        <span class="ticker-loading">Fetching live market data…</span>
     </div>
-    <div class="gold-line-top"></div>
-
-    <header>
-        <div class="brand-logo">MAHIHKAN</div>
-        
-        <div class="quote-container">
-            <span class="red-quote">
-                "A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution."
-            </span>
-            <span class="quote-attribution">— Satoshi N.</span>
+</div>
+<nav class="site-nav">
+    <div class="nav-inner">
+        <div class="nav-item">
+            <button class="nav-trigger">Products <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <span class="dd-label">Sovereign Infrastructure</span>
+                <a href="products/aletheia.html">Alētheia™ x101 Array</a>
+                <a href="products/inxs.html">INxS™ — Inexorabilis</a>
+                <a href="products/argos.html">Argos™ Autonomous Sentinel</a>
+                <a href="products/acerbe.html">AcerbE™ Digital Fingerprinting</a>
+                <span class="dd-label">Automation &amp; Delivery</span>
+                <a href="products/rapax.html">RaPaX™ Sovereign Vending</a>
+                <a href="products/salvagbotx.html">SalvageBotX™ Code Recycler</a>
+                <a href="products/formdepot.html">FormDepot™</a>
+                <a href="products/compliance-app.html">New Business Compliance App</a>
+            </div>
         </div>
-    </header>
-
-    <main class="content-body">
-        <section class="article-box">
-            <h2>The Original Vision of Cryptocurrency, and Where It Is Going Now</h2>
-            <p>Cryptocurrency began with a simple but radical idea: money should not belong only to banks, governments, or other centralized institutions. The early vision was to create a peer-to-peer financial system that could move value directly between people, reduce dependence on gatekeepers, and open access to anyone with an internet connection. In that sense, crypto was never just about speculation; it was about freedom, privacy, and spreading financial power more broadly.</p>
-            <p>Bitcoin, the first major cryptocurrency, captured that spirit when it launched in 2009 as a peer-to-peer electronic cash system. It promised a form of money that did not require trust in a single authority, and for many early supporters, that was the real breakthrough. The dream was that decentralized networks could reduce censorship, lower barriers to entry, and give ordinary people a way to participate in a global financial system on more equal terms.</p>
-            <p>That original vision also had an economic edge. By removing intermediaries, cryptocurrency was supposed to reduce friction, lower transaction costs, and create a more open system where wealth and opportunity were not so tightly controlled by legacy finance. For a lot of people, the appeal was not only technological but philosophical: crypto represented a chance to push back against centralized control and build something more distributed, resilient, and fair.</p>
-            <p>But the direction of crypto today is more complicated. As the market has grown, so has the influence of large exchanges, institutional investors, hedge funds, and major holders who shape liquidity and price action. Instead of only functioning as a decentralized alternative to traditional finance, crypto has increasingly become part of the financial system it once aimed to replace.</p>
-            <p>That shift has created a tension at the center of the industry. On one side is the promise of self-custody, open networks, and decentralized ownership. On the other side is the reality of token concentration, speculative trading, regulatory pressure, and institutional adoption. In practice, some parts of crypto still preserve the original ideals, while other parts now look a lot more like conventional finance with a blockchain layer on top.</p>
-            <p>This does not mean the original mission has disappeared. It means the mission is being tested. Projects in decentralized finance, payments, and tokenized assets still point toward a future where finance can be more open and programmable. At the same time, the broader market is increasingly shaped by capital, compliance, and mainstream adoption, which can improve stability but also pull the space away from its rebel origins.</p>
-            <p>So where is crypto going? It is likely heading in two directions at once. One path leads toward institutional integration, regulated products, and wider acceptance as a financial asset class. The other path tries to preserve the founding ideal of decentralization, user control, and permissionless participation. The future of crypto will depend on which of those paths becomes dominant — and whether the technology can still deliver on its promise to spread opportunity instead of simply concentrating it in new hands.</p>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-line-bottom"></div>
-        <div class="footer-content">
-            <div class="footer-left"><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></div>
-            <div class="footer-center">Sovereignty // Integrity // Inexorabilis</div>
-            <div class="footer-right">© 2026 ALL RIGHTS RESERVED</div>
+        <div class="nav-item">
+            <button class="nav-trigger">Services <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <a href="services.html#consulting">Consulting</a>
+                <a href="services.html#installation">Installation</a>
+                <a href="services.html#whitelabel">White-Label Licensing</a>
+                <a href="services.html#warranty">The AcerbE™ FAFO Guarantee</a>
+            </div>
         </div>
-    </footer>
-
+        <div class="nav-item hor">
+            <button class="nav-trigger">Alētheia™ Array Hall of Records <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <a href="hall-of-records.html">Hall of Records — Main</a>
+                <a href="signin.html">Sign In / Register</a>
+                <a href="hall-of-records.html#access">Access Tiers</a>
+                <a href="hall-of-records.html#tools">Available Tools</a>
+                <a href="hall-of-records.html#charity">The Alētheia Charity</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<header>
+    <div class="brand-logo">MAHIHKAN</div>
+    <div class="quote-container">
+        <span class="red-quote">"A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution."</span>
+        <span class="quote-attribution">— Satoshi N.</span>
+    </div>
+</header>
+<main class="content-body">
+    <section class="article-box">
+        <h2>The Original Vision of Cryptocurrency, and Where It Is Going Now</h2>
+        <p>Cryptocurrency began with a simple but radical idea: money should not belong only to banks, governments, or other centralized institutions. The early vision was to create a peer-to-peer financial system that could move value directly between people, reduce dependence on gatekeepers, and open access to anyone with an internet connection. In that sense, crypto was never just about speculation; it was about freedom, privacy, and spreading financial power more broadly.</p>
+        <p>Bitcoin, the first major cryptocurrency, captured that spirit when it launched in 2009 as a peer-to-peer electronic cash system. It promised a form of money that did not require trust in a single authority, and for many early supporters, that was the real breakthrough. The dream was that decentralized networks could reduce censorship, lower barriers to entry, and give ordinary people a way to participate in a global financial system on more equal terms.</p>
+        <p>That original vision also had an economic edge. By removing intermediaries, cryptocurrency was supposed to reduce friction, lower transaction costs, and create a more open system where wealth and opportunity were not so tightly controlled by legacy finance. For a lot of people, the appeal was not only technological but philosophical: crypto represented a chance to push back against centralized control and build something more distributed, resilient, and fair.</p>
+        <p>But the direction of crypto today is more complicated. As the market has grown, so has the influence of large exchanges, institutional investors, hedge funds, and major holders who shape liquidity and price action. Instead of only functioning as a decentralized alternative to traditional finance, crypto has increasingly become part of the financial system it once aimed to replace.</p>
+        <p>That shift has created a tension at the center of the industry. On one side is the promise of self-custody, open networks, and decentralized ownership. On the other side is the reality of token concentration, speculative trading, regulatory pressure, and institutional adoption. In practice, some parts of crypto still preserve the original ideals, while other parts now look a lot more like conventional finance with a blockchain layer on top.</p>
+        <p>This does not mean the original mission has disappeared. It means the mission is being tested. Projects in decentralized finance, payments, and tokenized assets still point toward a future where finance can be more open and programmable. At the same time, the broader market is increasingly shaped by capital, compliance, and mainstream adoption, which can improve stability but also pull the space away from its rebel origins.</p>
+        <p>So where is crypto going? It is likely heading in two directions at once. One path leads toward institutional integration, regulated products, and wider acceptance as a financial asset class. The other path tries to preserve the founding ideal of decentralization, user control, and permissionless participation. The future of crypto will depend on which of those paths becomes dominant — and whether the technology can still deliver on its promise to spread opportunity instead of simply concentrating it in new hands.</p>
+    </section>
+</main>
+<footer>
+    <div class="footer-line"></div>
+    <div class="footer-content">
+        <div><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></div>
+        <div class="footer-center">Sovereignty // Integrity // Inexorabilis</div>
+        <div>© 2026 All Rights Reserved</div>
+    </div>
+</footer>
+<script>
+const TOKENS=[{s:'BTC',id:'bitcoin'},{s:'ETH',id:'ethereum'},{s:'BNB',id:'binancecoin'},{s:'SOL',id:'solana'},{s:'XRP',id:'ripple'},{s:'ADA',id:'cardano'},{s:'AVAX',id:'avalanche-2'},{s:'DOT',id:'polkadot'},{s:'DOGE',id:'dogecoin'},{s:'LINK',id:'chainlink'},{s:'MATIC',id:'matic-network'},{s:'UNI',id:'uniswap'},{s:'ATOM',id:'cosmos'},{s:'LTC',id:'litecoin'},{s:'NEAR',id:'near'},{s:'ARB',id:'arbitrum'},{s:'OP',id:'optimism'},{s:'SUI',id:'sui'},{s:'APT',id:'aptos'},{s:'TRX',id:'tron'},{s:'XLM',id:'stellar'},{s:'ALGO',id:'algorand'},{s:'AAVE',id:'aave'},{s:'XMR',id:'monero'},{s:'BCH',id:'bitcoin-cash'},{s:'ZEC',id:'zcash'},{s:'DASH',id:'dash'},{s:'FTM',id:'fantom'},{s:'HBAR',id:'hedera-hashgraph'},{s:'CRO',id:'crypto-com-chain'}];
+function fmtP(p){if(p>=1000)return'$'+p.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});if(p>=1)return'$'+p.toFixed(4);if(p>=0.01)return'$'+p.toFixed(5);return'$'+p.toFixed(6);}
+function mkItem(t,p,c){const dir=c>0?'up':c<0?'down':'';const arr=c>0?'▲':c<0?'▼':'—';const el=document.createElement('div');el.className='ticker-item';el.innerHTML=`<span class="ticker-symbol">${t.s}</span><span class="ticker-price">${fmtP(p)}</span><span class="ticker-change ${dir}">${arr} ${Math.abs(c).toFixed(2)}%</span>`;return el;}
+async function fetchTicker(){const ids=TOKENS.map(t=>t.id).join(',');try{const res=await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);if(!res.ok)throw new Error();const data=await res.json();const track=document.getElementById('tickerTrack');track.classList.remove('animating');track.style.transform='translateX(0)';track.innerHTML='';const frag=document.createDocumentFragment();TOKENS.forEach(t=>{const d=data[t.id];if(d&&d.usd)frag.appendChild(mkItem(t,d.usd,d.usd_24h_change||0));});track.appendChild(frag);track.appendChild(track.cloneNode(true));const dur=Math.round(track.scrollWidth/2/85);track.style.animationDuration=dur+'s';track.classList.add('animating');}catch(e){document.getElementById('tickerTrack').innerHTML='<span class="ticker-loading">Market data temporarily unavailable</span>';}}
+fetchTicker();setInterval(fetchTicker,60000);
+</script>
 </body>
 </html>
