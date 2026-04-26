@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sign In — Alētheia™ Hall of Records</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root{--void:#030304;--gold:#a6894c;--gold-dim:rgba(166,137,76,0.12);--red:#FF0000;--mid:#888890;--white:#f0f0f4;--green:#4caf82;--mono:'IBM Plex Mono',monospace;--display:'Cinzel',serif;--body:'Barlow',sans-serif;}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        body{background:var(--void);color:var(--white);font-family:var(--body);line-height:1.7;overflow-x:hidden;display:flex;flex-direction:column;min-height:100vh;}
+        .corporate-header{width:100%;padding:15px 40px 5px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);}
+        .header-center{font-family:var(--display);font-size:10px;letter-spacing:4px;font-weight:600;}
+        .gold-line{width:100%;height:1px;background:var(--gold);opacity:0.6;}
+        .site-nav{width:100%;background:#0a0a0d;border-bottom:1px solid rgba(166,137,76,0.3);position:relative;z-index:100;}
+        .nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:stretch;padding:0 40px;}
+        .nav-item{position:relative;}
+        .nav-trigger{display:flex;align-items:center;gap:8px;padding:18px 28px;font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);cursor:pointer;border:none;background:none;transition:background 0.2s;white-space:nowrap;}
+        .nav-trigger:hover{background:var(--gold-dim);}
+        .nav-trigger .chevron{font-size:7px;opacity:0.6;transition:transform 0.2s;display:inline-block;}
+        .nav-item:hover .chevron{transform:rotate(180deg);}
+        .nav-dropdown{display:none;position:absolute;top:100%;left:0;min-width:280px;background:#0d0d10;border:1px solid rgba(166,137,76,0.25);border-top:2px solid var(--gold);z-index:200;}
+        .nav-item:hover .nav-dropdown{display:block;}
+        .nav-dropdown a{display:block;padding:14px 24px;font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;border-bottom:1px solid rgba(166,137,76,0.08);transition:color 0.2s,background 0.2s;}
+        .nav-dropdown a:hover{color:var(--gold);background:var(--gold-dim);}
+        .nav-dropdown a:last-child{border-bottom:none;}
+        .dd-label{display:block;padding:10px 24px 6px;font-family:var(--mono);font-size:7px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(166,137,76,0.4);border-bottom:1px solid rgba(166,137,76,0.1);}
+        .nav-item.hor .nav-dropdown{min-width:340px;}
+        a{color:inherit;text-decoration:none;}
+
+        /* SIGN IN PAGE */
+        .signin-wrapper{flex-grow:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 40px;}
+        .signin-label{font-family:var(--mono);font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:16px;text-align:center;}
+        .signin-title{font-family:var(--display);font-size:clamp(1.8rem,4vw,3rem);letter-spacing:0.15em;color:var(--white);text-transform:uppercase;font-weight:400;text-align:center;margin-bottom:60px;}
+
+        /* TAB SWITCHER */
+        .tab-row{display:flex;border:1px solid rgba(166,137,76,0.2);margin-bottom:0;width:100%;max-width:560px;}
+        .tab-btn{flex:1;padding:14px 0;font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--mid);background:none;border:none;cursor:pointer;transition:background 0.2s,color 0.2s;}
+        .tab-btn.active{background:var(--gold-dim);color:var(--gold);}
+        .tab-btn:not(:last-child){border-right:1px solid rgba(166,137,76,0.2);}
+
+        /* FORM PANEL */
+        .signin-panel{width:100%;max-width:560px;background:#08080c;border:1px solid rgba(166,137,76,0.2);border-top:none;padding:48px;}
+        .form-group{margin-bottom:28px;}
+        .form-group label{display:block;font-family:var(--mono);font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;opacity:0.8;}
+        .form-group input,
+        .form-group select{width:100%;background:#030304;border:1px solid rgba(166,137,76,0.2);color:var(--white);font-family:var(--mono);font-size:12px;padding:14px 18px;outline:none;transition:border-color 0.2s;letter-spacing:0.05em;}
+        .form-group input:focus,
+        .form-group select:focus{border-color:var(--gold);}
+        .form-group select option{background:#030304;}
+
+        .tier-selector{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(166,137,76,0.15);margin-bottom:32px;}
+        .tier-opt{background:#030304;padding:20px 16px;text-align:center;cursor:pointer;border:2px solid transparent;transition:border-color 0.2s,background 0.2s;}
+        .tier-opt.selected{border-color:var(--gold);background:var(--gold-dim);}
+        .tier-opt .to-name{font-family:var(--display);font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px;}
+        .tier-opt .to-price{font-family:var(--mono);font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);}
+        .tier-opt .to-price.free{color:var(--green);}
+
+        .divider-or{text-align:center;font-family:var(--mono);font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:var(--mid);margin:28px 0;position:relative;}
+        .divider-or::before,.divider-or::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:rgba(166,137,76,0.15);}
+        .divider-or::before{left:0;}.divider-or::after{right:0;}
+
+        .wallet-btn{width:100%;padding:14px;border:1px solid rgba(166,137,76,0.25);background:transparent;font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--mid);cursor:pointer;transition:background 0.2s,color 0.2s,border-color 0.2s;display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px;}
+        .wallet-btn:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
+        .wallet-icon{font-size:1rem;}
+
+        .submit-btn{width:100%;padding:16px;background:transparent;border:1px solid var(--gold);font-family:var(--mono);font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);cursor:pointer;transition:background 0.2s,color 0.2s;margin-top:16px;}
+        .submit-btn:hover{background:var(--gold);color:var(--void);}
+
+        .form-note{font-family:var(--mono);font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);text-align:center;margin-top:24px;line-height:1.9;opacity:0.7;}
+
+        footer{width:100%;padding:0 40px 20px;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-top:40px;}
+        .footer-line{width:100%;height:1px;background:var(--gold);opacity:0.6;margin-bottom:12px;}
+        .footer-content{display:flex;justify-content:space-between;align-items:center;}
+        .footer-center{font-family:var(--display);font-size:9px;letter-spacing:3px;}
+
+        .hidden{display:none;}
+    </style>
+</head>
+<body>
+<div class="corporate-header">
+    <div>BIN754975035</div>
+    <div class="header-center">Archer Chain Analytics</div>
+    <div>GST/HST754975035RT0001</div>
+</div>
+<div class="gold-line"></div>
+<nav class="site-nav">
+    <div class="nav-inner">
+        <div class="nav-item">
+            <button class="nav-trigger">Products <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <span class="dd-label">Sovereign Infrastructure</span>
+                <a href="products/aletheia.html">Alētheia™ x101 Array</a>
+                <a href="products/inxs.html">INxS™ — Inexorabilis</a>
+                <a href="products/argos.html">Argos™ Autonomous Sentinel</a>
+                <a href="products/acerbe.html">AcerbE™ Digital Fingerprinting</a>
+                <span class="dd-label">Automation &amp; Delivery</span>
+                <a href="products/rapax.html">RaPaX™ Sovereign Vending</a>
+                <a href="products/salvagbotx.html">SalvageBotX™ Code Recycler</a>
+                <a href="products/formdepot.html">FormDepot™</a>
+                <a href="products/compliance-app.html">New Business Compliance App</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-trigger">Services <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <a href="services.html#consulting">Consulting</a>
+                <a href="services.html#installation">Installation</a>
+                <a href="services.html#whitelabel">White-Label Licensing</a>
+                <a href="services.html#warranty">The AcerbE™ FAFO Guarantee</a>
+            </div>
+        </div>
+        <div class="nav-item hor">
+            <button class="nav-trigger">Alētheia™ Array Hall of Records <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <a href="hall-of-records.html">Hall of Records — Main</a>
+                <a href="signin.html">Sign In / Register</a>
+                <a href="hall-of-records.html#access">Access Tiers</a>
+                <a href="hall-of-records.html#tools">Available Tools</a>
+                <a href="hall-of-records.html#charity">The Alētheia Charity</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="signin-wrapper">
+    <div class="signin-label">Alētheia™ Array Hall of Records</div>
+    <div class="signin-title">Access Portal</div>
+
+    <div class="tab-row">
+        <button class="tab-btn active" id="tabSignin" onclick="switchTab('signin')">Sign In</button>
+        <button class="tab-btn" id="tabRegister" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <!-- SIGN IN PANEL -->
+    <div class="signin-panel" id="panelSignin">
+        <div class="form-group">
+            <label for="si-email">Email Address</label>
+            <input type="email" id="si-email" placeholder="you@domain.com" autocomplete="email"/>
+        </div>
+        <div class="form-group">
+            <label for="si-pass">Password</label>
+            <input type="password" id="si-pass" placeholder="••••••••••••" autocomplete="current-password"/>
+        </div>
+        <button class="submit-btn">Sign In</button>
+
+        <div class="divider-or">or</div>
+
+        <button class="wallet-btn"><span class="wallet-icon">🦊</span> Connect MetaMask</button>
+        <button class="wallet-btn"><span class="wallet-icon">👻</span> Connect Phantom</button>
+        <button class="wallet-btn"><span class="wallet-icon">🔗</span> WalletConnect</button>
+
+        <div class="form-note">
+            Zero-Trust session — all access is authenticated and logged.<br>
+            Your session is encrypted end-to-end under Cloudflare Zero-Trust infrastructure.
+        </div>
+    </div>
+
+    <!-- REGISTER PANEL -->
+    <div class="signin-panel hidden" id="panelRegister">
+        <div class="form-group">
+            <label>Select Access Tier</label>
+            <div class="tier-selector">
+                <div class="tier-opt selected" id="tier-academic" onclick="selectTier('academic')">
+                    <span class="to-name">Academic</span>
+                    <span class="to-price free">Free</span>
+                </div>
+                <div class="tier-opt" id="tier-developer" onclick="selectTier('developer')">
+                    <span class="to-name">Developer</span>
+                    <span class="to-price">Contact</span>
+                </div>
+                <div class="tier-opt" id="tier-corporate" onclick="selectTier('corporate')">
+                    <span class="to-name">Corporate</span>
+                    <span class="to-price">Past Actions Tax</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="reg-name">Full Name / Organization</label>
+            <input type="text" id="reg-name" placeholder="Name or Organization"/>
+        </div>
+        <div class="form-group">
+            <label for="reg-email">Email Address</label>
+            <input type="email" id="reg-email" placeholder="you@institution.edu"/>
+        </div>
+        <div class="form-group" id="edu-field">
+            <label for="reg-institution">Institution / .edu Verification</label>
+            <input type="text" id="reg-institution" placeholder="University, College, or School Name"/>
+        </div>
+        <div class="form-group">
+            <label for="reg-pass">Create Password</label>
+            <input type="password" id="reg-pass" placeholder="Minimum 16 characters"/>
+        </div>
+        <button class="submit-btn">Register for Access</button>
+
+        <div class="divider-or">or register with wallet</div>
+
+        <button class="wallet-btn"><span class="wallet-icon">🦊</span> Register with MetaMask</button>
+        <button class="wallet-btn"><span class="wallet-icon">👻</span> Register with Phantom</button>
+        <button class="wallet-btn"><span class="wallet-icon">🔗</span> WalletConnect</button>
+
+        <div class="form-note">
+            Academic registration is free and unconditional.<br>
+            Developer and Corporate access is activated upon verification and fee arrangement.<br>
+            All accounts operate under Zero-Trust session architecture.
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-line"></div>
+    <div class="footer-content">
+        <div><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></div>
+        <div class="footer-center">Sovereignty // Integrity // Inexorabilis</div>
+        <div>© 2026 All Rights Reserved</div>
+    </div>
+</footer>
+
+<script>
+function switchTab(tab) {
+    document.getElementById('panelSignin').classList.toggle('hidden', tab !== 'signin');
+    document.getElementById('panelRegister').classList.toggle('hidden', tab !== 'register');
+    document.getElementById('tabSignin').classList.toggle('active', tab === 'signin');
+    document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+}
+function selectTier(tier) {
+    ['academic','developer','corporate'].forEach(t => {
+        document.getElementById('tier-'+t).classList.toggle('selected', t === tier);
+    });
+    document.getElementById('edu-field').style.display = tier === 'academic' ? 'block' : 'none';
+}
+// Check URL param
+const params = new URLSearchParams(window.location.search);
+if (params.get('tier')) {
+    switchTab('register');
+    selectTier(params.get('tier'));
+}
+</script>
+</body>
+</html>
