@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Services — Archer Chain Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root{--void:#030304;--gold:#a6894c;--gold-dim:rgba(166,137,76,0.12);--red:#FF0000;--mid:#888890;--white:#f0f0f4;--green:#4caf82;--mono:'IBM Plex Mono',monospace;--display:'Cinzel',serif;--body:'Barlow',sans-serif;}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        body{background:var(--void);color:var(--white);font-family:var(--body);line-height:1.7;overflow-x:hidden;display:flex;flex-direction:column;min-height:100vh;}
+        .corporate-header{width:100%;padding:15px 40px 5px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);}
+        .header-center{font-family:var(--display);font-size:10px;letter-spacing:4px;font-weight:600;}
+        .gold-line{width:100%;height:1px;background:var(--gold);opacity:0.6;}
+        .site-nav{width:100%;background:#0a0a0d;border-bottom:1px solid rgba(166,137,76,0.3);position:relative;z-index:100;}
+        .nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:stretch;padding:0 40px;}
+        .nav-item{position:relative;}
+        .nav-trigger{display:flex;align-items:center;gap:8px;padding:18px 28px;font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);cursor:pointer;border:none;background:none;transition:background 0.2s;white-space:nowrap;}
+        .nav-trigger:hover{background:var(--gold-dim);}
+        .nav-trigger .chevron{font-size:7px;opacity:0.6;transition:transform 0.2s;display:inline-block;}
+        .nav-item:hover .chevron{transform:rotate(180deg);}
+        .nav-dropdown{display:none;position:absolute;top:100%;left:0;min-width:280px;background:#0d0d10;border:1px solid rgba(166,137,76,0.25);border-top:2px solid var(--gold);z-index:200;}
+        .nav-item:hover .nav-dropdown{display:block;}
+        .nav-dropdown a{display:block;padding:14px 24px;font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;border-bottom:1px solid rgba(166,137,76,0.08);transition:color 0.2s,background 0.2s;}
+        .nav-dropdown a:hover{color:var(--gold);background:var(--gold-dim);}
+        .nav-dropdown a:last-child{border-bottom:none;}
+        .dd-label{display:block;padding:10px 24px 6px;font-family:var(--mono);font-size:7px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(166,137,76,0.4);border-bottom:1px solid rgba(166,137,76,0.1);}
+        .nav-item.hor .nav-dropdown{min-width:340px;}
+        a{color:inherit;text-decoration:none;}
+
+        /* PAGE */
+        .page-header{text-align:center;padding:80px 40px 60px;}
+        .page-header .label{font-family:var(--mono);font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:block;}
+        .page-header h1{font-family:var(--display);font-size:clamp(2.5rem,6vw,4.5rem);letter-spacing:0.2em;color:var(--white);text-transform:uppercase;font-weight:400;}
+        .page-header .sub{font-family:var(--mono);font-size:0.8rem;letter-spacing:0.15em;color:var(--mid);margin-top:20px;text-transform:uppercase;}
+
+        .divider{width:100%;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0.4;margin:0;}
+
+        .services-body{max-width:1100px;margin:0 auto;padding:80px 60px 120px;flex-grow:1;}
+
+        .service-block{margin-bottom:100px;scroll-margin-top:40px;}
+        .service-block .block-label{font-family:var(--mono);font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-bottom:12px;}
+        .service-block h2{font-family:var(--display);font-size:1.9rem;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-bottom:30px;line-height:1.3;}
+        .service-block p{font-family:var(--body);font-size:1.05rem;font-weight:300;line-height:2.2;letter-spacing:0.06em;color:var(--mid);margin-bottom:24px;max-width:800px;}
+        .service-block p strong{color:var(--white);font-weight:500;}
+
+        .spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:rgba(166,137,76,0.15);margin:40px 0;border:1px solid rgba(166,137,76,0.15);}
+        .spec-cell{background:var(--void);padding:28px 32px;}
+        .spec-cell .sc-label{font-family:var(--mono);font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:10px;}
+        .spec-cell .sc-value{font-family:var(--mono);font-size:0.95rem;color:var(--white);line-height:1.6;}
+
+        .cta-row{display:flex;gap:20px;margin-top:40px;flex-wrap:wrap;}
+        .btn-primary{display:inline-block;padding:14px 36px;border:1px solid var(--gold);font-family:var(--mono);font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);background:transparent;cursor:pointer;transition:background 0.2s,color 0.2s;}
+        .btn-primary:hover{background:var(--gold);color:var(--void);}
+
+        /* FAFO SECTION */
+        .fafo-block{background:#08060a;border:1px solid rgba(166,137,76,0.2);border-left:3px solid var(--red);padding:60px;margin-top:40px;position:relative;}
+        .fafo-block::before{content:'⚠';position:absolute;top:30px;right:40px;font-size:1.4rem;opacity:0.2;}
+        .fafo-block .fafo-name{font-family:var(--display);font-size:2rem;letter-spacing:0.15em;color:var(--red);text-transform:uppercase;margin-bottom:8px;}
+        .fafo-block .fafo-tag{font-family:var(--mono);font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,0,0,0.5);margin-bottom:36px;display:block;}
+        .fafo-block p{font-family:var(--body);font-size:1rem;font-weight:300;line-height:2.2;letter-spacing:0.06em;color:var(--mid);margin-bottom:20px;max-width:780px;}
+        .fafo-block p strong{color:var(--white);font-weight:500;}
+        .fafo-block .acerbe-notice{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);padding:20px 28px;border:1px solid rgba(166,137,76,0.2);margin-top:36px;line-height:1.9;}
+
+        .section-rule{width:100%;height:1px;background:rgba(166,137,76,0.12);margin:80px 0;}
+
+        footer{width:100%;padding:0 40px 20px;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-top:auto;}
+        .footer-line{width:100%;height:1px;background:var(--gold);opacity:0.6;margin-bottom:12px;}
+        .footer-content{display:flex;justify-content:space-between;align-items:center;}
+        .footer-center{font-family:var(--display);font-size:9px;letter-spacing:3px;}
+    </style>
+</head>
+<body>
+<div class="corporate-header">
+    <div>BIN754975035</div>
+    <div class="header-center">Archer Chain Analytics</div>
+    <div>GST/HST754975035RT0001</div>
+</div>
+<div class="gold-line"></div>
+<nav class="site-nav">
+    <div class="nav-inner">
+        <div class="nav-item">
+            <button class="nav-trigger">Products <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <span class="dd-label">Sovereign Infrastructure</span>
+                <a href="products/aletheia.html">Alētheia™ x101 Array</a>
+                <a href="products/inxs.html">INxS™ — Inexorabilis</a>
+                <a href="products/argos.html">Argos™ Autonomous Sentinel</a>
+                <a href="products/acerbe.html">AcerbE™ Digital Fingerprinting</a>
+                <span class="dd-label">Automation &amp; Delivery</span>
+                <a href="products/rapax.html">RaPaX™ Sovereign Vending</a>
+                <a href="products/salvagbotx.html">SalvageBotX™ Code Recycler</a>
+                <a href="products/formdepot.html">FormDepot™</a>
+                <a href="products/compliance-app.html">New Business Compliance App</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-trigger">Services <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <a href="services.html#consulting">Consulting</a>
+                <a href="services.html#installation">Installation</a>
+                <a href="services.html#whitelabel">White-Label Licensing</a>
+                <a href="services.html#warranty">The AcerbE™ FAFO Guarantee</a>
+            </div>
+        </div>
+        <div class="nav-item hor">
+            <button class="nav-trigger">Alētheia™ Array Hall of Records <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <a href="hall-of-records.html">Hall of Records — Main</a>
+                <a href="signin.html">Sign In / Register</a>
+                <a href="hall-of-records.html#access">Access Tiers</a>
+                <a href="hall-of-records.html#tools">Available Tools</a>
+                <a href="hall-of-records.html#charity">The Alētheia Charity</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="page-header">
+    <span class="label">Archer Chain Analytics — Professional Services</span>
+    <h1>Services</h1>
+    <p class="sub">Consulting · Installation · White-Label Licensing · Warranty</p>
+</div>
+<div class="divider"></div>
+
+<main class="services-body">
+
+    <!-- CONSULTING -->
+    <section class="service-block" id="consulting">
+        <div class="block-label">Service 01</div>
+        <h2>Consulting</h2>
+        <p>Archer Chain Analytics provides <strong>sovereign-grade technical consulting</strong> for organizations building on blockchain infrastructure, implementing forensic integrity systems, or navigating the compliance and legal architecture of digital asset operations.</p>
+        <p>This is not template advice. Every engagement is direct, technical, and specific to your architecture. We work with your stack, your threat model, and your operational context. We do not hand you a slide deck — we hand you a working plan.</p>
+        <p>Consulting scope includes: blockchain infrastructure design, forensic audit pipeline architecture, IP protection strategy, compliance framework review, multi-chain data ingestion strategy, and white-label deployment planning.</p>
+        <div class="spec-grid">
+            <div class="spec-cell">
+                <div class="sc-label">Engagement Format</div>
+                <div class="sc-value">Retainer · Project-Based · Hourly</div>
+            </div>
+            <div class="spec-cell">
+                <div class="sc-label">Delivery</div>
+                <div class="sc-value">Remote · On-Site (Canada) · Async</div>
+            </div>
+            <div class="spec-cell">
+                <div class="sc-label">Pricing</div>
+                <div class="sc-value">Contact for Pricing — All tiers USD</div>
+            </div>
+            <div class="spec-cell">
+                <div class="sc-label">NDA / Confidentiality</div>
+                <div class="sc-value">Standard — Executed Prior to Engagement</div>
+            </div>
+        </div>
+        <div class="cta-row">
+            <a href="mailto:sales@mahihkan.com?subject=Consulting Inquiry" class="btn-primary">Request Consulting</a>
+        </div>
+    </section>
+
+    <div class="section-rule"></div>
+
+    <!-- INSTALLATION -->
+    <section class="service-block" id="installation">
+        <div class="block-label">Service 02</div>
+        <h2>Installation</h2>
+        <p>We deploy our own products. Every installation of Alētheia™, AcerbE™, RaPaX™, SalvageBotX™, INxS™, or any component in the Archer Chain Analytics ecosystem can be delivered, configured, and validated by us — in your environment, on your infrastructure, under your operational parameters.</p>
+        <p>Installation includes: environment provisioning, configuration hardening, AcerbE™ fingerprint initialization and registration, integration testing against your existing stack, and a signed verification report confirming the deployment state at handoff.</p>
+        <p><strong>No third-party integrators. No undocumented access. No ambiguity about what was installed and where.</strong> Every installation generates a full audit log, delivered to you at completion.</p>
+        <div class="spec-grid">
+            <div class="spec-cell">
+                <div class="sc-label">Platforms</div>
+                <div class="sc-value">Windows · Linux · Android · Cloud (self-hosted)</div>
+            </div>
+            <div class="spec-cell">
+                <div class="sc-label">Delivery</div>
+                <div class="sc-value">Remote Guided · On-Site (Canada)</div>
+            </div>
+            <div class="spec-cell">
+                <div class="sc-label">Includes</div>
+                <div class="sc-value">Config Hardening · AcerbE™ Initialization · Audit Report</div>
+            </div>
+            <div class="spec-cell">
+                <div class="sc-label">Pricing</div>
+                <div class="sc-value">Contact for Pricing — All tiers USD</div>
+            </div>
+        </div>
+        <div class="cta-row">
+            <a href="mailto:sales@mahihkan.com?subject=Installation Service Inquiry" class="btn-primary">Request Installation</a>
+        </div>
+    </section>
+
+    <div class="section-rule"></div>
+
+    <!-- WHITE-LABEL -->
+    <section class="service-block" id="whitelabel">
+        <div class="block-label">Service 03</div>
+        <h2>White-Label Licensing</h2>
+        <p>The complete Archer Chain Analytics product suite is available for enterprise white-label licensing. Your brand. Your deployment. Our infrastructure, our forensic integrity layer, our sovereign architecture — running under your name.</p>
+        <p>White-label rights include: full branding injection across all licensed modules, custom prefix and identity configuration, dedicated license key generation, priority installation and support, and AcerbE™ fingerprint registration under the licensee's organizational identity.</p>
+        <p><strong>White-label does not mean unsupervised.</strong> AcerbE™ fingerprinting remains active in all white-label deployments. Tamper detection, chain-of-custody integrity, and IP protection are non-negotiable conditions of any licensing agreement.</p>
+        <div class="spec-grid">
+            <div class="spec-cell">
+                <div class="sc-label">Scope</div>
+                <div class="sc-value">Full Suite · Individual Products · Module-Level</div>
+            </div>
+            <div class="spec-cell">
+                <div class="sc-label">Branding</div>
+                <div class="sc-value">Runtime Injection — All 7 Modules (INxS™)</div>
+            </div>
+            <div class="spec-cell">
+                <div class="sc-label">AcerbE™ Status</div>
+                <div class="sc-value">Active — Non-Negotiable in All Deployments</div>
+            </div>
+            <div class="spec-cell">
+                <div class="sc-label">Pricing</div>
+                <div class="sc-value">Contact for Pricing — Tiered by Scope · USD</div>
+            </div>
+        </div>
+        <div class="cta-row">
+            <a href="mailto:sales@mahihkan.com?subject=White-Label Licensing Inquiry" class="btn-primary">Request White-Label Terms</a>
+        </div>
+    </section>
+
+    <div class="section-rule"></div>
+
+    <!-- FAFO WARRANTY -->
+    <section class="service-block" id="warranty">
+        <div class="block-label">Service 04 — Warranty &amp; Replacement</div>
+        <h2>Warranty Policy</h2>
+        <p>Archer Chain Analytics products are built to operate. If something is not working, we replace it — no argument, no extended diagnosis, no delay. The terms are simple.</p>
+
+        <div class="fafo-block">
+            <div class="fafo-name">The AcerbE™ FAFO Guarantee</div>
+            <span class="fafo-tag">Tagline — Warranty &amp; Replacement Policy</span>
+
+            <p><strong>If an Archer Chain Analytics product fails to operate as documented, return it. We will replace it with a new unit at no charge.</strong> No lengthy RMA process. No parsing of fine print. If our product failed, we make it right. Full stop.</p>
+
+            <p>The sole condition under which this guarantee does not apply is the following:</p>
+
+            <p><strong>If the customer has tampered with the product — and AcerbE™ has recorded that tamper event — the guarantee is void.</strong> AcerbE™ is our forensic watermarking and integrity verification system. It runs beneath the surface of all products it protects. It does not announce itself. It does not negotiate. It records.</p>
+
+            <p>If you have modified, reverse-engineered, attempted to bypass licensing, or otherwise interfered with the integrity of the product, AcerbE™ will have logged it — timestamped, hashed, and chain-verified. We will know. The guarantee does not apply. The evidence does not disappear.</p>
+
+            <p>For customers who have not tampered: bring us what is broken. We will bring you something that works.</p>
+
+            <div class="acerbe-notice">
+                AcerbE™ Forensic Integrity Layer is active in all covered products.<br>
+                Tamper events are logged, timestamped, and cryptographically verifiable.<br>
+                Chain-of-custody integrity is maintained from point of delivery.<br>
+                Warranty claims are subject to forensic review prior to processing.<br>
+                Archer Chain Analytics reserves the right to present forensic evidence in any dispute.<br><br>
+                Jurisdiction: Saskatoon, Saskatchewan, Canada · CRA BN: 754975035
+            </div>
+        </div>
+
+        <div class="cta-row" style="margin-top:40px;">
+            <a href="mailto:sales@mahihkan.com?subject=Warranty Claim" class="btn-primary">Submit Warranty Claim</a>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-line"></div>
+    <div class="footer-content">
+        <div><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></div>
+        <div class="footer-center">Sovereignty // Integrity // Inexorabilis</div>
+        <div>© 2026 All Rights Reserved</div>
+    </div>
+</footer>
+</body>
+</html>
