@@ -1,1 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACERBE™ | ARCHER CHAIN ANALYTICS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Inter:wght@100;300;400;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --onyx: #050505;
+            --platinum-gold: #C5A059;
+            --snow-white: #FBFCFF;
+            --blood-red: #8B0000;
+            --border-glow: rgba(197, 160, 89, 0.08);
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--onyx);
+            color: var(--snow-white);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #corporate-registry {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
+            color: #444;
+            text-transform: uppercase;
+            z-index: 10001;
+            background: var(--onyx);
+        }
+
+        .corp-name { color: var(--platinum-gold); font-weight: 400; }
+
+        #aletheia-ticker {
+            position: fixed;
+            top: 48px;
+            height: 96px;
+            width: 100%;
+            background: #000;
+            border-top: 1px solid var(--border-glow);
+            border-bottom: 1px solid var(--border-glow);
+            display: flex;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .ticker-move {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 120s linear infinite;
+        }
+
+        .ticker-unit {
+            display: inline-block;
+            padding: 0 50px;
+            font-weight: 100;
+            letter-spacing: 0.3em;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        header {
+            margin-top: calc(1.5in + 80px);
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .brand-mark {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .ona-signature-center {
+            color: var(--blood-red);
+            font-weight: 900;
+            font-size: 1rem;
+            letter-spacing: 0.6em;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+
+        .content-body {
+            max-width: 850px;
+            margin: 80px auto;
+            text-align: center;
+            padding: 0 60px;
+        }
+
+        .mission-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .mission-section p {
+            font-weight: 100;
+            line-height: 2.2;
+            letter-spacing: 0.08em;
+            font-size: 1.1rem;
+            color: #AAA;
+            margin-bottom: 30px;
+        }
+
+        .product-detail {
+            text-align: left;
+            margin-top: 60px;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .product-detail h3 {
+            color: var(--platinum-gold);
+            font-size: 1.4rem;
+            margin: 40px 0 20px;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="corporate-registry">
+        <span>BN# 75497 5035</span>
+        <span class="corp-name">Archer Chain Analytics</span>
+        <span>GST/HST 75497 5035 RT0001</span>
+    </div>
+
+    <div id="aletheia-ticker">
+        <div class="ticker-move">
+            <span class="ticker-unit"><span style="color:var(--platinum-gold)">BTC/USD</span> 64,231.00</span>
+            <span class="ticker-unit"><span style="color:var(--platinum-gold)">ETH/USD</span> 3,452.12</span>
+            <span class="ticker-unit"><span style="color:var(--platinum-gold)">SOL/USD</span> 142.05</span>
+            <span class="ticker-unit"><span style="color:var(--platinum-gold)">XMR/USD</span> 128.40</span>
+            <span class="ticker-unit"><span style="color:var(--platinum-gold)">KAS/USD</span> 0.168</span>
+            <span class="ticker-unit"><span style="color:var(--platinum-gold)">BTC/USD</span> 64,231.00</span>
+        </div>
+    </div>
+
+    <header>
+        <h1 class="brand-mark">ACERBE™</h1>
+        <div class="ona-signature-center">DIGITAL FINGERPRINTING MODULE</div>
+    </header>
+
+    <main class="content-body">
+        <section class="mission-section">
+            <h2>Sovereign. Zero-Trust. Zero Compromise.</h2>
+            <p>
+                AcerbE™ is the forensic integrity engine of Archer Chain Analytics™. 
+                A fully standalone, local-only, cryptographically sovereign digital fingerprinting system 
+                that embeds buyer-specific, tamper-destructive markers into any digital product.
+            </p>
+            <p>
+                No external APIs. No telemetry. No cloud. All operations run 100% offline on your hardware.
+            </p>
+
+            <div class="product-detail">
+                <h3>Core Capabilities</h3>
+                <p>
+                    • LSB steganographic embedding (PNG, JPG, WEBP)<br>
+                    • XMP metadata + DocInfo injection (PDF)<br>
+                    • Trailing-byte & manifest injection (audio, ZIP)<br>
+                    • AES-256-CBC encryption with PBKDF2-derived buyer keys (200,000 iterations)<br>
+                    • HMAC-SHA256 tamper-guard that destroys usability on any modification<br>
+                    • Local SQLite registry with full chain-of-custody records
+                </p>
+
+                <h3>Licensing & White-Label Policy</h3>
+                <p>
+                    Standard single-unit license available immediately.<br>
+                    <strong>White-label / rebranding version available in bulk only (5 or more units).</strong><br>
+                    Contact <a href="mailto:sales@mahihkan.com" style="color:#C5A059;">sales@mahihkan.com</a> for bulk white-label inquiries.
+                </p>
+
+                <h3>Security Posture</h3>
+                <p>
+                    Zero-trust by design. Full threat model, cryptographic primitives, and operator obligations are documented in the Security Model Overview (included).
+                </p>
+
+                <h3>Complete Documentation Included</h3>
+                <p>
+                    SBOM • Integrity Specification • Security Model • EULA • White-Label Agreement • Warranty Disclaimer • Privacy Policy • Chain of Custody Template • Compliance & Tax Disclosure
+                </p>
+
+                <h3>Valuation Status (April 11, 2026)</h3>
+                <p>
+                    Conservative: $800,000 – $1,400,000 CAD<br>
+                    Production-ready • Version 1.0 complete
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-col">
+            <span><a href="mailto:ArcherChainAnalytics@mahihkan.com">ArcherChainAnalytics@mahihkan.com</a></span>
+            <span>(306) 912-9347</span>
+        </div>
+        
+        <div class="footer-col text-center">
+            <span class="white-label-callout">White-Label Enquiries</span>
+            <span><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></span>
+        </div>
+
+        <div class="footer-col text-right">
+            <span>415 Fairmont DR, Saskatoon, SK S7M5N6</span>
+            <span>© 2026 ARCHER CHAIN ANALYTICS™</span>
+        </div>
+    </footer>
+
+</body>
+</html>
