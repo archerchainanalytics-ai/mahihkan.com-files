@@ -16,7 +16,7 @@
             --text-gray: #a0a0a0;
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; cursor: crosshair; }
         
         body {
             background: var(--deep-black);
@@ -26,13 +26,16 @@
             padding: 20px 14px;
             min-height: 100vh;
             position: relative;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* Scanline Flicker Overlay */
         body::before {
             content: "";
             position: fixed;
             inset: 0;
-            background: repeating-linear-gradient(to bottom, transparent 0px, transparent 2px, rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 3px);
+            background: repeating-linear-gradient(to bottom, transparent 0px, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 3px);
             pointer-events: none;
             z-index: 9999;
             animation: flicker 0.15s infinite alternate;
@@ -78,11 +81,23 @@
             text-transform: uppercase;
         }
 
+        .valuation-tag {
+            color: var(--gold);
+            font-weight: 700;
+            letter-spacing: 2px;
+            font-size: 18px;
+            margin-top: 10px;
+            display: block;
+            font-family: 'Oswald';
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
         .subtitle { 
             font-size: 15.5px; 
             color: var(--dim-gold); 
             letter-spacing: 6px; 
             font-weight: 500;
+            margin-top: 15px;
         }
 
         section { margin-bottom: 110px; position: relative; }
@@ -115,7 +130,7 @@
 
         .module:hover {
             border-color: var(--gold);
-            box-shadow: 0 0 30px rgba(212,175,55,0.2);
+            box-shadow: 0 0 30px rgba(212,175,55,0.1);
         }
 
         .module-title {
@@ -129,14 +144,6 @@
         }
 
         .module-title::before { content: "◉"; color: var(--gold); }
-
-        .stat-value {
-            color: white;
-            font-size: 23px;
-            animation: pulse 3.2s infinite ease-in-out;
-        }
-
-        @keyframes pulse { 0%,100% { opacity: 0.85; } 50% { opacity: 1; } }
 
         .terminal {
             background: #000;
@@ -158,17 +165,9 @@
 
         @keyframes blink { 50% { opacity: 0; } }
 
-        .moat-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border-gray);
-            font-size: 13.5px;
-        }
-
-        .moat-row:last-child { border-bottom: none; }
-
         .premium { color: #4ade80; }
+        .red-alert { color: var(--accent-red); animation: pulse-red 1s infinite alternate; }
+        @keyframes pulse-red { from { opacity: 0.6; } to { opacity: 1; } }
 
         .feed-entry {
             font-size: 13.8px;
@@ -179,8 +178,6 @@
         }
 
         .feed-entry .time { color: var(--dim-gold); min-width: 70px; text-align: right; }
-
-        .critical { color: var(--accent-red); }
 
         .footer-bar {
             position: fixed;
@@ -213,7 +210,8 @@
         <span><span class="status-pill">● KILL-SWITCH IMMUNE • SOVEREIGN INTEGRITY 100%</span> ARGOS™ v1.17 LIVE</span>
     </div>
     <h1>ARGOS</h1>
-    <div class="subtitle">AUTONOMOUS SENTINEL • FAFO SOVEREIGN SYSTEM • ZERO TELEMETRY • ZERO DEPENDENCIES</div>
+    <span class="valuation-tag">ACQUISITION_VALUE: $8,400,000.00 USD</span>
+    <div class="subtitle">AUTONOMOUS BUG-BOUNTY SENTINEL • ZERO TELEMETRY • ZERO DEPENDENCIES</div>
 </header>
 
 <section>
@@ -225,71 +223,59 @@
             Acerbe™ • Rapax™ • Alētheia Listeners operate with<br>
             <span style="color:#fff;">ZERO telemetry • ZERO cloud dependency</span><br><br>
             <span class="premium">De-platforming risk: NULL</span><br>
-            Enterprise sovereignty premium: 2x – 5x over SaaS
+            Market Position: Sovereign Infrastructure (Anti-SaaS)
         </div>
     </div>
 </section>
 
 <section>
     <div class="section-num">02</div>
-    <h2>HIGH-FIDELITY DATA OWNERSHIP</h2>
-    
+    <h2>THE ALĒTHEIA X101 ARRAY</h2>
     <div class="module">
-        <div class="module-title">116 ALĒTHEIA LISTENERS • SOVEREIGN INFRASTRUCTURE</div>
+        <div class="module-title">116 SOVEREIGN LISTENERS (RING 0 ACCESS)</div>
         <div class="terminal">
-            Replacement Cost: $500,000 – $750,000 R&amp;D (self-built hardened stack)<br>
-            vs. Nansen / Chainalysis subscription model (tens of thousands/month)<br><br>
-            You are not buying access.<br>
-            You are buying the <span style="color:#fff;">Printing Press</span>.
-        </div>
-    </div>
-
-    <div class="module">
-        <div class="module-title">MOAT STRENGTH METRICS</div>
-        <div style="font-size:13.5px; line-height:1.75;">
-            <div class="moat-row"><span>Kill-Switch Immunity</span><span class="premium">Absolute</span></div>
-            <div class="moat-row"><span>Data Sovereignty Factor</span><span class="premium">1.0 (Self-hosted)</span></div>
-            <div class="moat-row"><span>Vendor Lock-In Risk</span><span class="premium">Eliminated</span></div>
+            Eliminating Ring 3 latency (Public indexers/relays).<br>
+            Direct node-level ingestion across 101 chains.<br><br>
+            <span style="color:#fff;">Replacement R&amp;D Value: $750,000.00</span><br>
+            Result: You own the Printing Press, not a subscription.
         </div>
     </div>
 </section>
 
 <section>
     <div class="section-num">03</div>
-    <h2>FORCE MULTIPLIER — THE MACHINE</h2>
-
+    <h2>SIMULATION ENGINE — THE BLAST RADIUS</h2>
     <div class="module">
-        <div class="module-title">SALVAGEBOTX + FABRICAT™ • INDUSTRIAL-GRADE ASSET</div>
+        <div class="module-title">EPHEMERAL FORK LOGIC • < 200MS LATENCY</div>
         <div class="terminal">
-            Ingest any codebase → Identify value → Automatically package for 13+ marketplaces<br><br>
-            This is not code.<br>
-            This is the system that builds the code.<br>
-            <span style="color:#fff;">The Printing Press for digital products.</span>
+            Target identified inside block production window.<br>
+            <span class="premium">Instantiating ephemeral sandbox...</span><br>
+            Exploit simulation: [SUCCESS]<br>
+            <span style="color:#fff;">ROI Score: 24.8x (Threshold: 18x)</span><br><br>
+            <span id="simulation-status">Executing sandboxed trace...</span>
         </div>
     </div>
 
     <div class="terminal" id="simulation" style="margin-top:20px;">
         <div>[01] Fork @ block <span id="block">19483921</span> • Alētheia trace active</div>
-        <div>[02] Acerbe fingerprint integrity: 100% • Tamper-proof</div>
+        <div>[02] Heuristic Match: Re-entrancy signature detected</div>
         <div id="viability">[03] Kill-switch exposure: ZERO</div>
-        <div>[04] FabriCat assembly cycle complete • Ready for Rapax deployment</div>
+        <div>[04] Sealed Verdict archived to Hall of Records (Mahihkan.com)</div>
     </div>
 </section>
 
 <section>
     <div class="section-num">04</div>
-    <h2>LIVE THREAT FEED • SOVEREIGNTY MONITOR</h2>
-
+    <h2>BOUNTY DISCOVERY • THREAT FEED</h2>
     <div class="module" id="feed">
-        <div class="module-title">ANOMALIES • IP &amp; INFRASTRUCTURE</div>
-        <!-- Populated by JS -->
-    </div>
+        <div class="module-title">ACTIVE DISCOVERY • SEALED VERDICTS</div>
+        </div>
 </section>
 
 </div>
 
 <div class="footer-bar">
-    <span>116 LISTENERS ONLINE • ZERO EXTERNAL DEPENDENCIES • FAFO SOVEREIGN STACK PROTECTED</span>
+    <span>VALUATION: $8.4M USD • 116 LISTENERS ONLINE • ZERO DEPENDENCIES</span>
     <span>ARGOS™ v1.17 • ARCHER CHAIN ANALYTICS • INEXORABILIS</span>
 </div>
 
@@ -297,41 +283,45 @@
     let block = 19483921;
     setInterval(() => {
         block += Math.floor(Math.random() * 5) + 2;
-        document.getElementById('block').textContent = block.toLocaleString();
+        const blockEl = document.getElementById('block');
+        if(blockEl) blockEl.textContent = block.toLocaleString();
     }, 3800);
 
-    // Dynamic viability for drama
     setInterval(() => {
         const v = document.getElementById('viability');
-        v.textContent = (Math.random() > 0.5) ? 
-            "[03] Kill-switch exposure: ZERO" : 
-            "[03] Sovereign integrity: VERIFIED";
+        if(v) {
+            v.textContent = (Math.random() > 0.5) ? 
+                "[03] Kill-switch exposure: ZERO" : 
+                "[03] Sovereign integrity: VERIFIED";
+        }
     }, 11000);
 
-    // Live threat feed focused on sovereignty
     const feed = document.getElementById('feed');
-    const sovereigntyThreats = [
-        {text: "External telemetry probe attempt on Acerbe layer", time: "+11s", critical: true},
-        {text: "Alētheia Listener integrity check passed", time: "+29s"},
-        {text: "FabriCat salvage cycle — no vendor leakage", time: "+47s"}
+    const logs = [
+        {text: "Heuristic Match: Overflow @ 0x8a...4b", time: "+0.4s", critical: true},
+        {text: "ROI Gatekeeper: 28.1x score. Escalating to Proving stage.", time: "+1.2s"},
+        {text: "Alētheia Array: Scanning Ring 0 state changes...", time: "LIVE"},
+        {text: "Sealed Verdict archived to Hall of Records", time: "+3.8s"},
+        {text: "Proving: Ephemeral fork instantiation successful", time: "+0.2s"}
     ];
     let idx = 0;
 
     setInterval(() => {
-        if (Math.random() > 0.5) {
+        if (Math.random() > 0.4) {
             const entry = document.createElement('div');
-            entry.className = `feed-entry ${sovereigntyThreats[idx % 3].critical ? 'critical' : ''}`;
-            entry.innerHTML = `<span>\( {sovereigntyThreats[idx % 3].text}</span><span class="time"> \){sovereigntyThreats[idx % 3].time}</span>`;
+            const data = logs[idx % logs.length];
+            entry.className = `feed-entry ${data.critical ? 'red-alert' : ''}`;
+            entry.innerHTML = `<span>${data.text}</span><span class="time">${data.time}</span>`;
             feed.appendChild(entry);
             
-            if (feed.children.length > 6) {
-                feed.removeChild(feed.children[1]); // preserve title
+            if (feed.children.length > 7) {
+                feed.removeChild(feed.children[1]); // Keep title
             }
             idx++;
         }
-    }, 7200);
+    }, 6000);
 
-    console.log('%cARGOS™ v1.17 ONLINE — Kill-Switch Immune • 116 Alētheia Listeners Armed • FAFO Sovereign Stack Under Absolute Protection.', 'color:#D4AF37; font-family:monospace; font-size:13px;');
+    console.log('%cARGOS™ v1.17 ONLINE — Valuation: $8,400,000.00 USD • FAFO Sovereign Stack Protected.', 'color:#D4AF37; font-family:monospace; font-size:13px;');
 </script>
 </body>
 </html>
