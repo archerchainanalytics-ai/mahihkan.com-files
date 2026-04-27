@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Alētheia™ x101 Array — Archer Chain Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root{--void:#030304;--gold:#a6894c;--gold-dim:rgba(166,137,76,0.12);--red:#FF0000;--mid:#888890;--white:#f0f0f4;--green:#4caf82;--mono:'IBM Plex Mono',monospace;--display:'Cinzel',serif;--body:'Barlow',sans-serif;}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        body{background:var(--void);color:var(--white);font-family:var(--body);line-height:1.7;overflow-x:hidden;display:flex;flex-direction:column;min-height:100vh;}
+        .corporate-header{width:100%;padding:15px 40px 5px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);}
+        .header-center{font-family:var(--display);font-size:10px;letter-spacing:4px;font-weight:600;}
+        .gold-line{width:100%;height:1px;background:var(--gold);opacity:0.6;}
+        .site-nav{width:100%;background:#0a0a0d;border-bottom:1px solid rgba(166,137,76,0.3);position:relative;z-index:100;}
+        .nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:stretch;padding:0 40px;}
+        .nav-item{position:relative;}
+        .nav-trigger{display:flex;align-items:center;gap:8px;padding:18px 28px;font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);cursor:pointer;border:none;background:none;transition:background 0.2s;white-space:nowrap;}
+        .nav-trigger:hover{background:var(--gold-dim);}
+        .nav-trigger .chevron{font-size:7px;opacity:0.6;transition:transform 0.2s;display:inline-block;}
+        .nav-item:hover .chevron{transform:rotate(180deg);}
+        .nav-dropdown{display:none;position:absolute;top:100%;left:0;min-width:280px;background:#0d0d10;border:1px solid rgba(166,137,76,0.25);border-top:2px solid var(--gold);z-index:200;}
+        .nav-item:hover .nav-dropdown{display:block;}
+        .nav-dropdown a{display:block;padding:14px 24px;font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;border-bottom:1px solid rgba(166,137,76,0.08);transition:color 0.2s,background 0.2s;}
+        .nav-dropdown a:hover{color:var(--gold);background:var(--gold-dim);}
+        .nav-dropdown a:last-child{border-bottom:none;}
+        .dd-label{display:block;padding:10px 24px 6px;font-family:var(--mono);font-size:7px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(166,137,76,0.4);border-bottom:1px solid rgba(166,137,76,0.1);}
+        .nav-item.hor .nav-dropdown{min-width:340px;}
+        a{color:inherit;text-decoration:none;}
+        .prod-hero{padding:80px 60px 60px;max-width:1100px;margin:0 auto;width:100%;}
+        .prod-eyebrow{font-family:var(--mono);font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:16px;}
+        .prod-name{font-family:var(--display);font-size:clamp(2rem,5vw,4.5rem);letter-spacing:0.12em;color:var(--white);text-transform:uppercase;font-weight:400;line-height:1.1;margin-bottom:12px;}
+        .prod-name em{color:var(--gold);font-style:normal;}
+        .prod-tagline{font-family:var(--mono);font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--mid);margin-bottom:20px;}
+        .prod-status{display:inline-block;padding:5px 16px;border:1px solid rgba(76,175,130,0.4);font-family:var(--mono);font-size:8px;letter-spacing:0.25em;text-transform:uppercase;color:var(--green);}
+        .gold-rule{width:100%;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0.35;}
+        .prod-body{max-width:1100px;margin:0 auto;padding:60px 60px 120px;flex-grow:1;}
+        .not-ai-block{background:#060408;border:1px solid rgba(166,137,76,0.2);border-left:3px solid var(--gold);padding:40px 48px;margin-bottom:72px;}
+        .not-ai-block .na-label{font-family:var(--mono);font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;opacity:0.8;}
+        .not-ai-block p{font-family:var(--body);font-size:1.05rem;font-weight:300;line-height:2.2;letter-spacing:0.06em;color:var(--mid);}
+        .not-ai-block p strong{color:var(--white);font-weight:500;}
+        .section-block{margin-bottom:72px;}
+        .section-block .sb-label{font-family:var(--mono);font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-bottom:12px;}
+        .section-block h2{font-family:var(--display);font-size:1.7rem;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;line-height:1.3;}
+        .section-block p{font-family:var(--body);font-size:1.05rem;font-weight:300;line-height:2.2;letter-spacing:0.06em;color:var(--mid);margin-bottom:20px;max-width:820px;}
+        .section-block p strong{color:var(--white);font-weight:500;}
+        .spec-table{width:100%;border-collapse:collapse;margin:32px 0;font-family:var(--mono);}
+        .spec-table th{text-align:left;padding:12px 20px;font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(166,137,76,0.3);opacity:0.8;}
+        .spec-table td{padding:14px 20px;font-size:10px;letter-spacing:0.1em;color:var(--mid);border-bottom:1px solid rgba(166,137,76,0.08);vertical-align:top;line-height:1.7;}
+        .spec-table td:first-child{color:var(--white);}
+        .spec-table tr:last-child td{border-bottom:none;}
+        .os-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:rgba(166,137,76,0.12);border:1px solid rgba(166,137,76,0.12);margin:32px 0;}
+        .os-cell{background:var(--void);padding:28px 24px;text-align:center;}
+        .os-cell .os-icon{font-size:1.6rem;margin-bottom:12px;display:block;}
+        .os-cell .os-name{font-family:var(--display);font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px;}
+        .os-cell .os-ver{font-family:var(--mono);font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);}
+        .chain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1px;background:rgba(166,137,76,0.08);border:1px solid rgba(166,137,76,0.08);margin:32px 0;}
+        .chain-cell{background:var(--void);padding:16px 18px;font-family:var(--mono);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);}
+        .chain-cell .cc-cat{font-size:7px;color:var(--gold);opacity:0.5;letter-spacing:0.25em;display:block;margin-bottom:6px;}
+        .pricing-block{background:#060408;border:1px solid rgba(166,137,76,0.15);padding:40px 48px;margin-top:40px;}
+        .pricing-block .pb-label{font-family:var(--mono);font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;opacity:0.8;}
+        .pricing-block p{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);line-height:2;margin-bottom:20px;}
+        .tier-list{list-style:none;padding:0;margin:16px 0;}
+        .tier-list li{font-family:var(--mono);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);padding:8px 0;border-bottom:1px solid rgba(166,137,76,0.08);}
+        .tier-list li::before{content:'// ';color:var(--gold);opacity:0.5;}
+        .tier-list li:last-child{border-bottom:none;}
+        .cta-btn{display:inline-block;margin-top:28px;padding:14px 36px;border:1px solid var(--gold);font-family:var(--mono);font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);transition:background 0.2s,color 0.2s;}
+        .cta-btn:hover{background:var(--gold);color:var(--void);}
+        .acerbe-badge{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border:1px solid rgba(166,137,76,0.2);font-family:var(--mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-top:40px;}
+        .acerbe-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse2 2s ease-in-out infinite;}
+        @keyframes pulse2{0%,100%{opacity:0.3}50%{opacity:1}}
+        footer{width:100%;padding:0 40px 20px;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-top:auto;}
+        .footer-line{width:100%;height:1px;background:var(--gold);opacity:0.6;margin-bottom:12px;}
+        .footer-content{display:flex;justify-content:space-between;align-items:center;}
+        .footer-center{font-family:var(--display);font-size:9px;letter-spacing:3px;}
+    </style>
+</head>
+<body>
+<div class="corporate-header"><div>BIN754975035</div><div class="header-center">Archer Chain Analytics</div><div>GST/HST754975035RT0001</div></div>
+<div class="gold-line"></div>
+<nav class="site-nav"><div class="nav-inner">
+    <div class="nav-item"><button class="nav-trigger">Products <span class="chevron">▾</span></button><div class="nav-dropdown"><span class="dd-label">Sovereign Infrastructure</span><a href="aletheia.html">Alētheia™ x101 Array</a><a href="inxs.html">INxS™ — Inexorabilis</a><a href="argos.html">Argos™ Autonomous Sentinel</a><a href="acerbe.html">AcerbE™ Digital Fingerprinting</a><span class="dd-label">Automation &amp; Delivery</span><a href="rapax.html">RaPaX™ Sovereign Vending</a><a href="salvagbotx.html">SalvageBotX™ Code Recycler</a><a href="formdepot.html">FormDepot™</a><a href="compliance-app.html">New Business Compliance App</a></div></div>
+    <div class="nav-item"><button class="nav-trigger">Services <span class="chevron">▾</span></button><div class="nav-dropdown"><a href="../services.html#consulting">Consulting</a><a href="../services.html#installation">Installation</a><a href="../services.html#whitelabel">White-Label Licensing</a><a href="../services.html#warranty">The AcerbE™ FAFO Guarantee</a></div></div>
+    <div class="nav-item hor"><button class="nav-trigger">Alētheia™ Array Hall of Records <span class="chevron">▾</span></button><div class="nav-dropdown"><a href="../hall-of-records.html">Hall of Records — Main</a><a href="../signin.html">Sign In / Register</a><a href="../hall-of-records.html#access">Access Tiers</a><a href="../hall-of-records.html#tools">Available Tools</a><a href="../hall-of-records.html#charity">The Alētheia Charity</a></div></div>
+</div></nav>
+
+<div class="prod-hero">
+    <div class="prod-eyebrow">Archer Chain Analytics — Sovereign Infrastructure</div>
+    <div class="prod-name"><em>Alētheia™</em> x101 Array</div>
+    <div class="prod-tagline">Sovereign Real-Time Data Ingestion for 101 Blockchains</div>
+    <span class="prod-status">Production Ready</span>
+</div>
+<div class="gold-rule"></div>
+
+<main class="prod-body">
+    <div class="not-ai-block">
+        <div class="na-label">On the Record — What This Is</div>
+        <p><strong>Alētheia™ is not a data dashboard with an API label. It is not a third-party aggregator reselling blockchain data with a delay baked in.</strong> It is a sovereign, real-time event monitoring and state reconstruction engine that ingests directly from 101 blockchain networks simultaneously. No middleware. No aggregator dependency. No latency introduced by someone else's pipeline. <strong>What happens on-chain is visible here first, because we are watching the chain — not watching someone who is watching the chain.</strong></p>
+    </div>
+
+    <div class="section-block">
+        <div class="sb-label">Origin</div>
+        <h2>Why This Exists</h2>
+        <p>Data access has been controlled by a small number of companies for decades. They charge institutional rates for access to information that is, by the nature of public blockchains, already public. They add latency, subscription walls, rate limits, and terms of service that make real-time, sovereign analysis impossible for anyone who cannot write a large monthly cheque.</p>
+        <p>Alētheia™ was built to end that dependency. <strong>It watches 101 chains directly, reconstructs state in real time, and delivers verified, Zero-Trust attested data without an intermediary collecting rent in the middle.</strong> The Hall of Records runs on it. Our forensic tools run on it. Our clients can run on it too.</p>
+    </div>
+
+    <div class="section-block">
+        <div class="sb-label">Architecture</div>
+        <h2>What Alētheia™ Does</h2>
+        <p>Real-time event monitoring and state reconstruction across 101 blockchain networks. The x101 Array ingests block data, transaction streams, contract events, and protocol state changes simultaneously across all covered chains, normalizes them into a unified data model, and delivers them via REST and WebSocket endpoints with cryptographic integrity attestation on every record delivered.</p>
+        <table class="spec-table">
+            <thead><tr><th>Specification</th><th>Value</th></tr></thead>
+            <tbody>
+                <tr><td>Chain Coverage</td><td>101 networks — L1s, L2s, EVM-compatible, Bitcoin forks, emerging chains</td></tr>
+                <tr><td>Ingestion Type</td><td>Real-time — block-by-block, event-driven</td></tr>
+                <tr><td>State Reconstruction</td><td>Full — transaction, contract event, protocol state</td></tr>
+                <tr><td>Data Delivery</td><td>REST API · WebSocket streams · Batch export</td></tr>
+                <tr><td>Integrity Attestation</td><td>AcerbE™ — cryptographic attestation on all records</td></tr>
+                <tr><td>Infrastructure</td><td>Cloudflare Zero-Trust — operational at all times</td></tr>
+                <tr><td>Latency</td><td>Among the fastest available sources — direct chain ingestion, no aggregator hop</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section-block">
+        <div class="sb-label">Chain Coverage — 101 Networks</div>
+        <h2>Covered Blockchains</h2>
+        <div class="chain-grid">
+            <div class="chain-cell"><span class="cc-cat">Layer 1</span>Bitcoin · Ethereum · Solana</div>
+            <div class="chain-cell"><span class="cc-cat">Layer 1</span>Avalanche · Polygon · BNB Chain</div>
+            <div class="chain-cell"><span class="cc-cat">Layer 1</span>Cardano · Polkadot · Cosmos · Near</div>
+            <div class="chain-cell"><span class="cc-cat">Layer 1</span>Algorand · Tron · Hedera · Stellar · Zilliqa</div>
+            <div class="chain-cell"><span class="cc-cat">Layer 2</span>Arbitrum · Optimism · Base · zkSync</div>
+            <div class="chain-cell"><span class="cc-cat">Layer 2</span>Linea · Scroll · Manta · Polygon zkEVM · dYdX L2</div>
+            <div class="chain-cell"><span class="cc-cat">EVM</span>Gnosis · Celo · Harmony · Moonbeam · Moonriver</div>
+            <div class="chain-cell"><span class="cc-cat">EVM</span>Aurora · Astar · Fantom · Cronos · Klaytn</div>
+            <div class="chain-cell"><span class="cc-cat">EVM</span>Metis · Boba · Fuse · Starknet · Blast</div>
+            <div class="chain-cell"><span class="cc-cat">EVM</span>Mode · Redstone · Fraxtal · Taiko</div>
+            <div class="chain-cell"><span class="cc-cat">BTC Forks</span>Bitcoin Cash · Bitcoin SV · Litecoin · Dogecoin</div>
+            <div class="chain-cell"><span class="cc-cat">BTC Forks</span>Zcash · Dash · Ravencoin</div>
+            <div class="chain-cell"><span class="cc-cat">Emerging</span>Sui · Aptos · Sei · Berachain · Sonic</div>
+            <div class="chain-cell"><span class="cc-cat">Emerging</span>Eclipse · Zora · Degen · Plume</div>
+            <div class="chain-cell"><span class="cc-cat">DeFi</span>Uniswap · Chainlink · Aave · MakerDAO</div>
+            <div class="chain-cell"><span class="cc-cat">DeFi</span>Compound · Curve · Balancer · Yearn</div>
+            <div class="chain-cell"><span class="cc-cat">Other</span>XRP Ledger · Monero · THORChain · Ergo</div>
+            <div class="chain-cell"><span class="cc-cat">Other</span>Nervos · IoTeX · dYdX · GMX · Hyperliquid</div>
+        </div>
+    </div>
+
+    <div class="section-block">
+        <div class="sb-label">Platform Availability</div>
+        <h2>Deployment Environments</h2>
+        <div class="os-grid">
+            <div class="os-cell"><span class="os-icon">🪟</span><span class="os-name">Windows</span><span class="os-ver">Server 2019+ · Windows 10/11</span></div>
+            <div class="os-cell"><span class="os-icon">🐧</span><span class="os-name">Linux</span><span class="os-ver">Ubuntu 20.04+ · Debian 11+ · RHEL 8+</span></div>
+            <div class="os-cell"><span class="os-icon">☁️</span><span class="os-name">Cloud</span><span class="os-ver">Self-Hosted · Cloudflare Workers · VPS</span></div>
+            <div class="os-cell"><span class="os-icon">🔒</span><span class="os-name">Zero-Trust</span><span class="os-ver">Cloudflare Zero-Trust — All Deployments</span></div>
+        </div>
+    </div>
+
+    <div class="section-block">
+        <div class="sb-label">Pricing</div>
+        <h2>Licensing &amp; Pricing</h2>
+        <div class="pricing-block">
+            <div class="pb-label">Pricing Structure — All Tiers in USD</div>
+            <p>Alētheia™ is available under multiple access models. Contact for current pricing.</p>
+            <ul class="tier-list">
+                <li>Individual / Developer API Access</li>
+                <li>Team License — shared API, multiple seats</li>
+                <li>SaaS — hosted feed, usage-based billing</li>
+                <li>White-Label — full rebranding, dedicated instance</li>
+                <li>Enterprise — custom SLA, dedicated support, priority ingestion</li>
+                <li>Hall of Records Integration — tiered by access level (see HoR pricing)</li>
+            </ul>
+            <a href="mailto:sales@mahihkan.com?subject=Aletheia Pricing Inquiry" class="cta-btn">Request Pricing</a>
+        </div>
+    </div>
+    <div class="acerbe-badge"><span class="dot"></span>AcerbE™ Forensic Fingerprint Active — All Records Integrity-Attested</div>
+</main>
+
+<footer><div class="footer-line"></div><div class="footer-content"><div><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></div><div class="footer-center">Sovereignty // Integrity // Inexorabilis</div><div>© 2026 All Rights Reserved</div></div></footer>
+</body></html>
