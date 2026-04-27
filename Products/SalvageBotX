@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SalvageBotX™ — Archer Chain Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root{--void:#030304;--gold:#a6894c;--gold-dim:rgba(166,137,76,0.12);--red:#FF0000;--mid:#888890;--white:#f0f0f4;--green:#4caf82;--mono:'IBM Plex Mono',monospace;--display:'Cinzel',serif;--body:'Barlow',sans-serif;}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        body{background:var(--void);color:var(--white);font-family:var(--body);line-height:1.7;overflow-x:hidden;display:flex;flex-direction:column;min-height:100vh;}
+        .corporate-header{width:100%;padding:15px 40px 5px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);}
+        .header-center{font-family:var(--display);font-size:10px;letter-spacing:4px;font-weight:600;}
+        .gold-line{width:100%;height:1px;background:var(--gold);opacity:0.6;}
+        .site-nav{width:100%;background:#0a0a0d;border-bottom:1px solid rgba(166,137,76,0.3);position:relative;z-index:100;}
+        .nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:stretch;padding:0 40px;}
+        .nav-item{position:relative;}
+        .nav-trigger{display:flex;align-items:center;gap:8px;padding:18px 28px;font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);cursor:pointer;border:none;background:none;transition:background 0.2s;white-space:nowrap;}
+        .nav-trigger:hover{background:var(--gold-dim);}
+        .nav-trigger .chevron{font-size:7px;opacity:0.6;transition:transform 0.2s;display:inline-block;}
+        .nav-item:hover .chevron{transform:rotate(180deg);}
+        .nav-dropdown{display:none;position:absolute;top:100%;left:0;min-width:280px;background:#0d0d10;border:1px solid rgba(166,137,76,0.25);border-top:2px solid var(--gold);z-index:200;}
+        .nav-item:hover .nav-dropdown{display:block;}
+        .nav-dropdown a{display:block;padding:14px 24px;font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;border-bottom:1px solid rgba(166,137,76,0.08);transition:color 0.2s,background 0.2s;}
+        .nav-dropdown a:hover{color:var(--gold);background:var(--gold-dim);}
+        .nav-dropdown a:last-child{border-bottom:none;}
+        .dd-label{display:block;padding:10px 24px 6px;font-family:var(--mono);font-size:7px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(166,137,76,0.4);border-bottom:1px solid rgba(166,137,76,0.1);}
+        .nav-item.hor .nav-dropdown{min-width:340px;}
+        a{color:inherit;text-decoration:none;}
+
+        /* PRODUCT PAGE LAYOUT */
+        .prod-hero{padding:80px 60px 60px;max-width:1100px;margin:0 auto;width:100%;}
+        .prod-eyebrow{font-family:var(--mono);font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:16px;}
+        .prod-name{font-family:var(--display);font-size:clamp(2.5rem,6vw,5rem);letter-spacing:0.15em;color:var(--white);text-transform:uppercase;font-weight:400;line-height:1.1;margin-bottom:12px;}
+        .prod-name em{color:var(--gold);font-style:normal;}
+        .prod-tagline{font-family:var(--mono);font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--mid);margin-bottom:20px;}
+        .prod-status{display:inline-block;padding:5px 16px;border:1px solid rgba(76,175,130,0.4);font-family:var(--mono);font-size:8px;letter-spacing:0.25em;text-transform:uppercase;color:var(--green);}
+
+        .gold-rule{width:100%;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0.35;margin:0;}
+
+        .prod-body{max-width:1100px;margin:0 auto;padding:60px 60px 120px;flex-grow:1;}
+
+        /* NOT AI STATEMENT */
+        .not-ai-block{background:#060408;border:1px solid rgba(166,137,76,0.2);border-left:3px solid var(--gold);padding:40px 48px;margin-bottom:72px;}
+        .not-ai-block .na-label{font-family:var(--mono);font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;opacity:0.8;}
+        .not-ai-block p{font-family:var(--body);font-size:1.05rem;font-weight:300;line-height:2.2;letter-spacing:0.06em;color:var(--mid);}
+        .not-ai-block p strong{color:var(--white);font-weight:500;}
+
+        .section-block{margin-bottom:72px;}
+        .section-block .sb-label{font-family:var(--mono);font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-bottom:12px;}
+        .section-block h2{font-family:var(--display);font-size:1.7rem;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;line-height:1.3;}
+        .section-block p{font-family:var(--body);font-size:1.05rem;font-weight:300;line-height:2.2;letter-spacing:0.06em;color:var(--mid);margin-bottom:20px;max-width:820px;}
+        .section-block p strong{color:var(--white);font-weight:500;}
+
+        /* SPEC TABLE */
+        .spec-table{width:100%;border-collapse:collapse;margin:32px 0;font-family:var(--mono);}
+        .spec-table th{text-align:left;padding:12px 20px;font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(166,137,76,0.3);opacity:0.8;}
+        .spec-table td{padding:14px 20px;font-size:10px;letter-spacing:0.1em;color:var(--mid);border-bottom:1px solid rgba(166,137,76,0.08);vertical-align:top;line-height:1.7;}
+        .spec-table td:first-child{color:var(--white);}
+        .spec-table tr:last-child td{border-bottom:none;}
+
+        /* OS GRID */
+        .os-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:rgba(166,137,76,0.12);border:1px solid rgba(166,137,76,0.12);margin:32px 0;}
+        .os-cell{background:var(--void);padding:28px 24px;text-align:center;}
+        .os-cell .os-icon{font-size:1.6rem;margin-bottom:12px;display:block;}
+        .os-cell .os-name{font-family:var(--display);font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px;}
+        .os-cell .os-ver{font-family:var(--mono);font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);}
+
+        /* PIPELINE DIAGRAM */
+        .pipeline{display:flex;align-items:center;gap:0;margin:40px 0;flex-wrap:wrap;}
+        .pipe-step{background:#08080c;border:1px solid rgba(166,137,76,0.2);padding:20px 24px;flex:1;min-width:120px;text-align:center;}
+        .pipe-step .ps-num{font-family:var(--mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.5;margin-bottom:8px;}
+        .pipe-step .ps-name{font-family:var(--mono);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);}
+        .pipe-arrow{font-family:var(--mono);color:var(--gold);opacity:0.4;padding:0 8px;font-size:1rem;}
+
+        /* FORM TYPES */
+        .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(166,137,76,0.1);border:1px solid rgba(166,137,76,0.1);margin:32px 0;}
+        .form-card{background:var(--void);padding:28px 24px;}
+        .form-card .fc-type{font-family:var(--mono);font-size:8px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+        .form-card .fc-audience{font-family:var(--mono);font-size:8px;color:var(--mid);margin-bottom:6px;letter-spacing:0.1em;}
+        .form-card .fc-range{font-family:var(--mono);font-size:10px;color:var(--white);}
+
+        /* PRICING */
+        .pricing-block{background:#060408;border:1px solid rgba(166,137,76,0.15);padding:40px 48px;margin-top:40px;}
+        .pricing-block .pb-label{font-family:var(--mono);font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;opacity:0.8;}
+        .pricing-block p{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);line-height:2;margin-bottom:20px;}
+        .tier-list{list-style:none;padding:0;margin:16px 0;}
+        .tier-list li{font-family:var(--mono);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);padding:8px 0;border-bottom:1px solid rgba(166,137,76,0.08);}
+        .tier-list li::before{content:'// ';color:var(--gold);opacity:0.5;}
+        .tier-list li:last-child{border-bottom:none;}
+
+        .cta-btn{display:inline-block;margin-top:28px;padding:14px 36px;border:1px solid var(--gold);font-family:var(--mono);font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);transition:background 0.2s,color 0.2s;}
+        .cta-btn:hover{background:var(--gold);color:var(--void);}
+
+        .acerbe-badge{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border:1px solid rgba(166,137,76,0.2);font-family:var(--mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-top:40px;}
+        .acerbe-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse2 2s ease-in-out infinite;}
+        @keyframes pulse2{0%,100%{opacity:0.3}50%{opacity:1}}
+
+        footer{width:100%;padding:0 40px 20px;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-top:auto;}
+        .footer-line{width:100%;height:1px;background:var(--gold);opacity:0.6;margin-bottom:12px;}
+        .footer-content{display:flex;justify-content:space-between;align-items:center;}
+        .footer-center{font-family:var(--display);font-size:9px;letter-spacing:3px;}
+    </style>
+</head>
+<body>
+<div class="corporate-header">
+    <div>BIN754975035</div>
+    <div class="header-center">Archer Chain Analytics</div>
+    <div>GST/HST754975035RT0001</div>
+</div>
+<div class="gold-line"></div>
+<nav class="site-nav">
+    <div class="nav-inner">
+        <div class="nav-item">
+            <button class="nav-trigger">Products <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <span class="dd-label">Sovereign Infrastructure</span>
+                <a href="aletheia.html">Alētheia™ x101 Array</a>
+                <a href="inxs.html">INxS™ — Inexorabilis</a>
+                <a href="argos.html">Argos™ Autonomous Sentinel</a>
+                <a href="acerbe.html">AcerbE™ Digital Fingerprinting</a>
+                <span class="dd-label">Automation &amp; Delivery</span>
+                <a href="rapax.html">RaPaX™ Sovereign Vending</a>
+                <a href="salvagbotx.html">SalvageBotX™ Code Recycler</a>
+                <a href="formdepot.html">FormDepot™</a>
+                <a href="compliance-app.html">New Business Compliance App</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-trigger">Services <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <a href="../services.html#consulting">Consulting</a>
+                <a href="../services.html#installation">Installation</a>
+                <a href="../services.html#whitelabel">White-Label Licensing</a>
+                <a href="../services.html#warranty">The AcerbE™ FAFO Guarantee</a>
+            </div>
+        </div>
+        <div class="nav-item hor">
+            <button class="nav-trigger">Alētheia™ Array Hall of Records <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <a href="../hall-of-records.html">Hall of Records — Main</a>
+                <a href="../signin.html">Sign In / Register</a>
+                <a href="../hall-of-records.html#access">Access Tiers</a>
+                <a href="../hall-of-records.html#tools">Available Tools</a>
+                <a href="../hall-of-records.html#charity">The Alētheia Charity</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="prod-hero">
+    <div class="prod-eyebrow">Archer Chain Analytics — Product Documentation v2.0.0</div>
+    <div class="prod-name"><em>SalvageBotX™</em></div>
+    <div class="prod-tagline">No Mercy Code Recycler · Productization Machine</div>
+    <span class="prod-status">Production Ready</span>
+</div>
+<div class="gold-rule"></div>
+
+<main class="prod-body">
+
+    <!-- NOT AI STATEMENT -->
+    <div class="not-ai-block">
+        <div class="na-label">On the Record — What This Is</div>
+        <p><strong>SalvageBotX™ is not an AI product dressed up as software. It is not a chatbot with a logo. It is not a wrapper around a language model pretending to do analysis.</strong> It is a local-execution, deterministic code analysis and productization engine. It runs on your machine. It processes your files. It produces structured, ranked, reproducible output — the same output every time on the same input. No cloud dependency. No inference model. No black box. <strong>It does exactly what the documentation says it does, because it is actual software, not a statistical approximation of software.</strong></p>
+    </div>
+
+    <!-- WHY I BUILT THIS -->
+    <div class="section-block">
+        <div class="sb-label">Origin</div>
+        <h2>Why This Exists</h2>
+        <p>Every developer has a graveyard. Abandoned projects, half-finished utilities, scripts that solved a real problem once and then got buried under the next sprint. That code has value. It already solved something. Someone else almost certainly has the same problem and would pay to not solve it from scratch.</p>
+        <p>SalvageBotX™ was built to stop that value from disappearing. <strong>You feed it a codebase — any codebase, any language, any state of completion — and it tells you exactly what you have, what it is worth, who would buy it, and how to package it for sale.</strong> Not as a suggestion. As a ranked execution plan with price ranges, assembly instructions, and audience profiles.</p>
+        <p>The model I built it around is simple: <strong>nothing is wasted.</strong> Even dead code has components that are alive. SalvageBotX™ finds them.</p>
+    </div>
+
+    <!-- WHAT IT DOES -->
+    <div class="section-block">
+        <div class="sb-label">Product Overview</div>
+        <h2>What SalvageBotX™ Does</h2>
+        <p>SalvageBotX™ ingests any codebase and produces a ranked, itemized execution plan identifying every component that can be extracted, packaged, and sold as a standalone digital product. All processing is local. Nothing leaves your machine.</p>
+
+        <div class="pipeline">
+            <div class="pipe-step"><div class="ps-num">01</div><div class="ps-name">Ingest</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step"><div class="ps-num">02</div><div class="ps-name">Decompose</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step"><div class="ps-num">03</div><div class="ps-name">Classify</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step"><div class="ps-num">04</div><div class="ps-name">Map Forms</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step"><div class="ps-num">05</div><div class="ps-name">Score</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step"><div class="ps-num">06</div><div class="ps-name">Output Plan</div></div>
+        </div>
+
+        <p><strong>Ingest methods:</strong> Local folder · ZIP archive · Git URL · Pasted code</p>
+        <p><strong>Output files:</strong> <code style="color:var(--gold);font-family:var(--mono);font-size:0.9rem;">SalvageBotX_PLAN.md</code> (human-readable) and <code style="color:var(--gold);font-family:var(--mono);font-size:0.9rem;">salvagebotx_plan.json</code> (machine-readable for pipeline integration)</p>
+    </div>
+
+    <!-- SUPPORTED LANGUAGES -->
+    <div class="section-block">
+        <div class="sb-label">Language Support</div>
+        <h2>Supported Languages</h2>
+        <table class="spec-table">
+            <thead><tr><th>Language</th><th>Decomposition Depth</th><th>Notes</th></tr></thead>
+            <tbody>
+                <tr><td>Python</td><td>Full — files, functions, classes</td><td>AST-level decomposition. Most accurate.</td></tr>
+                <tr><td>JavaScript</td><td>Structural — files, functions, classes</td><td>Regex-based. Covers all common patterns.</td></tr>
+                <tr><td>TypeScript</td><td>Structural — files, functions, classes</td><td>Same as JS. Compile step noted in instructions.</td></tr>
+                <tr><td>Shell / Bash</td><td>File-level</td><td>Capability detection only.</td></tr>
+                <tr><td>Ruby · Go · Rust · Java · C# · C++ · C · PHP</td><td>File-level</td><td>Language detected. Capability inferred from path/name.</td></tr>
+                <tr><td>JSON · YAML · TOML · INI</td><td>Config classification</td><td>Not decomposed further.</td></tr>
+                <tr><td>Markdown · RST · TXT</td><td>Documentation classification</td><td>Teachability flag applied.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- OS / PLATFORM -->
+    <div class="section-block">
+        <div class="sb-label">Platform Availability</div>
+        <h2>Operating System Support</h2>
+        <div class="os-grid">
+            <div class="os-cell">
+                <span class="os-icon">🪟</span>
+                <span class="os-name">Windows</span>
+                <span class="os-ver">10 v1903+ · Windows 11 (all)</span>
+            </div>
+            <div class="os-cell">
+                <span class="os-icon">🐧</span>
+                <span class="os-name">Linux</span>
+                <span class="os-ver">Ubuntu 20.04+ · Debian 11+ · Fedora 36+ · Arch · RHEL 8+</span>
+            </div>
+            <div class="os-cell">
+                <span class="os-icon">🤖</span>
+                <span class="os-name">Android</span>
+                <span class="os-ver">Android 8.0 (Oreo)+ via Termux</span>
+            </div>
+        </div>
+        <p>macOS is not a listed supported platform. Python 3.9 minimum required on all platforms. Python 3.12+ recommended.</p>
+    </div>
+
+    <!-- SYSTEM REQUIREMENTS -->
+    <div class="section-block">
+        <div class="sb-label">System Requirements</div>
+        <h2>Hardware Requirements</h2>
+        <table class="spec-table">
+            <thead><tr><th>Requirement</th><th>Minimum</th><th>Recommended</th></tr></thead>
+            <tbody>
+                <tr><td>Python</td><td>3.9</td><td>3.12+</td></tr>
+                <tr><td>RAM</td><td>512 MB free</td><td>2 GB free</td></tr>
+                <tr><td>Disk</td><td>100 MB free</td><td>500 MB free</td></tr>
+                <tr><td>CPU</td><td>Any dual-core</td><td>Any quad-core</td></tr>
+                <tr><td>Internet</td><td>Not required for analysis</td><td>Required for Git ingest only</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- PRODUCT FORMS -->
+    <div class="section-block">
+        <div class="sb-label">Output Classification</div>
+        <h2>Product Form Types</h2>
+        <p>SalvageBotX™ maps every identified component to one of ten product forms, each with defined target audiences, price ranges, and assembly complexity ratings.</p>
+        <div class="form-grid">
+            <div class="form-card"><div class="fc-type">Security Tool</div><div class="fc-audience">Developers · Security Engineers</div><div class="fc-range">$149 — $499</div></div>
+            <div class="form-card"><div class="fc-type">API Module</div><div class="fc-audience">Backend Developers</div><div class="fc-range">$99 — $299</div></div>
+            <div class="form-card"><div class="fc-type">CLI Tool</div><div class="fc-audience">Power Users · Developers</div><div class="fc-range">$49 — $149</div></div>
+            <div class="form-card"><div class="fc-type">ML Starter</div><div class="fc-audience">Data Scientists · ML Engineers</div><div class="fc-range">$79 — $249</div></div>
+            <div class="form-card"><div class="fc-type">Dashboard Template</div><div class="fc-audience">Frontend Developers</div><div class="fc-range">$49 — $199</div></div>
+            <div class="form-card"><div class="fc-type">Snippet Pack</div><div class="fc-audience">Developers — All Levels</div><div class="fc-range">$29 — $79</div></div>
+            <div class="form-card"><div class="fc-type">Mini Course Module</div><div class="fc-audience">Learners · Indie Developers</div><div class="fc-range">$29 — $79</div></div>
+            <div class="form-card"><div class="fc-type">Test Suite Pack</div><div class="fc-audience">Developers</div><div class="fc-range">$19 — $49</div></div>
+            <div class="form-card"><div class="fc-type">Doc Pack</div><div class="fc-audience">Broad</div><div class="fc-range">$9 — $29</div></div>
+            <div class="form-card"><div class="fc-type">Asset Bundle</div><div class="fc-audience">Broad</div><div class="fc-range">$9 — $29</div></div>
+        </div>
+    </div>
+
+    <!-- PRICING -->
+    <div class="section-block">
+        <div class="sb-label">Pricing</div>
+        <h2>Licensing &amp; Pricing</h2>
+        <div class="pricing-block">
+            <div class="pb-label">Pricing Structure — All Tiers in USD</div>
+            <p>SalvageBotX™ is available across multiple licensing models. Contact for current pricing on all tiers.</p>
+            <ul class="tier-list">
+                <li>Individual License — single user, local deployment</li>
+                <li>Team License — multi-seat, shared deployment</li>
+                <li>SaaS — hosted analysis pipeline, usage-based</li>
+                <li>White-Label — full branding injection, enterprise deployment</li>
+                <li>Preventative Maintenance — update subscription, priority patches</li>
+                <li>Enterprise — custom terms, dedicated support, SLA</li>
+            </ul>
+            <a href="mailto:sales@mahihkan.com?subject=SalvageBotX Pricing Inquiry" class="cta-btn">Request Pricing</a>
+        </div>
+    </div>
+
+    <div class="acerbe-badge">
+        <span class="dot"></span>
+        AcerbE™ Forensic Fingerprint Active — Tamper Detection Enabled
+    </div>
+
+</main>
+
+<footer>
+    <div class="footer-line"></div>
+    <div class="footer-content">
+        <div><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></div>
+        <div class="footer-center">Sovereignty // Integrity // Inexorabilis</div>
+        <div>© 2026 All Rights Reserved</div>
+    </div>
+</footer>
+</body>
+</html>
