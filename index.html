@@ -12,66 +12,98 @@
             --mono:'IBM Plex Mono',monospace;--display:'Cinzel',serif;--body:'Barlow',sans-serif;
         }
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-        body{background:var(--void);color:var(--white);font-family:var(--body);line-height:1.7;overflow-x:hidden;display:flex;flex-direction:column;min-height:100vh;}
         
+        body {
+            background: radial-gradient(circle at center, #0a0a0f 0%, var(--void) 100%);
+            color: var(--white);
+            font-family: var(--body);
+            line-height: 1.7;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Purgatory Scan Line */
+        body::after {
+            content: "";
+            position: fixed;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(166,137,76,0.03), transparent);
+            animation: scan 8s linear infinite;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        @keyframes scan { 0% { top: -100px; } 100% { top: 100%; } }
+
         .corporate-header{width:100%;padding:15px 40px 5px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);}
         .header-center{font-family:var(--display);font-size:10px;letter-spacing:4px;font-weight:600;}
         .gold-line{width:100%;height:1px;background:var(--gold);opacity:0.6;}
 
-        /* Ticker: Tightened height */
+        /* Ticker: Tightened & Slowed */
         .ticker-wrapper{width:100%;height:24px;background:#07070a;border-bottom:1px solid rgba(166,137,76,0.2);overflow:hidden;position:relative;display:flex;align-items:center;}
-        .ticker-wrapper::before,.ticker-wrapper::after{content:'';position:absolute;top:0;width:100px;height:100%;z-index:2;pointer-events:none;}
-        .ticker-wrapper::before{left:0;background:linear-gradient(to right,#07070a 40%,transparent);}
-        .ticker-wrapper::after{right:0;background:linear-gradient(to left,#07070a 40%,transparent);}
         .ticker-track{display:flex;align-items:center;white-space:nowrap;will-change:transform;}
         .ticker-track.animating{animation:ticker-scroll linear infinite;}
         @keyframes ticker-scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-        .ticker-track:hover{animation-play-state:paused;}
         .ticker-item{display:inline-flex;align-items:center;gap:10px;padding:0 32px;height:24px;font-family:var(--mono);border-right:1px solid rgba(166,137,76,0.12);}
         .ticker-symbol{color:var(--gold);font-weight:600;font-size:10px;letter-spacing:0.2em;}
         .ticker-price{color:var(--white);font-size:12px;}
         .ticker-change{font-size:10px;font-weight:500;}
         .up{color:var(--green);}.down{color:var(--red);}
-        .ticker-loading{font-family:var(--mono);font-size:9px;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase;padding:0 40px;animation:pulse 1.4s ease-in-out infinite;}
-        @keyframes pulse{0%,100%{opacity:0.2}50%{opacity:0.7}}
 
-        /* Navigation: Symmetrical Layout */
+        /* Nav: Symmetrical 25/50/75 */
         .site-nav{width:100%;background:#0a0a0d;border-bottom:1px solid rgba(166,137,76,0.3);position:relative;z-index:100;}
-        .nav-inner{max-width:1400px;margin:0 auto;height:50px;position:relative;padding:0 40px;}
-        .nav-item{position:absolute;top:0;height:100%;}
-        
-        /* Position Logic: 25% | 50% | 75% */
+        .nav-inner{max-width:1400px;margin:0 auto;height:50px;position:relative;}
+        .nav-item{position:absolute;top:0;height:100%;display:flex;align-items:center;}
         .nav-item.products-pos { left: 25%; transform: translateX(-50%); }
         .nav-item.hall-pos { left: 50%; transform: translateX(-50%); }
         .nav-item.services-pos { left: 75%; transform: translateX(-50%); }
 
-        .nav-trigger{display:flex;align-items:center;gap:8px;height:100%;padding:0 20px;font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);cursor:pointer;border:none;background:none;transition:background 0.2s;white-space:nowrap;}
-        .nav-trigger:hover{background:var(--gold-dim);}
-        .nav-trigger .chevron{font-size:7px;opacity:0.6;transition:transform 0.2s;display:inline-block;}
-        .nav-item:hover .chevron{transform:rotate(180deg);}
-        
-        .nav-dropdown{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);min-width:280px;background:#0d0d10;border:1px solid rgba(166,137,76,0.25);border-top:2px solid var(--gold);z-index:200;}
+        .nav-trigger{display:flex;align-items:center;gap:8px;padding:10px 20px;font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);cursor:pointer;border:none;background:none;white-space:nowrap;}
+        .nav-dropdown{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);min-width:280px;background:#0d0d10;border:1px solid rgba(166,137,76,0.25);border-top:2px solid var(--gold);}
         .nav-item:hover .nav-dropdown{display:block;}
-        .nav-dropdown a{display:block;padding:14px 24px;font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;border-bottom:1px solid rgba(166,137,76,0.08);transition:color 0.2s,background 0.2s;}
+        .nav-dropdown a{display:block;padding:12px 20px;font-family:var(--mono);font-size:9px;color:var(--mid);text-decoration:none;border-bottom:1px solid rgba(166,137,76,0.08);}
         .nav-dropdown a:hover{color:var(--gold);background:var(--gold-dim);}
-        .nav-dropdown a:last-child{border-bottom:none;}
-        .dd-label{display:block;padding:10px 24px 6px;font-family:var(--mono);font-size:7px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(166,137,76,0.4);border-bottom:1px solid rgba(166,137,76,0.1);}
-        .nav-item.hor .nav-dropdown{min-width:340px;}
 
+        /* Article & Content */
         header{text-align:center;margin:80px 0 100px;}
         .brand-logo{font-family:var(--display);font-size:clamp(4rem,10vw,7rem);letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;font-weight:400;margin-bottom:40px;}
-        .quote-container{max-width:800px;margin:0 auto;text-align:center;padding:0 40px;}
-        .red-quote{color:var(--red);font-family:var(--mono);font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;line-height:1.8;display:block;}
-        .quote-attribution{display:block;text-align:right;color:var(--red);font-family:var(--mono);font-size:0.75rem;margin-top:15px;letter-spacing:0.12em;}
-        .content-body{max-width:900px;margin:100px auto 120px;padding:0 60px;flex-grow:1;}
-        .article-box h2{font-family:var(--display);font-size:2.2rem;letter-spacing:0.1em;color:var(--gold);margin-bottom:60px;text-transform:uppercase;text-align:center;line-height:1.4;}
-        .article-box p{font-weight:300;line-height:2.4;letter-spacing:0.08em;font-size:1.15rem;color:var(--mid);margin-bottom:40px;text-align:justify;}
+        .red-quote{color:var(--red);font-family:var(--mono);font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;text-shadow: 0 0 10px rgba(255,0,0,0.2);}
         
-        footer{width:100%;padding:0 40px 20px;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-top:auto;}
-        .footer-line{width:100%;height:1px;background:var(--gold);opacity:0.6;margin-bottom:12px;}
-        .footer-content{display:flex;justify-content:space-between;align-items:center;}
-        .footer-center{font-family:var(--display);font-size:9px;letter-spacing:3px;}
-        a{color:inherit;text-decoration:none;}
+        .content-body{max-width:720px;margin:0 auto 120px;padding:0 20px;}
+        .article-box h2{font-family:var(--display);font-size:1.8rem;color:var(--gold);margin-bottom:40px;text-align:center;}
+        .article-box p{font-weight:300;line-height:2;font-size:1.05rem;color:var(--mid);margin-bottom:30px;text-align:justify;}
+
+        /* Data Break */
+        .data-break {
+            border-top: 1px solid var(--gold-dim);
+            border-bottom: 1px solid var(--gold-dim);
+            padding: 20px 0;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-around;
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Founders Note */
+        .founders-note {
+            background: rgba(166,137,76,0.03);
+            border-left: 2px solid var(--gold);
+            padding: 40px;
+            margin-top: 80px;
+        }
+        .founders-note h3 { font-family: var(--mono); font-size: 12px; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; }
+        .founders-note p { font-family: var(--mono); font-size: 11px; color: var(--mid); line-height: 1.8; }
+
+        footer{width:100%;padding:20px 40px;font-family:var(--mono);font-size:8px;color:var(--gold);border-top:1px solid var(--gold-dim);}
+        .footer-content{display:flex;justify-content:space-between;}
     </style>
 </head>
 <body>
@@ -86,5 +118,105 @@
         <span class="ticker-loading">Fetching live market data…</span>
     </div>
 </div>
+
 <nav class="site-nav">
-    <div
+    <div class="nav-inner">
+        <div class="nav-item products-pos">
+            <button class="nav-trigger">Products ▾</button>
+            <div class="nav-dropdown">
+                <span class="dd-label">Hardened Infrastructure</span>
+                <a href="#">Alētheia™ x101 Array [v2.0]</a>
+                <a href="#">INxS™ — Inexorabilis (Hardened)</a>
+                <a href="#">Argos™ Sentinel Node</a>
+                <a href="#">AcerbE™ Digital Fingerprinting</a>
+                <span class="dd-label">Automation & Delivery</span>
+                <a href="#">RaPaX™ Sovereign Vending</a>
+                <a href="#">SalvageBotX™ [v3.1]</a>
+            </div>
+        </div>
+        <div class="nav-item hall-pos">
+            <button class="nav-trigger">Hall of Records ▾</button>
+            <div class="nav-dropdown">
+                <a href="#">Access Mainframe</a>
+                <a href="#">Security Tiers</a>
+                <a href="#">The Alētheia Charity</a>
+            </div>
+        </div>
+        <div class="nav-item services-pos">
+            <button class="nav-trigger">Services ▾</button>
+            <div class="nav-dropdown">
+                <a href="#">Consulting</a>
+                <a href="#">Hardened Installation</a>
+                <a href="#">White-Label Licensing</a>
+                <a href="#">The FAFO Guarantee</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<header>
+    <div class="brand-logo">MAHIHKAN</div>
+    <div class="quote-container">
+        <span class="red-quote">"A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution."</span>
+        <br><br>
+        <span style="color:var(--red); font-family:var(--mono); font-size:10px;">— SATOSHI N. —</span>
+    </div>
+</header>
+
+<main class="content-body">
+    <section class="article-box">
+        <h2>The Original Vision and the Hardened Reality</h2>
+        <p>Cryptocurrency began with a simple but radical idea: money should not belong only to banks, governments, or other centralized institutions. The early vision was to create a peer-to-peer financial system that could move value directly between people, reduce dependence on gatekeepers, and open access to anyone with an internet connection.</p>
+        
+        <div class="data-break">
+            <span>Entropy: 0.00042</span>
+            <span>Uptime: 99.998%</span>
+            <span>Sync: Hardened</span>
+        </div>
+
+        <p>Today, the mission is being tested. Projects in decentralized finance, payments, and tokenized assets still point toward a future where finance can be more open and programmable. The future of crypto will depend on whether the technology can still deliver on its promise to spread opportunity instead of simply concentrating it in new hands.</p>
+    </section>
+
+    <section class="founders-note">
+        <h3>Founders Note // System Update</h3>
+        <p>We have recently hardened the core product line. By integrating the Alētheia Array directly with our diagnostic sentinels, we've created a closed-loop analytics environment. This isn't just about security—it's about sovereignty. We don't just watch the chain; we understand its intent. Stay vigilant.</p>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div>SALES@MAHIHKAN.COM</div>
+        <div>SOVEREIGNTY // INTEGRITY // INEXORABILIS</div>
+        <div>© 2026 ARCHER CHAIN ANALYTICS</div>
+    </div>
+</footer>
+
+<script>
+const TOKENS=[{s:'BTC',id:'bitcoin'},{s:'ETH',id:'ethereum'},{s:'BNB',id:'binancecoin'},{s:'SOL',id:'solana'},{s:'XRP',id:'ripple'},{s:'ADA',id:'cardano'},{s:'LINK',id:'chainlink'},{s:'DOT',id:'polkadot'}];
+function fmtP(p){return '$'+(p >= 1 ? p.toFixed(2) : p.toFixed(5));}
+async function fetchTicker(){
+    const ids=TOKENS.map(t=>t.id).join(',');
+    try{
+        const res=await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);
+        const data=await res.json();
+        const track=document.getElementById('tickerTrack');
+        track.innerHTML='';
+        TOKENS.forEach(t=>{
+            const d=data[t.id];
+            if(d){
+                const div=document.createElement('div');
+                div.className='ticker-item';
+                div.innerHTML=`<span class="ticker-symbol">${t.s}</span><span class="ticker-price">${fmtP(d.usd)}</span><span class="ticker-change ${d.usd_24h_change>0?'up':'down'}">${d.usd_24h_change.toFixed(2)}%</span>`;
+                track.appendChild(div);
+            }
+        });
+        track.appendChild(track.cloneNode(true));
+        const dur=Math.round(track.scrollWidth/2/42.5); // 42.5 = Half speed of original 85
+        track.style.animationDuration=dur+'s';
+        track.classList.add('animating');
+    }catch(e){}
+}
+fetchTicker(); setInterval(fetchTicker, 60000);
+</script>
+</body>
+</html>
