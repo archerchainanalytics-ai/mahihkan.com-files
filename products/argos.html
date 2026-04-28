@@ -3,140 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARCHER_LEDGER_2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <title>ARGOS™ // ARCHER_CHAIN</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --boudoir-gold: #7a6321; /* Muted, antique gold */
-            --velvet-red: #5e0000;  /* Deep, dark oxblood */
-            --abyss: #010101;       /* Absolute dark */
-            --ash: #4a4a4a;         /* Dimmed text, very low contrast */
-            --ghost-white: #888888; /* For the values, still dimmed */
+            --gold: #7a6321; --red: #5e0000; --abyss: #010101; --ash: #4a4a4a; --ghost: #888888;
         }
+
+        * { box-sizing: border-box; }
 
         body {
-            background-color: var(--abyss);
-            color: var(--ash);
-            font-family: 'JetBrains Mono', monospace;
-            margin: 0;
-            padding: 60px 20px;
-            font-size: 10.5px;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            line-height: 1.8;
+            background-color: var(--abyss); color: var(--ash);
+            font-family: 'JetBrains Mono', monospace; margin: 0;
+            padding: 40px 40px 180px 40px; font-size: 10.5px;
+            letter-spacing: 1.2px; text-transform: uppercase; line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .boudoir-wrap {
-            max-width: 700px;
-            margin: 0 auto;
-            border-top: 1px solid #1a1a1a;
-            padding-top: 40px;
+        .container { max-width: 900px; margin: 0 auto; position: relative; }
+
+        header { border-bottom: 1px solid var(--gold); padding-bottom: 25px; margin-bottom: 40px; }
+        .h-meta { display: flex; justify-content: space-between; font-size: 9px; color: var(--gold); margin-bottom: 10px; font-weight: 700; }
+        
+        h1 { font-family: 'Oswald', sans-serif; font-size: 52px; color: var(--ghost); margin: 0; letter-spacing: 14px; line-height: 1; }
+        .val-sub { color: var(--gold); font-size: 11px; margin-top: 12px; display: block; letter-spacing: 5px; }
+
+        .directive-block {
+            border-left: 1px solid var(--gold);
+            padding: 20px 30px;
+            margin: 40px 0;
+            background: rgba(10, 10, 10, 0.5);
         }
 
-        .header-meta {
-            color: var(--boudoir-gold);
-            font-size: 9px;
-            margin-bottom: 50px;
-            display: flex;
-            justify-content: space-between;
-            opacity: 0.7;
-        }
+        .dir-label { color: var(--gold); font-size: 9px; margin-bottom: 10px; display: block; }
+        .dir-content { font-size: 10px; color: var(--ash); letter-spacing: 1.2px; line-height: 1.8; }
 
-        .ledger-title {
-            color: var(--ghost-white);
-            border-bottom: 1px solid var(--velvet-red);
-            padding-bottom: 5px;
-            margin-bottom: 30px;
-            display: inline-block;
-        }
+        .ledger-title { color: var(--ghost); border-bottom: 1px solid var(--red); padding-bottom: 5px; margin: 40px 0 15px 0; display: inline-block; font-weight: 700; }
+        .row { display: flex; justify-content: space-between; border-bottom: 1px solid #0d0d0d; padding: 10px 0; }
+        .val { color: var(--ghost); font-weight: 700; }
+        
+        .asset-box { margin-top: 40px; border-left: 2px solid var(--gold); padding: 25px 30px; background: rgba(122, 99, 33, 0.02); }
+        .sum-total { font-size: 22px; color: var(--gold); letter-spacing: 5px; font-weight: 700; }
 
-        .entry-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            border-bottom: 1px solid #080808;
-        }
+        footer { position: fixed; bottom: 45px; left: 40px; right: 40px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .left-f, .right-f { font-size: 9px; color: #222; letter-spacing: 2.5px; line-height: 1.5; }
 
-        .val { color: var(--ghost-white); }
-        .alert { color: var(--velvet-red); }
-        .gold { color: var(--boudoir-gold); }
-
-        .final-asset-block {
-            margin-top: 80px;
-            border-left: 2px solid var(--boudoir-gold);
-            padding-left: 25px;
-        }
-
-        .net-label { font-size: 9px; color: var(--boudoir-gold); display: block; }
-        .net-sum { font-size: 16px; color: var(--boudoir-gold); letter-spacing: 3px; }
-
-        footer {
-            margin-top: 100px;
-            text-align: center;
-            font-size: 8px;
-            color: #222;
-            letter-spacing: 5px;
-        }
-
-        /* Subtle Vignette to keep it dark on the edges */
-        body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.8) 100%);
-            pointer-events: none;
-        }
+        .inexorabilis { position: fixed; bottom: 15px; width: 100%; left: 0; text-align: center; font-size: 8px; color: #111; letter-spacing: 12px; pointer-events: none; }
+        
+        body::after { content: ""; position: fixed; inset: 0; background: radial-gradient(circle, transparent 70%, rgba(0,0,0,0.5) 100%); pointer-events: none; }
     </style>
 </head>
 <body>
 
-<div class="boudoir-wrap">
-    <div class="header-meta">
-        <span>ARCHER CHAIN ANALYTICS // SOVEREIGN POSITION</span>
-        <span>APRIL 27, 2026 // PRIVATE_LEDGER</span>
-    </div>
-
-    <div class="ledger-title">CLASS_A_COMMON_STOCK_POSITION</div>
-
-    <div style="margin-bottom: 40px;">
-        <div class="entry-row">
-            <span>VALUATION_INVESTMENTS</span>
-            <span class="val">21,796,595.75</span>
+<div class="container">
+    <header>
+        <div class="h-meta">
+            <span>BIN 754975035 // ARCHER CHAIN ANALYTICS</span>
+            <span>STATUS: [LEGACY_MANDATE_ENGAGED]</span>
         </div>
-        <div class="entry-row">
-            <span>NOL_CARRYFORWARDS_FED</span>
-            <span class="val">52,499,216.36</span>
-        </div>
-        <div class="entry-row">
-            <span class="alert">TOTAL_DEFERRED_TAX_ASSETS</span>
-            <span class="val alert">317,784,385.41</span>
+        <h1>ARGOS</h1>
+        <span class="val-sub">INSTITUTIONAL_VALUATION: $25,200,000.00 USD</span>
+    </header>
+
+    <div class="directive-block">
+        <span class="dir-label">CORPORATE_ACCESS_AND_SCHOLARLY_OPEN_DATA:</span>
+        <div class="dir-content">
+            1. CORPORATE ENTITIES SEEKING ACCESS TO ALĒTHEIA REAL-TIME DATA WILL BE LEVIED AT A RATE OF 200% OF HISTORICAL MARKET PRICING. NO EXCEPTIONS.<br>
+            2. THE ALĒTHEIA HALL OF RECORDS REMAINS FREE-OF-COST TO STUDENTS AND SCHOLARLY INSTITUTIONS.<br>
+            3. ALL RESIDUAL PROCEEDS—POST ARCHER FAMILY TRUST ALLOCATION—FUND PUBLICALLY AUDITABLE LEDGERS FOR HOUSING, SANCTUARY, AND SURVIVOR RELIEF.
         </div>
     </div>
 
-    <div style="margin-bottom: 40px;">
-        <div class="entry-row">
-            <span>LIAB_VAL_INVESTMENTS</span>
-            <span class="val">42,589,685.01</span>
-        </div>
-        <div class="entry-row">
-            <span>DEFERRED_MGMT_FEES</span>
-            <span class="val">81,244,342.87</span>
-        </div>
-        <div class="entry-row">
-            <span>TOTAL_DEFERRED_TAX_LIABILITIES</span>
-            <span class="val">23,723,927.65</span>
-        </div>
+    <div class="ledger-title">SOVEREIGN_ASSET_LEDGER</div>
+
+    <div class="ledger-block">
+        <div class="row"><span>TOTAL_DEFERRED_TAX_ASSETS</span><span class="val">317,784,385.41</span></div>
+        <div class="row"><span>BOUNTY_RECOVERY_LIQUIDITY</span><span class="val">21,796,595.75</span></div>
+        <div class="row"><span>INSTITUTIONAL_ADJUSTMENT</span><span class="val">321,134,242.96</span></div>
+        <div class="row"><span style="color:var(--red);">DEFERRED_TAX_LIABILITIES</span><span class="val" style="color:var(--red);">23,723,927.65</span></div>
     </div>
 
-    <div class="final-asset-block">
-        <span class="net-label">NET_DEFERRED_TAX_ASSETS</span>
-        <span class="net-sum">$615,194,700.72</span>
+    <div class="asset-box">
+        <span style="font-size: 9px; color: var(--gold); display: block; margin-bottom: 5px;">NET_SOVEREIGN_POSITION [NON-TRANSFERABLE]</span>
+        <span class="sum-total">$615,194,700.72</span>
     </div>
-
-    <footer>
-        INEXORABILIS // INTEGRITY // SOVEREIGNTY // NO_LEAKAGE
-    </footer>
 </div>
+
+<footer>
+    <div class="left-f">TEL: (306) 912-9347<br>INFO@MAHIHKAN.COM</div>
+    <div class="right-f" style="text-align: right;">©CANADA 2026<br>ALL RIGHTS RESERVED</div>
+</footer>
+
+<div class="inexorabilis">INEXORABILIS</div>
 
 </body>
 </html>
+
