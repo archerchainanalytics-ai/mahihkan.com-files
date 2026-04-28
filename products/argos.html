@@ -1,87 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MAHIHKAN | The Architecture of Truth</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=IBM+Plex+Mono:wght@300;400;600&family=Barlow:wght@200;300;400&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCHER_LEDGER_2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --void: #030304; --gold: #a6894c; --gold-dim: rgba(166,137,76,0.15);
-            --white: #f0f0f4; --mid: #888890; --mono: 'IBM Plex Mono', monospace;
-            --display: 'Cinzel', serif; --body: 'Barlow', sans-serif;
+            --boudoir-gold: #7a6321; /* Muted, antique gold */
+            --velvet-red: #5e0000;  /* Deep, dark oxblood */
+            --abyss: #010101;       /* Absolute dark */
+            --ash: #4a4a4a;         /* Dimmed text, very low contrast */
+            --ghost-white: #888888; /* For the values, still dimmed */
         }
 
         body {
-            background-color: var(--void);
-            background-image: radial-gradient(circle at center, #0a0a0f 0%, var(--void) 100%);
-            color: var(--white);
-            font-family: var(--body);
-            line-height: 1.8;
+            background-color: var(--abyss);
+            color: var(--ash);
+            font-family: 'JetBrains Mono', monospace;
             margin: 0;
-            overflow-x: hidden;
+            padding: 60px 20px;
+            font-size: 10.5px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            line-height: 1.8;
         }
 
-        /* Institutional Nav: Absolute Symmetry */
-        .site-nav { width: 100%; border-bottom: 1px solid var(--gold-dim); height: 60px; background: rgba(3,3,4,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; }
-        .nav-inner { max-width: 1400px; margin: 0 auto; height: 100%; position: relative; }
-        .nav-item { position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--mono); font-size: 10px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; cursor: pointer; transition: 0.3s; }
-        .nav-item:hover { color: var(--white); text-shadow: 0 0 10px var(--gold-dim); }
-        .p-pos { left: 25%; transform: translate(-50%, -50%); }
-        .o-pos { left: 50%; transform: translate(-50%, -50%); }
-        .s-pos { left: 75%; transform: translate(-50%, -50%); }
+        .boudoir-wrap {
+            max-width: 700px;
+            margin: 0 auto;
+            border-top: 1px solid #1a1a1a;
+            padding-top: 40px;
+        }
 
-        header { text-align: center; padding: 120px 20px 80px; }
-        .brand-logo { font-family: var(--display); font-size: clamp(3rem, 10vw, 6rem); letter-spacing: 0.5em; color: var(--gold); font-weight: 400; margin-bottom: 40px; }
-        
-        .manifesto-section { max-width: 800px; margin: 0 auto 100px; padding: 0 40px; text-align: center; }
-        .manifesto-title { font-family: var(--display); font-size: 1.5rem; color: var(--gold); letter-spacing: 0.3em; margin-bottom: 30px; text-transform: uppercase; }
-        .manifesto-text { font-size: 1.15rem; font-weight: 200; color: var(--mid); line-height: 2.2; text-align: justify; }
-        .manifesto-text b { color: var(--gold); font-weight: 400; }
+        .header-meta {
+            color: var(--boudoir-gold);
+            font-size: 9px;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: space-between;
+            opacity: 0.7;
+        }
 
-        /* The Gold Line / Purgatory Transition */
-        .divider { width: 100px; height: 1px; background: var(--gold); margin: 60px auto; opacity: 0.5; }
+        .ledger-title {
+            color: var(--ghost-white);
+            border-bottom: 1px solid var(--velvet-red);
+            padding-bottom: 5px;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
 
-        .satoshi-quote { font-family: var(--mono); font-size: 0.8rem; color: #661010; letter-spacing: 0.1em; text-transform: uppercase; max-width: 600px; margin: 0 auto; line-height: 2; opacity: 0.8; }
+        .entry-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #080808;
+        }
 
-        footer { padding: 60px 40px; border-top: 1px solid var(--gold-dim); font-family: var(--mono); font-size: 9px; letter-spacing: 4px; color: var(--gold); text-align: center; }
-        
-        /* The Secret Entrance Hook */
-        #inexorabilis-trigger { cursor: default; transition: color 0.3s; }
-        #inexorabilis-trigger:active { color: #fff; }
+        .val { color: var(--ghost-white); }
+        .alert { color: var(--velvet-red); }
+        .gold { color: var(--boudoir-gold); }
+
+        .final-asset-block {
+            margin-top: 80px;
+            border-left: 2px solid var(--boudoir-gold);
+            padding-left: 25px;
+        }
+
+        .net-label { font-size: 9px; color: var(--boudoir-gold); display: block; }
+        .net-sum { font-size: 16px; color: var(--boudoir-gold); letter-spacing: 3px; }
+
+        footer {
+            margin-top: 100px;
+            text-align: center;
+            font-size: 8px;
+            color: #222;
+            letter-spacing: 5px;
+        }
+
+        /* Subtle Vignette to keep it dark on the edges */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.8) 100%);
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
 
-<nav class="site-nav">
-    <div class="nav-inner">
-        <div class="nav-item p-pos">Products</div>
-        <div class="nav-item o-pos">The Hall of Records</div>
-        <div class="nav-item s-pos">Services</div>
+<div class="boudoir-wrap">
+    <div class="header-meta">
+        <span>ARCHER CHAIN ANALYTICS // SOVEREIGN POSITION</span>
+        <span>APRIL 27, 2026 // PRIVATE_LEDGER</span>
     </div>
-</nav>
 
-<header>
-    <div class="brand-logo">MAHIHKAN</div>
-    <div class="satoshi-quote">
-        "A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution."
+    <div class="ledger-title">CLASS_A_COMMON_STOCK_POSITION</div>
+
+    <div style="margin-bottom: 40px;">
+        <div class="entry-row">
+            <span>VALUATION_INVESTMENTS</span>
+            <span class="val">21,796,595.75</span>
+        </div>
+        <div class="entry-row">
+            <span>NOL_CARRYFORWARDS_FED</span>
+            <span class="val">52,499,216.36</span>
+        </div>
+        <div class="entry-row">
+            <span class="alert">TOTAL_DEFERRED_TAX_ASSETS</span>
+            <span class="val alert">317,784,385.41</span>
+        </div>
     </div>
-</header>
 
-<main class="manifesto-section">
-    <h2 class="manifesto-title">The Architecture of Truth</h2>
-    <p class="manifesto-text">
-        In an era of synthetic data and institutional disregard, <b>MAHIHKAN</b> exists to restore the absolute. We do not aggregate; we listen. We do not speculate; we verify. Our 101-chain <b>Alētheia™ Array</b> is the first sovereign response to a world built on digital mirrors. 
-        <br><br>
-        We exist to provide the <b>Platinum Standard</b> of data integrity to those who understand that in the coming age, <b>Truth</b> is the only currency that cannot be devalued.
-    </p>
-    
-    <div class="divider"></div>
-</main>
+    <div style="margin-bottom: 40px;">
+        <div class="entry-row">
+            <span>LIAB_VAL_INVESTMENTS</span>
+            <span class="val">42,589,685.01</span>
+        </div>
+        <div class="entry-row">
+            <span>DEFERRED_MGMT_FEES</span>
+            <span class="val">81,244,342.87</span>
+        </div>
+        <div class="entry-row">
+            <span>TOTAL_DEFERRED_TAX_LIABILITIES</span>
+            <span class="val">23,723,927.65</span>
+        </div>
+    </div>
 
-<footer>
-    MAHIHKAN // ARCHER CHAIN ANALYTICS // SOVEREIGNTY // INTEGRITY // <span id="inexorabilis-trigger">INEXORABILIS</span>
-</footer>
+    <div class="final-asset-block">
+        <span class="net-label">NET_DEFERRED_TAX_ASSETS</span>
+        <span class="net-sum">$615,194,700.72</span>
+    </div>
+
+    <footer>
+        INEXORABILIS // INTEGRITY // SOVEREIGNTY // NO_LEAKAGE
+    </footer>
+</div>
 
 </body>
 </html>
