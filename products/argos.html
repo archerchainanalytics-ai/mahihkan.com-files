@@ -1,327 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARGOS™ v1.17 — Sovereign Kill-Switch Immune Sentinel</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MAHIHKAN | The Architecture of Truth</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=IBM+Plex+Mono:wght@300;400;600&family=Barlow:wght@200;300;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #D4AF37;
-            --dim-gold: #8a7125;
-            --accent-red: #c0392b;
-            --deep-black: #050505;
-            --border-gray: #222;
-            --text-gray: #a0a0a0;
+            --void: #030304; --gold: #a6894c; --gold-dim: rgba(166,137,76,0.15);
+            --white: #f0f0f4; --mid: #888890; --mono: 'IBM Plex Mono', monospace;
+            --display: 'Cinzel', serif; --body: 'Barlow', sans-serif;
         }
 
-        * { box-sizing: border-box; cursor: crosshair; }
-        
         body {
-            background: var(--deep-black);
-            color: var(--text-gray);
-            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--void);
+            background-image: radial-gradient(circle at center, #0a0a0f 0%, var(--void) 100%);
+            color: var(--white);
+            font-family: var(--body);
+            line-height: 1.8;
             margin: 0;
-            padding: 20px 14px;
-            min-height: 100vh;
-            position: relative;
-            text-rendering: optimizeLegibility;
-            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        /* Scanline Flicker Overlay */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: repeating-linear-gradient(to bottom, transparent 0px, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 3px);
-            pointer-events: none;
-            z-index: 9999;
-            animation: flicker 0.15s infinite alternate;
-        }
+        /* Institutional Nav: Absolute Symmetry */
+        .site-nav { width: 100%; border-bottom: 1px solid var(--gold-dim); height: 60px; background: rgba(3,3,4,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; }
+        .nav-inner { max-width: 1400px; margin: 0 auto; height: 100%; position: relative; }
+        .nav-item { position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--mono); font-size: 10px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        .nav-item:hover { color: var(--white); text-shadow: 0 0 10px var(--gold-dim); }
+        .p-pos { left: 25%; transform: translate(-50%, -50%); }
+        .o-pos { left: 50%; transform: translate(-50%, -50%); }
+        .s-pos { left: 75%; transform: translate(-50%, -50%); }
 
-        @keyframes flicker { 0% { opacity: 0.98; } 100% { opacity: 1; } }
+        header { text-align: center; padding: 120px 20px 80px; }
+        .brand-logo { font-family: var(--display); font-size: clamp(3rem, 10vw, 6rem); letter-spacing: 0.5em; color: var(--gold); font-weight: 400; margin-bottom: 40px; }
+        
+        .manifesto-section { max-width: 800px; margin: 0 auto 100px; padding: 0 40px; text-align: center; }
+        .manifesto-title { font-family: var(--display); font-size: 1.5rem; color: var(--gold); letter-spacing: 0.3em; margin-bottom: 30px; text-transform: uppercase; }
+        .manifesto-text { font-size: 1.15rem; font-weight: 200; color: var(--mid); line-height: 2.2; text-align: justify; }
+        .manifesto-text b { color: var(--gold); font-weight: 400; }
 
-        .container { max-width: 980px; width: 100%; margin: 0 auto; }
+        /* The Gold Line / Purgatory Transition */
+        .divider { width: 100px; height: 1px; background: var(--gold); margin: 60px auto; opacity: 0.5; }
 
-        header {
-            border-bottom: 2px solid var(--gold);
-            padding-bottom: 28px;
-            margin-bottom: 65px;
-        }
+        .satoshi-quote { font-family: var(--mono); font-size: 0.8rem; color: #661010; letter-spacing: 0.1em; text-transform: uppercase; max-width: 600px; margin: 0 auto; line-height: 2; opacity: 0.8; }
 
-        .header-meta {
-            font-size: 11px;
-            letter-spacing: 3.5px;
-            color: var(--dim-gold);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .status-pill {
-            background: rgba(212, 175, 55, 0.12);
-            color: var(--gold);
-            padding: 6px 16px;
-            border-radius: 9999px;
-            font-size: 10px;
-            border: 1px solid var(--gold);
-            animation: pulse-status 4s infinite;
-        }
-
-        @keyframes pulse-status { 0%,100% { opacity: 0.9; } 50% { opacity: 1; } }
-
-        h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 78px;
-            color: white;
-            letter-spacing: 14px;
-            margin: 8px 0 0;
-            text-transform: uppercase;
-        }
-
-        .valuation-tag {
-            color: var(--gold);
-            font-weight: 700;
-            letter-spacing: 2px;
-            font-size: 18px;
-            margin-top: 10px;
-            display: block;
-            font-family: 'Oswald';
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-        }
-
-        .subtitle { 
-            font-size: 15.5px; 
-            color: var(--dim-gold); 
-            letter-spacing: 6px; 
-            font-weight: 500;
-            margin-top: 15px;
-        }
-
-        section { margin-bottom: 110px; position: relative; }
-
-        .section-num {
-            position: absolute;
-            left: -85px;
-            top: -52px;
-            font-size: 122px;
-            color: rgba(212,175,55,0.045);
-            font-family: 'Oswald';
-            pointer-events: none;
-        }
-
-        h2 {
-            color: var(--gold);
-            font-family: 'Oswald';
-            letter-spacing: 4.5px;
-            font-size: 29px;
-            margin-bottom: 12px;
-        }
-
-        .module {
-            background: rgba(10,10,10,0.7);
-            border: 1px solid var(--border-gray);
-            padding: 26px;
-            margin-bottom: 28px;
-            transition: all 0.3s ease;
-        }
-
-        .module:hover {
-            border-color: var(--gold);
-            box-shadow: 0 0 30px rgba(212,175,55,0.1);
-        }
-
-        .module-title {
-            font-size: 13px;
-            color: var(--dim-gold);
-            letter-spacing: 3px;
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .module-title::before { content: "◉"; color: var(--gold); }
-
-        .terminal {
-            background: #000;
-            border: 1px dashed var(--dim-gold);
-            padding: 22px;
-            font-size: 14.2px;
-            color: var(--gold);
-            line-height: 1.65;
-            position: relative;
-        }
-
-        .terminal::after {
-            content: "▋";
-            animation: blink 0.9s step-end infinite;
-            position: absolute;
-            right: 24px;
-            bottom: 22px;
-        }
-
-        @keyframes blink { 50% { opacity: 0; } }
-
-        .premium { color: #4ade80; }
-        .red-alert { color: var(--accent-red); animation: pulse-red 1s infinite alternate; }
-        @keyframes pulse-red { from { opacity: 0.6; } to { opacity: 1; } }
-
-        .feed-entry {
-            font-size: 13.8px;
-            border-bottom: 1px solid var(--border-gray);
-            padding: 12px 0;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .feed-entry .time { color: var(--dim-gold); min-width: 70px; text-align: right; }
-
-        .footer-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(5,5,5,0.97);
-            border-top: 1px solid var(--gold);
-            padding: 13px 26px;
-            font-size: 11.2px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 10000;
-            letter-spacing: 1.2px;
-        }
-
-        @media (max-width: 700px) {
-            .section-num { display: none; }
-            h1 { font-size: 54px; letter-spacing: 8px; }
-        }
+        footer { padding: 60px 40px; border-top: 1px solid var(--gold-dim); font-family: var(--mono); font-size: 9px; letter-spacing: 4px; color: var(--gold); text-align: center; }
+        
+        /* The Secret Entrance Hook */
+        #inexorabilis-trigger { cursor: default; transition: color 0.3s; }
+        #inexorabilis-trigger:active { color: #fff; }
     </style>
 </head>
 <body>
 
-<div class="container">
+<nav class="site-nav">
+    <div class="nav-inner">
+        <div class="nav-item p-pos">Products</div>
+        <div class="nav-item o-pos">The Hall of Records</div>
+        <div class="nav-item s-pos">Services</div>
+    </div>
+</nav>
 
 <header>
-    <div class="header-meta">
-        <span>ARCHER CHAIN ANALYTICS • 116 PROTOCOL • APRIL 27, 2026</span>
-        <span><span class="status-pill">● KILL-SWITCH IMMUNE • SOVEREIGN INTEGRITY 100%</span> ARGOS™ v1.17 LIVE</span>
+    <div class="brand-logo">MAHIHKAN</div>
+    <div class="satoshi-quote">
+        "A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution."
     </div>
-    <h1>ARGOS</h1>
-    <span class="valuation-tag">ACQUISITION_VALUE: $8,400,000.00 USD</span>
-    <div class="subtitle">AUTONOMOUS BUG-BOUNTY SENTINEL • ZERO TELEMETRY • ZERO DEPENDENCIES</div>
 </header>
 
-<section>
-    <div class="section-num">01</div>
-    <h2>KILL-SWITCH IMMUNITY</h2>
-    <div class="module">
-        <div class="module-title">ABSOLUTE OWNERSHIP PROTOCOL</div>
-        <div class="terminal">
-            Acerbe™ • Rapax™ • Alētheia Listeners operate with<br>
-            <span style="color:#fff;">ZERO telemetry • ZERO cloud dependency</span><br><br>
-            <span class="premium">De-platforming risk: NULL</span><br>
-            Market Position: Sovereign Infrastructure (Anti-SaaS)
-        </div>
-    </div>
-</section>
+<main class="manifesto-section">
+    <h2 class="manifesto-title">The Architecture of Truth</h2>
+    <p class="manifesto-text">
+        In an era of synthetic data and institutional disregard, <b>MAHIHKAN</b> exists to restore the absolute. We do not aggregate; we listen. We do not speculate; we verify. Our 101-chain <b>Alētheia™ Array</b> is the first sovereign response to a world built on digital mirrors. 
+        <br><br>
+        We exist to provide the <b>Platinum Standard</b> of data integrity to those who understand that in the coming age, <b>Truth</b> is the only currency that cannot be devalued.
+    </p>
+    
+    <div class="divider"></div>
+</main>
 
-<section>
-    <div class="section-num">02</div>
-    <h2>THE ALĒTHEIA X101 ARRAY</h2>
-    <div class="module">
-        <div class="module-title">116 SOVEREIGN LISTENERS (RING 0 ACCESS)</div>
-        <div class="terminal">
-            Eliminating Ring 3 latency (Public indexers/relays).<br>
-            Direct node-level ingestion across 101 chains.<br><br>
-            <span style="color:#fff;">Replacement R&amp;D Value: $750,000.00</span><br>
-            Result: You own the Printing Press, not a subscription.
-        </div>
-    </div>
-</section>
+<footer>
+    MAHIHKAN // ARCHER CHAIN ANALYTICS // SOVEREIGNTY // INTEGRITY // <span id="inexorabilis-trigger">INEXORABILIS</span>
+</footer>
 
-<section>
-    <div class="section-num">03</div>
-    <h2>SIMULATION ENGINE — THE BLAST RADIUS</h2>
-    <div class="module">
-        <div class="module-title">EPHEMERAL FORK LOGIC • < 200MS LATENCY</div>
-        <div class="terminal">
-            Target identified inside block production window.<br>
-            <span class="premium">Instantiating ephemeral sandbox...</span><br>
-            Exploit simulation: [SUCCESS]<br>
-            <span style="color:#fff;">ROI Score: 24.8x (Threshold: 18x)</span><br><br>
-            <span id="simulation-status">Executing sandboxed trace...</span>
-        </div>
-    </div>
-
-    <div class="terminal" id="simulation" style="margin-top:20px;">
-        <div>[01] Fork @ block <span id="block">19483921</span> • Alētheia trace active</div>
-        <div>[02] Heuristic Match: Re-entrancy signature detected</div>
-        <div id="viability">[03] Kill-switch exposure: ZERO</div>
-        <div>[04] Sealed Verdict archived to Hall of Records (Mahihkan.com)</div>
-    </div>
-</section>
-
-<section>
-    <div class="section-num">04</div>
-    <h2>BOUNTY DISCOVERY • THREAT FEED</h2>
-    <div class="module" id="feed">
-        <div class="module-title">ACTIVE DISCOVERY • SEALED VERDICTS</div>
-        </div>
-</section>
-
-</div>
-
-<div class="footer-bar">
-    <span>VALUATION: $8.4M USD • 116 LISTENERS ONLINE • ZERO DEPENDENCIES</span>
-    <span>ARGOS™ v1.17 • ARCHER CHAIN ANALYTICS • INEXORABILIS</span>
-</div>
-
-<script>
-    let block = 19483921;
-    setInterval(() => {
-        block += Math.floor(Math.random() * 5) + 2;
-        const blockEl = document.getElementById('block');
-        if(blockEl) blockEl.textContent = block.toLocaleString();
-    }, 3800);
-
-    setInterval(() => {
-        const v = document.getElementById('viability');
-        if(v) {
-            v.textContent = (Math.random() > 0.5) ? 
-                "[03] Kill-switch exposure: ZERO" : 
-                "[03] Sovereign integrity: VERIFIED";
-        }
-    }, 11000);
-
-    const feed = document.getElementById('feed');
-    const logs = [
-        {text: "Heuristic Match: Overflow @ 0x8a...4b", time: "+0.4s", critical: true},
-        {text: "ROI Gatekeeper: 28.1x score. Escalating to Proving stage.", time: "+1.2s"},
-        {text: "Alētheia Array: Scanning Ring 0 state changes...", time: "LIVE"},
-        {text: "Sealed Verdict archived to Hall of Records", time: "+3.8s"},
-        {text: "Proving: Ephemeral fork instantiation successful", time: "+0.2s"}
-    ];
-    let idx = 0;
-
-    setInterval(() => {
-        if (Math.random() > 0.4) {
-            const entry = document.createElement('div');
-            const data = logs[idx % logs.length];
-            entry.className = `feed-entry ${data.critical ? 'red-alert' : ''}`;
-            entry.innerHTML = `<span>${data.text}</span><span class="time">${data.time}</span>`;
-            feed.appendChild(entry);
-            
-            if (feed.children.length > 7) {
-                feed.removeChild(feed.children[1]); // Keep title
-            }
-            idx++;
-        }
-    }, 6000);
-
-    console.log('%cARGOS™ v1.17 ONLINE — Valuation: $8,400,000.00 USD • FAFO Sovereign Stack Protected.', 'color:#D4AF37; font-family:monospace; font-size:13px;');
-</script>
 </body>
 </html>
