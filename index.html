@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MAHIHKAN | Oracle of Truth — Archer Chain Analytics</title>
+    <title>MAHIHKAN | Institutional Sovereignty — Archer Chain Analytics</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -43,7 +43,7 @@
         .header-center{font-family:var(--display);font-size:10px;letter-spacing:4px;font-weight:600;}
         .gold-line{width:100%;height:1px;background:var(--gold);opacity:0.6;}
 
-        /* Ticker: Tightened & Slowed */
+        /* Ticker */
         .ticker-wrapper{width:100%;height:24px;background:#07070a;border-bottom:1px solid rgba(166,137,76,0.2);overflow:hidden;position:relative;display:flex;align-items:center;}
         .ticker-track{display:flex;align-items:center;white-space:nowrap;will-change:transform;}
         .ticker-track.animating{animation:ticker-scroll linear infinite;}
@@ -54,7 +54,7 @@
         .ticker-change{font-size:10px;font-weight:500;}
         .up{color:var(--green);}.down{color:var(--red);}
 
-        /* Nav: Symmetrical 25/50/75 */
+        /* Nav: Institutional Architecture */
         .site-nav{width:100%;background:#0a0a0d;border-bottom:1px solid rgba(166,137,76,0.3);position:relative;z-index:100;}
         .nav-inner{max-width:1400px;margin:0 auto;height:50px;position:relative;}
         .nav-item{position:absolute;top:0;height:100%;display:flex;align-items:center;}
@@ -73,24 +73,41 @@
         .brand-logo{font-family:var(--display);font-size:clamp(4rem,10vw,7rem);letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;font-weight:400;margin-bottom:40px;}
         .red-quote{color:var(--red);font-family:var(--mono);font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;text-shadow: 0 0 10px rgba(255,0,0,0.2);}
         
-        .content-body{max-width:720px;margin:0 auto 120px;padding:0 20px;}
+        .content-body{max-width:850px;margin:0 auto 120px;padding:0 20px;}
         .article-box h2{font-family:var(--display);font-size:1.8rem;color:var(--gold);margin-bottom:40px;text-align:center;}
         .article-box p{font-weight:300;line-height:2;font-size:1.05rem;color:var(--mid);margin-bottom:30px;text-align:justify;}
 
-        /* Data Break */
-        .data-break {
-            border-top: 1px solid var(--gold-dim);
-            border-bottom: 1px solid var(--gold-dim);
-            padding: 20px 0;
-            margin: 40px 0;
-            display: flex;
-            justify-content: space-around;
-            font-family: var(--mono);
-            font-size: 10px;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        /* Enterprise Integration Section */
+        .enterprise-portal {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            margin: 80px 0;
+            padding: 50px;
+            background: #0d0d10;
+            border: 1px solid var(--gold-dim);
+            position: relative;
         }
+        .enterprise-portal::before {
+            content: "INSTITUTIONAL TIER";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--void);
+            padding: 0 15px;
+            font-family: var(--mono);
+            color: var(--gold);
+            font-size: 9px;
+            letter-spacing: 3px;
+        }
+        .ent-list {
+            list-style: none;
+            font-family: var(--mono);
+            font-size: 11px;
+            line-height: 2.8;
+            color: var(--white);
+        }
+        .ent-list li::before { content: "> "; color: var(--gold); }
 
         /* Founders Note */
         .founders-note {
@@ -115,39 +132,35 @@
 <div class="gold-line"></div>
 <div class="ticker-wrapper">
     <div class="ticker-track" id="tickerTrack">
-        <span class="ticker-loading">Fetching live market data…</span>
+        <span class="ticker-loading">Initialising Secure Ticker...</span>
     </div>
 </div>
 
 <nav class="site-nav">
     <div class="nav-inner">
         <div class="nav-item products-pos">
-            <button class="nav-trigger">Products ▾</button>
+            <button class="nav-trigger">Infrastructure ▾</button>
             <div class="nav-dropdown">
-                <span class="dd-label">Hardened Infrastructure</span>
-                <a href="#">Alētheia™ x101 Array [v2.0]</a>
-                <a href="#">INxS™ — Inexorabilis (Hardened)</a>
-                <a href="#">Argos™ Sentinel Node</a>
-                <a href="#">AcerbE™ Digital Fingerprinting</a>
-                <span class="dd-label">Automation & Delivery</span>
-                <a href="#">RaPaX™ Sovereign Vending</a>
-                <a href="#">SalvageBotX™ [v3.1]</a>
+                <a href="#">Sovereign Node Clusters</a>
+                <a href="#">Alētheia™ Listener Array</a>
+                <a href="#">Hardened INxS™ Pipeline</a>
+                <a href="#">AcerbE™ Forensic Watermark</a>
             </div>
         </div>
         <div class="nav-item hall-pos">
-            <button class="nav-trigger">Hall of Records ▾</button>
+            <button class="nav-trigger" style="color:var(--white); border-bottom: 1px solid var(--gold); letter-spacing: 4px;">ENTERPRISE SOLUTIONS</button>
             <div class="nav-dropdown">
-                <a href="#">Access Mainframe</a>
-                <a href="#">Security Tiers</a>
-                <a href="#">The Alētheia Charity</a>
+                <a href="#enterprise">Institutional Licensing</a>
+                <a href="#enterprise">Private Cloud Deployment</a>
+                <a href="#enterprise">Zero-Trust Architecture</a>
+                <a href="#enterprise">Bespoke Audit Suites</a>
             </div>
         </div>
         <div class="nav-item services-pos">
-            <button class="nav-trigger">Services ▾</button>
+            <button class="nav-trigger">Consultancy ▾</button>
             <div class="nav-dropdown">
-                <a href="#">Consulting</a>
-                <a href="#">Hardened Installation</a>
-                <a href="#">White-Label Licensing</a>
+                <a href="#">Security Implementation</a>
+                <a href="#">Regulatory Hardening</a>
                 <a href="#">The FAFO Guarantee</a>
             </div>
         </div>
@@ -167,19 +180,28 @@
     <section class="article-box">
         <h2>The Original Vision and the Hardened Reality</h2>
         <p>Cryptocurrency began with a simple but radical idea: money should not belong only to banks, governments, or other centralized institutions. The early vision was to create a peer-to-peer financial system that could move value directly between people, reduce dependence on gatekeepers, and open access to anyone with an internet connection.</p>
-        
-        <div class="data-break">
-            <span>Entropy: 0.00042</span>
-            <span>Uptime: 99.998%</span>
-            <span>Sync: Hardened</span>
-        </div>
-
-        <p>Today, the mission is being tested. Projects in decentralized finance, payments, and tokenized assets still point toward a future where finance can be more open and programmable. The future of crypto will depend on whether the technology can still deliver on its promise to spread opportunity instead of simply concentrating it in new hands.</p>
     </section>
 
+    <section id="enterprise" class="enterprise-portal">
+        <div>
+            <h3 style="font-family: var(--display); color: var(--gold); font-size: 1.8rem; margin-bottom: 20px;">Institutional Grade Sovereignty</h3>
+            <p style="color: var(--mid); font-size: 0.95rem; line-height: 1.6; text-align: left;">
+                Archer Chain Analytics provides the zero-trust framework required for modern capital. We deliver hardened, local-first environments that eliminate the risks of external cloud dependencies and ensure total data sovereignty.
+            </p>
+        </div>
+        <div style="background: rgba(166,137,76,0.05); padding: 30px; border-left: 2px solid var(--gold);">
+            <ul class="ent-list">
+                <li>PRIVATE CLOUD DEPLOYMENT</li>
+                <li>116+ BLOCKCHAIN LISTENERS</li>
+                <li>ZERO TELEMETRY ARCHITECTURE</li>
+                <li>INSTITUTIONAL LICENSING</li>
+                <li>FORENSIC-GRADE WATERMARKING</li>
+            </ul>
+        </div>
+    </section>
     <section class="founders-note">
         <h3>Founders Note // System Update</h3>
-        <p>We have recently hardened the core product line. By integrating the Alētheia Array directly with our diagnostic sentinels, we've created a closed-loop analytics environment. This isn't just about security—it's about sovereignty. We don't just watch the chain; we understand its intent. Stay vigilant.</p>
+        <p>Core infrastructure has been hardened to enterprise standards. By integrating the Alētheia Array directly with our diagnostic sentinels, we've created a closed-loop analytics environment designed for institutional scale. This is about total sovereignty. Stay vigilant.</p>
     </section>
 </main>
 
@@ -211,7 +233,7 @@ async function fetchTicker(){
             }
         });
         track.appendChild(track.cloneNode(true));
-        const dur=Math.round(track.scrollWidth/2/42.5); // 42.5 = Half speed of original 85
+        const dur=Math.round(track.scrollWidth/2/42.5);
         track.style.animationDuration=dur+'s';
         track.classList.add('animating');
     }catch(e){}
