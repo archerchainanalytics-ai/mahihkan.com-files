@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>INxS™ — Inexorabilis · Archer Chain Analytics</title>
+    <title>AcerbE™ Digital Fingerprinting — Archer Chain Analytics</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root{--void:#030304;--gold:#a6894c;--gold-dim:rgba(166,137,76,0.12);--red:#FF0000;--mid:#888890;--white:#f0f0f4;--green:#4caf82;--mono:'IBM Plex Mono',monospace;--display:'Cinzel',serif;--body:'Barlow',sans-serif;}
@@ -31,8 +31,7 @@
         .prod-name{font-family:var(--display);font-size:clamp(2rem,5vw,4.5rem);letter-spacing:0.12em;color:var(--white);text-transform:uppercase;font-weight:400;line-height:1.1;margin-bottom:12px;}
         .prod-name em{color:var(--gold);font-style:normal;}
         .prod-tagline{font-family:var(--mono);font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--mid);margin-bottom:20px;}
-        .prod-status{display:inline-block;padding:5px 16px;border:1px solid rgba(76,175,130,0.4);font-family:var(--mono);font-size:8px;letter-spacing:0.25em;text-transform:uppercase;color:var(--green);margin-right:12px;}
-        .prod-version{display:inline-block;padding:5px 16px;border:1px solid rgba(166,137,76,0.3);font-family:var(--mono);font-size:8px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);}
+        .prod-status{display:inline-block;padding:5px 16px;border:1px solid rgba(76,175,130,0.4);font-family:var(--mono);font-size:8px;letter-spacing:0.25em;text-transform:uppercase;color:var(--green);}
         .gold-rule{width:100%;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0.35;}
         .prod-body{max-width:1100px;margin:0 auto;padding:60px 60px 120px;flex-grow:1;}
         .not-ai-block{background:#060408;border:1px solid rgba(166,137,76,0.2);border-left:3px solid var(--gold);padding:40px 48px;margin-bottom:72px;}
@@ -40,7 +39,7 @@
         .not-ai-block p{font-family:var(--body);font-size:1.05rem;font-weight:300;line-height:2.2;letter-spacing:0.06em;color:var(--mid);}
         .not-ai-block p strong{color:var(--white);font-weight:500;}
         .section-block{margin-bottom:72px;}
-        .section-block .sb-label{font-family:var(--mono);font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-bottom:12px;}
+        .sb-label{font-family:var(--mono);font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-bottom:12px;}
         .section-block h2{font-family:var(--display);font-size:1.7rem;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;line-height:1.3;}
         .section-block p{font-family:var(--body);font-size:1.05rem;font-weight:300;line-height:2.2;letter-spacing:0.06em;color:var(--mid);margin-bottom:20px;max-width:820px;}
         .section-block p strong{color:var(--white);font-weight:500;}
@@ -49,28 +48,15 @@
         .spec-table td{padding:14px 20px;font-size:10px;letter-spacing:0.1em;color:var(--mid);border-bottom:1px solid rgba(166,137,76,0.08);vertical-align:top;line-height:1.7;}
         .spec-table td:first-child{color:var(--white);}
         .spec-table tr:last-child td{border-bottom:none;}
-        .module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(166,137,76,0.1);border:1px solid rgba(166,137,76,0.1);margin:32px 0;}
-        .module-card{background:var(--void);padding:32px 28px;}
-        .module-card .mc-id{font-family:var(--mono);font-size:7px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);opacity:0.5;margin-bottom:8px;}
-        .module-card .mc-name{font-family:var(--display);font-size:1rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
-        .module-card .mc-desc{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;color:var(--mid);line-height:1.8;text-transform:uppercase;}
-        .module-card .mc-status{display:inline-block;margin-top:14px;padding:4px 12px;border:1px solid rgba(76,175,130,0.3);font-family:var(--mono);font-size:7px;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);}
-        .pipeline{display:flex;align-items:center;gap:0;margin:40px 0;flex-wrap:wrap;}
-        .pipe-step{background:#08080c;border:1px solid rgba(166,137,76,0.2);padding:20px 24px;flex:1;min-width:110px;text-align:center;}
-        .pipe-step .ps-num{font-family:var(--mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.5;margin-bottom:8px;}
-        .pipe-step .ps-name{font-family:var(--mono);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);}
-        .pipe-arrow{font-family:var(--mono);color:var(--gold);opacity:0.4;padding:0 8px;font-size:1rem;}
         .os-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:rgba(166,137,76,0.12);border:1px solid rgba(166,137,76,0.12);margin:32px 0;}
         .os-cell{background:var(--void);padding:28px 24px;text-align:center;}
         .os-cell .os-icon{font-size:1.6rem;margin-bottom:12px;display:block;}
         .os-cell .os-name{font-family:var(--display);font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px;}
         .os-cell .os-ver{font-family:var(--mono);font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);}
-        .snipey-block{background:#0a0800;border:1px solid rgba(166,137,76,0.25);padding:40px 48px;margin-top:40px;position:relative;}
-        .snipey-block::after{content:'BONUS';position:absolute;top:20px;right:28px;font-family:var(--display);font-size:9px;letter-spacing:0.3em;color:var(--gold);opacity:0.4;}
-        .snipey-block .sn-label{font-family:var(--mono);font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;opacity:0.8;}
-        .snipey-block h3{font-family:var(--display);font-size:1.3rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
-        .snipey-block p{font-family:var(--body);font-size:1rem;font-weight:300;line-height:2.2;color:var(--mid);max-width:760px;}
-        .snipey-block p strong{color:var(--white);font-weight:500;}
+        .warning-block{background:#0a0404;border:1px solid rgba(255,0,0,0.2);border-left:3px solid var(--red);padding:40px 48px;margin:40px 0;}
+        .warning-block .w-label{font-family:var(--mono);font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:var(--red);margin-bottom:16px;opacity:0.8;}
+        .warning-block p{font-family:var(--body);font-size:1.05rem;font-weight:300;line-height:2.2;color:var(--mid);}
+        .warning-block p strong{color:var(--white);font-weight:500;}
         .pricing-block{background:#060408;border:1px solid rgba(166,137,76,0.15);padding:40px 48px;margin-top:40px;}
         .pricing-block .pb-label{font-family:var(--mono);font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;opacity:0.8;}
         .pricing-block p{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);line-height:2;margin-bottom:20px;}
@@ -81,7 +67,7 @@
         .cta-btn{display:inline-block;margin-top:28px;padding:14px 36px;border:1px solid var(--gold);font-family:var(--mono);font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);transition:background 0.2s,color 0.2s;}
         .cta-btn:hover{background:var(--gold);color:var(--void);}
         .acerbe-badge{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border:1px solid rgba(166,137,76,0.2);font-family:var(--mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-top:40px;}
-        .acerbe-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:p2 2s ease-in-out infinite;}
+        .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:p2 2s ease-in-out infinite;}
         @keyframes p2{0%,100%{opacity:0.3}50%{opacity:1}}
         footer{width:100%;padding:0 40px 20px;font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-top:auto;}
         .footer-line{width:100%;height:1px;background:var(--gold);opacity:0.6;margin-bottom:12px;}
@@ -99,118 +85,83 @@
 </div></nav>
 
 <div class="prod-hero">
-    <div class="prod-eyebrow">Archer Chain Analytics — White-Label Modular Trading Bot Factory</div>
-    <div class="prod-name"><em>INxS™</em> — Inexorabilis</div>
-    <div class="prod-tagline">7-Module Locked Pipeline · Multi-Chain · HMAC-SHA256 Local Licensing</div>
+    <div class="prod-eyebrow">Archer Chain Analytics — Forensic Integrity Engine</div>
+    <div class="prod-name"><em>AcerbE™</em></div>
+    <div class="prod-tagline">Forensic Watermarking · IP Protection · Tamper Detection · Chain-Verified Integrity</div>
     <span class="prod-status">Production Ready</span>
-    <span class="prod-version">v2.0-hardened</span>
 </div>
 <div class="gold-rule"></div>
 
 <main class="prod-body">
+
     <div class="not-ai-block">
         <div class="na-label">On the Record — What This Is</div>
-        <p><strong>INxS™ is not a strategy generator. It is not a chatbot that suggests trades. It is not machine learning deciding what to do with your money.</strong> It is a deterministic, modular automated trading bot factory built on a locked 7-module async pipeline. Every module has a defined input, a defined output, and a defined behavior. The license validates locally via HMAC-SHA256 — <strong>no network calls, no cloud dependency, no third-party validation that can go down at 3am when a position is open.</strong> It is actual software that does exactly what the architecture says it does, every time.</p>
+        <p><strong>AcerbE™ is not a DRM scheme with a new name. It is not a license server that phones home. It is not a soft warning system that logs events and sends emails.</strong> It is a forensic watermarking and integrity verification engine that embeds cryptographic fingerprints into software at the byte level, detects tamper events deterministically, and produces a chain-verifiable audit record that constitutes forensic evidence. <strong>It does not ask whether something happened. It records that it happened — with a timestamp, a hash, and a chain anchor.</strong> That record does not disappear. It does not negotiate. It is evidence.</p>
     </div>
 
     <div class="section-block">
         <div class="sb-label">Origin</div>
         <h2>Why This Exists</h2>
-        <p>Trading bot infrastructure is either locked inside a platform you don't control, or it's an open-source project with no commercial structure, no licensing model, and no path to white-label deployment. Neither option works for operators who need to move fast, brand independently, and distribute to clients without rebuilding from scratch every time.</p>
-        <p><strong>INxS™ was built to be the factory, not the bot.</strong> You configure it once per client. You apply branding. You generate a license key. You zip and deliver. The client gets a fully operational, independently licensed trading system running under their brand. You get a repeatable delivery pipeline that scales without proportional effort.</p>
-        <p>The Snipey McSniperson™ tactical configuration is available as a bonus at the 3-bot purchase threshold — see below.</p>
+        <p>Software gets stolen. Code gets copied, rebranded, and resold. Licensing systems get bypassed. Developers spend months building something and watch it appear under a different name six weeks later with no recourse, because proving provenance in software has historically been nearly impossible without an expensive legal process that the other side can simply delay.</p>
+        <p><strong>AcerbE™ was built to end that.</strong> It embeds a forensic fingerprint into every product it protects at the point of delivery. That fingerprint is cryptographic, chain-anchored, and registered against the Archer Chain Analytics registry. If the software is tampered with, the fingerprint records it. If it is redistributed without authorization, the fingerprint identifies it. If it ends up in a dispute, the fingerprint is the evidence — not an assertion, not a claim, <strong>a verifiable cryptographic record.</strong></p>
+        <p>It also powers the AcerbE™ FAFO Guarantee — our warranty void condition. If a customer tampers with an Archer Chain Analytics product and AcerbE™ has logged the event, the warranty is void. We will know. The record does not disappear.</p>
     </div>
 
     <div class="section-block">
-        <div class="sb-label">Architecture</div>
-        <h2>7-Module Locked Pipeline</h2>
-        <p>INxS™ operates on a fixed 7-category architecture. Every bot assembled through the factory contains exactly one module from each category, wired together via an async pipeline orchestrated by the Assembler. Categories cannot be removed or reordered. Modules within each category are swappable.</p>
-        <div class="pipeline">
-            <div class="pipe-step"><div class="ps-num">01</div><div class="ps-name">Listener</div></div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipe-step"><div class="ps-num">02</div><div class="ps-name">Strategy</div></div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipe-step"><div class="ps-num">03</div><div class="ps-name">Chain Adapter</div></div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipe-step"><div class="ps-num">04</div><div class="ps-name">Wallet Adapter</div></div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipe-step"><div class="ps-num">05</div><div class="ps-name">Execution</div></div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipe-step"><div class="ps-num">06</div><div class="ps-name">Risk</div></div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipe-step"><div class="ps-num">07</div><div class="ps-name">Scraper</div></div>
-        </div>
-    </div>
-
-    <div class="section-block">
-        <div class="sb-label">Core Modules</div>
-        <h2>Module Inventory</h2>
-        <div class="module-grid">
-            <div class="module-card"><div class="mc-id">INXS_CORE_001</div><div class="mc-name">Assembler</div><div class="mc-desc">Wires exactly 7 locked modules via async pipeline. Bot orchestration engine.</div><span class="mc-status">Complete</span></div>
-            <div class="module-card"><div class="mc-id">INXS_CORE_002</div><div class="mc-name">BotConfig</div><div class="mc-desc">Pydantic-validated config model enforcing 7-category Lego structure.</div><span class="mc-status">Complete</span></div>
-            <div class="module-card"><div class="mc-id">INXS_SEC_001</div><div class="mc-name">LicenseManager</div><div class="mc-desc">HMAC-SHA256 local license validation. No network calls. Base64 payload.</div><span class="mc-status">Complete</span></div>
-            <div class="module-card"><div class="mc-id">INXS_SEC_002</div><div class="mc-name">LicenseValidator</div><div class="mc-desc">Standalone hyphenated key format validator for manual distribution.</div><span class="mc-status">Complete</span></div>
-            <div class="module-card"><div class="mc-id">INXS_WL_001</div><div class="mc-name">BrandingEngine</div><div class="mc-desc">Runtime white-label config injection across all 7 modules from branding.json.</div><span class="mc-status">Complete</span></div>
-            <div class="module-card"><div class="mc-id">INXS_BASE_001</div><div class="mc-name">ModuleBases</div><div class="mc-desc">Abstract base classes: ListenerBase, StrategyBase, ChainAdapterBase, WalletAdapterBase, ExecutionBase, RiskBase, ScraperBase.</div><span class="mc-status">Complete</span></div>
-        </div>
-    </div>
-
-    <div class="section-block">
-        <div class="sb-label">Licensing Architecture</div>
-        <h2>License &amp; Delivery Specifications</h2>
+        <div class="sb-label">Technical Specifications</div>
+        <h2>How AcerbE™ Works</h2>
         <table class="spec-table">
             <thead><tr><th>Specification</th><th>Value</th></tr></thead>
             <tbody>
-                <tr><td>License Model</td><td>Standalone HMAC-SHA256 local validation</td></tr>
-                <tr><td>Key Format</td><td>inxs-{user_id}-{signature}-{expiry_ts}</td></tr>
-                <tr><td>Network Dependency</td><td>None — validation is fully offline</td></tr>
-                <tr><td>Timing Attack Protection</td><td>Yes</td></tr>
-                <tr><td>White-Label Config</td><td>branding.json — runtime injection</td></tr>
-                <tr><td>Supported Chains</td><td>Ethereum · Solana · EVM-compatible</td></tr>
-                <tr><td>Architecture</td><td>7-Module Locked Pipeline · Python · Async</td></tr>
-                <tr><td>AcerbE™ Fingerprint</td><td>Active — pending initialization at deployment</td></tr>
+                <tr><td>Fingerprint Method</td><td>Cryptographic watermark — byte-level embedding</td></tr>
+                <tr><td>Hash Algorithm</td><td>SHA-256 — per-file, per-module, per-build</td></tr>
+                <tr><td>Tamper Detection</td><td>Deterministic — any modification triggers a logged event</td></tr>
+                <tr><td>Audit Record</td><td>Timestamped · Hashed · Chain-anchored</td></tr>
+                <tr><td>Chain Verification</td><td>On-chain anchor via Alētheia™ — independently verifiable</td></tr>
+                <tr><td>Network Dependency</td><td>None for tamper detection — chain anchor requires connectivity at registration</td></tr>
+                <tr><td>Evidence Grade</td><td>Forensic — suitable for legal and regulatory proceedings</td></tr>
+                <tr><td>Integration</td><td>Active in all Archer Chain Analytics products — embedded at delivery</td></tr>
+                <tr><td>Legal Suite</td><td>14-document framework — completed for AcerbE™ and RaPaX™</td></tr>
             </tbody>
         </table>
     </div>
 
     <div class="section-block">
         <div class="sb-label">Platform Availability</div>
-        <h2>Supported Operating Systems</h2>
+        <h2>Supported Environments</h2>
         <div class="os-grid">
             <div class="os-cell"><span class="os-icon">🪟</span><span class="os-name">Windows</span><span class="os-ver">10 v1903+ · Windows 11</span></div>
-            <div class="os-cell"><span class="os-icon">🐧</span><span class="os-name">Linux</span><span class="os-ver">Ubuntu 20.04+ · Debian 11+ · Arch · RHEL 8+</span></div>
+            <div class="os-cell"><span class="os-icon">🐧</span><span class="os-name">Linux</span><span class="os-ver">Ubuntu 20.04+ · Debian 11+ · RHEL 8+</span></div>
             <div class="os-cell"><span class="os-icon">🤖</span><span class="os-name">Android</span><span class="os-ver">Android 8.0+ via Termux</span></div>
-            <div class="os-cell"><span class="os-icon">☁️</span><span class="os-name">Cloud / VPS</span><span class="os-ver">Any Linux-based host — headless supported</span></div>
+            <div class="os-cell"><span class="os-icon">☁️</span><span class="os-name">Cloud / Embedded</span><span class="os-ver">Any host — runs at build time and runtime</span></div>
         </div>
     </div>
 
-    <div class="snipey-block">
-        <div class="sn-label">Bonus Configuration — 3-Bot Purchase Threshold</div>
-        <h3>Snipey McSniperson™</h3>
-        <p>Purchase three INxS™ bot licenses and receive the <strong>Snipey McSniperson™ tactical configuration</strong> at no additional charge. Snipey is a pre-built, hardened INxS™ configuration optimized for precision entry execution — a complete 7-module assembly delivered as a ready-to-deploy bundle under the Snipey McSniperson™ brand identity (black, gold, white, circular crosshair). It is not a separate product. It is a bonus config. It runs on INxS™ infrastructure. <strong>Buy three, get Snipey free.</strong></p>
+    <div class="warning-block">
+        <div class="w-label">Tamper Warning — Read Before Purchase</div>
+        <p>AcerbE™ is active in every Archer Chain Analytics product it protects. <strong>It does not announce itself during normal operation.</strong> If you attempt to modify, reverse-engineer, bypass licensing, or otherwise interfere with the integrity of a protected product, AcerbE™ will log the event. The log is timestamped, hashed, and chain-anchored. <strong>We will have a forensic record before you know it has fired.</strong> This record voids the AcerbE™ FAFO Guarantee and may be presented as evidence in any dispute. There is no appeal to the fingerprint. There is no patch for the log.</p>
     </div>
 
-    <div class="section-block" style="margin-top:60px;">
+    <div class="section-block">
         <div class="sb-label">Pricing</div>
         <h2>Licensing &amp; Pricing</h2>
         <div class="pricing-block">
             <div class="pb-label">Pricing Structure — All Tiers in USD</div>
-            <p>INxS™ pricing is structured by deployment type. Contact for current rates on all tiers.</p>
+            <p>AcerbE™ is available as a standalone product and is embedded in all Archer Chain Analytics products at no additional charge to licensees. Standalone licensing for third-party integration available on request.</p>
             <ul class="tier-list">
-                <li>Single Bot License — individual deployment, HMAC key included</li>
-                <li>3-Bot Bundle — includes Snipey McSniperson™ bonus config</li>
-                <li>White-Label License — branding injection, custom prefix, client delivery</li>
-                <li>Enterprise Factory License — unlimited bot generation, priority support</li>
-                <li>SaaS — hosted assembly pipeline, usage-based</li>
-                <li>Preventative Maintenance — update subscription, module patches</li>
+                <li>Embedded — included in all ACA product licenses</li>
+                <li>Standalone License — integrate into your own software</li>
+                <li>Enterprise — custom integration, dedicated fingerprint registry</li>
+                <li>White-Label — deploy AcerbE™ protection under your brand</li>
+                <li>Forensic Verification Service — third-party dispute resolution</li>
+                <li>Preventative Maintenance — registry updates, hash algorithm upgrades</li>
             </ul>
-            <a href="mailto:sales@mahihkan.com?subject=INxS Pricing Inquiry" class="cta-btn">Request Pricing</a>
+            <a href="mailto:sales@mahihkan.com?subject=AcerbE Pricing Inquiry" class="cta-btn">Request Pricing</a>
         </div>
     </div>
 
-    <div class="acerbe-badge"><span class="dot"></span>AcerbE™ Forensic Fingerprint — Pending Initialization · Active at Deployment</div>
-    <p style="font-family:var(--mono);font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,0,0,0.5);margin-top:20px;max-width:700px;line-height:2;">Disclaimer: INxS™ is a high-risk tool for educational, testing, and development purposes only. It is not financial advice. Trading involves substantial risk of loss. Archer Chain Analytics accepts no liability for financial losses incurred through use of this system.</p>
-</main>
+    <div class="acerbe-badge"><span class="dot"></span>AcerbE™ Self-Protected — This Product Is Fingerprinted</div>
 
+</main>
 <footer><div class="footer-line"></div><div class="footer-content"><div><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></div><div class="footer-center">Sovereignty // Integrity // Inexorabilis</div><div>© 2026 All Rights Reserved</div></div></footer>
 </body></html>

@@ -1,238 +1,639 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARGOS™ // ARCHER CHAIN ANALYTICS</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="color-scheme" content="dark"/>
+    <meta name="description" content="Argos™ Autonomous Bug-Bounty Sentinel — Architectural design brief for Archer Chain Analytics' sovereign-grade threat intelligence system powered by the Alētheia™ x101 Array."/>
+    <title>Argos™ Autonomous Sentinel — Archer Chain Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #7a6321;   /* Antique Gold */
-            --red: #5e0000;    /* Oxblood */
-            --abyss: #010101;  /* Absolute Black */
-            --ash: #4a4a4a;    /* Muted Gray */
-            --ghost: #888888;  /* Value Highlight */
+            --void:   #030304;
+            --gold:   #a6894c;
+            --gold-dim: rgba(166,137,76,0.12);
+            --gold-mid: rgba(166,137,76,0.4);
+            --red:    #FF0000;
+            --mid:    #888890;
+            --white:  #f0f0f4;
+            --green:  #4caf82;
+            --panel:  #07070a;
+            --border: rgba(166,137,76,0.15);
+            --mono:   'IBM Plex Mono', monospace;
+            --display:'Cinzel', serif;
+            --body:   'Barlow', sans-serif;
         }
 
-        * { box-sizing: border-box; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: var(--abyss);
-            color: var(--ash);
-            font-family: 'JetBrains Mono', monospace;
-            margin: 0;
-            padding: 40px 40px 180px 40px;
-            font-size: 10.5px;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            line-height: 1.6;
+            background: var(--void);
+            color: var(--white);
+            font-family: var(--body);
+            line-height: 1.7;
             overflow-x: hidden;
-        }
-
-        .container { max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
-
-        /* HEADER: BIN / TAX / IDENTITY */
-        header {
-            border-bottom: 1px solid var(--gold);
-            padding-bottom: 25px;
-            margin-bottom: 60px;
-        }
-
-        .h-meta {
             display: flex;
-            justify-content: space-between;
-            font-size: 9px;
-            color: var(--gold);
-            margin-bottom: 10px;
-            font-weight: 700;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        .tax-id {
-            font-size: 9px;
-            color: var(--ash);
-            margin-bottom: 25px;
-            letter-spacing: 3px;
-        }
-
-        h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 52px;
-            color: var(--ghost);
-            margin: 0;
-            letter-spacing: 14px;
-            line-height: 1;
-        }
-
-        .val-sub {
-            color: var(--gold);
-            font-size: 11px;
-            margin-top: 12px;
-            display: block;
-            letter-spacing: 5px;
-        }
-
-        /* LEDGER CONTENT */
-        .ledger-title {
-            color: var(--ghost);
-            border-bottom: 1px solid var(--red);
-            padding-bottom: 5px;
-            margin: 40px 0 25px 0;
-            display: inline-block;
-            font-weight: 700;
-        }
-
-        .row {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #0d0d0d;
-            padding: 10px 0;
-        }
-
-        .val { color: var(--ghost); font-weight: 700; }
-        .red-text { color: var(--red); }
-
-        .asset-box {
-            margin-top: 80px;
-            border-left: 2px solid var(--gold);
-            padding: 25px 30px;
-            background: rgba(122, 99, 33, 0.02);
-        }
-
-        .sum-label {
-            font-size: 9px;
-            color: var(--gold);
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .sum-total {
-            font-size: 22px;
-            color: var(--gold);
-            letter-spacing: 5px;
-            font-weight: 700;
-        }
-
-        /* FOOTER: CONTACT / COPYRIGHT */
-        footer {
-            position: fixed;
-            bottom: 45px;
-            left: 40px;
-            right: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            z-index: 10;
-        }
-
-        .left-footer {
-            text-align: left;
-            font-size: 9px;
-            color: #222;
-            letter-spacing: 2.5px;
-            line-height: 1.5;
-        }
-
-        .right-footer {
-            text-align: right;
-            font-size: 9px;
-            color: #222;
-            letter-spacing: 2.5px;
-            line-height: 1.5;
-        }
-
-        .inexorabilis {
-            position: fixed;
-            bottom: 15px;
-            width: 100%;
-            left: 0;
-            text-align: center;
-            font-size: 8px;
-            color: #111;
-            letter-spacing: 12px;
-            pointer-events: none;
-        }
-
-        /* VIGNETTE & TEXTURE */
-        body::after {
-            content: "";
+        /* Subtle scan-line — same void, stays on brand */
+        body::before {
+            content: '';
             position: fixed;
             inset: 0;
-            background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.6) 100%);
             pointer-events: none;
-            z-index: 1;
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(166,137,76,0.012),
+                rgba(166,137,76,0.012) 1px,
+                transparent 1px,
+                transparent 4px
+            );
+            z-index: 0;
         }
 
-        /* MOBILE OPTIMIZATION */
-        @media (max-width: 600px) {
-            h1 { font-size: 32px; letter-spacing: 6px; }
-            footer { position: relative; bottom: 0; left: 0; flex-direction: column; align-items: flex-start; gap: 20px; padding-top: 60px; }
-            .right-footer { text-align: left; }
+        /* ── CORPORATE HEADER ── */
+        .corporate-header {
+            width: 100%;
+            padding: 15px 40px 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--mono);
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            position: relative;
+            z-index: 10;
+        }
+        .header-center { font-family: var(--display); font-size: 10px; letter-spacing: 4px; font-weight: 600; }
+        .gold-line { width: 100%; height: 1px; background: var(--gold); opacity: 0.6; position: relative; z-index: 10; }
+
+        /* ── NAV ── */
+        .site-nav { width: 100%; background: #0a0a0d; border-bottom: 1px solid rgba(166,137,76,0.3); position: relative; z-index: 100; }
+        .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: stretch; padding: 0 40px; }
+        .nav-item { position: relative; }
+        .nav-trigger { display: flex; align-items: center; gap: 8px; padding: 18px 28px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); cursor: pointer; border: none; background: none; transition: background 0.2s; white-space: nowrap; }
+        .nav-trigger:hover { background: var(--gold-dim); }
+        .nav-trigger .chevron { font-size: 7px; opacity: 0.6; transition: transform 0.2s; display: inline-block; }
+        .nav-item:hover .chevron { transform: rotate(180deg); }
+        .nav-dropdown { display: none; position: absolute; top: 100%; left: 0; min-width: 280px; background: #0d0d10; border: 1px solid rgba(166,137,76,0.25); border-top: 2px solid var(--gold); z-index: 200; }
+        .nav-item:hover .nav-dropdown { display: block; }
+        .nav-dropdown a { display: block; padding: 14px 24px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); text-decoration: none; border-bottom: 1px solid rgba(166,137,76,0.08); transition: color 0.2s, background 0.2s; }
+        .nav-dropdown a:hover { color: var(--gold); background: var(--gold-dim); }
+        .nav-dropdown a:last-child { border-bottom: none; }
+        .dd-label { display: block; padding: 10px 24px 6px; font-family: var(--mono); font-size: 7px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(166,137,76,0.4); border-bottom: 1px solid rgba(166,137,76,0.1); }
+        .nav-item.hor .nav-dropdown { min-width: 340px; }
+        a { color: inherit; text-decoration: none; }
+
+        /* ── PRODUCT HERO ── */
+        .prod-hero {
+            padding: 80px 60px 60px;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        .prod-eyebrow { font-family: var(--mono); font-size: 8px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 16px; }
+        .prod-name { font-family: var(--display); font-size: clamp(3rem, 7vw, 5.5rem); letter-spacing: 0.2em; color: var(--white); text-transform: uppercase; font-weight: 400; line-height: 1; margin-bottom: 12px; }
+        .prod-name em { color: var(--gold); font-style: normal; }
+        .prod-tagline { font-family: var(--mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--mid); margin-bottom: 20px; }
+        .prod-subtitle { font-family: var(--body); font-size: 1rem; font-weight: 300; color: var(--mid); font-style: italic; margin-bottom: 24px; }
+        .prod-status-dev { display: inline-block; padding: 5px 16px; border: 1px solid rgba(166,137,76,0.4); font-family: var(--mono); font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
+        .doc-ref { display: inline-block; margin-left: 12px; padding: 5px 16px; border: 1px solid rgba(166,137,76,0.2); font-family: var(--mono); font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(166,137,76,0.5); }
+
+        .gold-rule { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); opacity: 0.35; position: relative; z-index: 1; }
+
+        /* ── MAIN BODY ── */
+        .prod-body {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 60px 120px;
+            flex-grow: 1;
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: 80px;
+        }
+
+        /* ── NOT AI BLOCK ── */
+        .not-ai-block { background: #060408; border: 1px solid rgba(166,137,76,0.2); border-left: 3px solid var(--gold); padding: 40px 48px; margin-top: 60px; }
+        .not-ai-block .na-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; opacity: 0.8; }
+        .not-ai-block p { font-family: var(--body); font-size: 1.05rem; font-weight: 300; line-height: 2.2; letter-spacing: 0.06em; color: var(--mid); }
+        .not-ai-block p strong { color: var(--white); font-weight: 500; }
+
+        /* ── SECTION BLOCKS ── */
+        .section-block { }
+        .sb-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); opacity: 0.6; margin-bottom: 12px; }
+        .section-block h2 { font-family: var(--display); font-size: 1.7rem; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; line-height: 1.3; }
+        .section-block .sec-desc { font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); opacity: 0.4; margin-bottom: 32px; }
+        .section-block p { font-family: var(--body); font-size: 1.05rem; font-weight: 300; line-height: 2.2; letter-spacing: 0.06em; color: var(--mid); margin-bottom: 20px; max-width: 820px; }
+        .section-block p strong { color: var(--white); font-weight: 500; }
+
+        /* ── TWO-COL GRID ── */
+        .two-col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+
+        /* ── MODULE CARDS ── */
+        .module { background: var(--panel); padding: 36px 32px; }
+        .module-title { font-family: var(--mono); font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 24px; padding-bottom: 10px; border-bottom: 1px solid var(--border); display: block; }
+
+        /* Listener array */
+        .listener-badge { display: inline-block; padding: 4px 14px; border: 1px solid rgba(166,137,76,0.4); font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+        .listener-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1px; background: rgba(166,137,76,0.08); margin-top: 16px; }
+        .listener-item { background: var(--void); padding: 8px 12px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); }
+        .listener-item::before { content: '// '; color: var(--gold); opacity: 0.4; }
+        .muted-note { font-family: var(--mono); font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); opacity: 0.6; margin-top: 16px; }
+
+        /* Stat rows */
+        .stat-row { display: grid; gap: 20px; }
+        .stat-item { }
+        .stat-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); opacity: 0.6; margin-bottom: 6px; display: block; }
+        .stat-value { font-family: var(--mono); font-size: 1rem; color: var(--white); letter-spacing: 0.05em; }
+        .stat-value.gold { color: var(--gold); }
+
+        /* Operational principle quote */
+        .op-quote { margin: 0; padding: 28px 40px; border-left: 2px solid var(--gold); background: rgba(166,137,76,0.04); }
+        .op-quote p { font-family: var(--mono); font-size: 0.95rem; font-style: italic; color: var(--white); letter-spacing: 0.08em; margin-bottom: 12px; }
+        .op-quote cite { font-family: var(--mono); font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); opacity: 0.6; font-style: normal; }
+
+        /* State blocks */
+        .state-grid { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .state-block { background: var(--panel); padding: 28px 32px; display: grid; grid-template-columns: 80px 1fr; gap: 24px; align-items: start; }
+        .state-num { font-family: var(--display); font-size: 2.4rem; color: var(--gold); opacity: 0.25; line-height: 1; }
+        .state-body .state-name { font-family: var(--mono); font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; }
+        .state-body p { font-family: var(--body); font-size: 1rem; font-weight: 300; line-height: 2; color: var(--mid); margin: 0; }
+        .state-body p strong { color: var(--white); font-weight: 500; }
+
+        /* Simulation steps */
+        .step-list { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .step { background: var(--panel); display: grid; grid-template-columns: 72px 1fr; gap: 24px; align-items: start; padding: 32px 32px; }
+        .step-num { font-family: var(--display); font-size: 2.8rem; color: var(--gold); opacity: 0.2; line-height: 1; }
+        .step-content .sc-title { font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: block; }
+        .step-content p { font-family: var(--body); font-size: 1rem; font-weight: 300; line-height: 2; color: var(--mid); margin: 0; }
+
+        /* Terminal block */
+        .terminal { background: #000; border: 1px solid rgba(166,137,76,0.2); padding: 24px 28px; font-family: var(--mono); font-size: 11px; color: var(--gold); overflow-x: auto; margin-top: 32px; }
+        .terminal-line { margin: 0 0 8px; white-space: pre-wrap; color: var(--mid); }
+        .terminal-line .tl-gold { color: var(--gold); }
+        .terminal-line .tl-green { color: var(--green); }
+        .terminal-line .tl-red { color: var(--red); }
+        .terminal-line:last-child { margin-bottom: 0; }
+
+        /* Live feed */
+        .feed { display: grid; gap: 0; }
+        .feed-entry { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(166,137,76,0.08); font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; }
+        .feed-entry:last-child { border-bottom: none; }
+        .feed-label { color: var(--white); text-transform: uppercase; letter-spacing: 0.12em; }
+        .feed-sev { font-size: 9px; letter-spacing: 0.2em; margin-left: 12px; }
+        .feed-time { color: var(--gold); opacity: 0.5; white-space: nowrap; font-variant-numeric: tabular-nums; }
+        .feed-entry.new-entry { animation: feedIn 0.5s ease forwards; }
+        @keyframes feedIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Formula */
+        .formula-block { background: #000; border: 1px solid rgba(166,137,76,0.2); padding: 24px 28px; font-family: var(--mono); font-size: 13px; color: var(--gold); letter-spacing: 0.08em; margin-bottom: 0; }
+
+        /* ROI */
+        .roi-value { font-family: var(--display); font-size: 3.5rem; color: var(--white); line-height: 1; margin-bottom: 8px; }
+        .roi-note { font-family: var(--mono); font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-bottom: 16px; }
+        .roi-notice { font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(166,137,76,0.4); border: 1px solid var(--border); padding: 10px 16px; line-height: 1.8; }
+
+        /* Dev notice */
+        .dev-notice { background: #06080a; border: 1px solid rgba(166,137,76,0.2); border-left: 3px solid var(--gold); padding: 32px 40px; }
+        .dev-notice .dn-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; opacity: 0.7; }
+        .dev-notice p { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); line-height: 2; margin: 0; }
+
+        /* OS Grid */
+        .os-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: rgba(166,137,76,0.12); border: 1px solid rgba(166,137,76,0.12); }
+        .os-cell { background: var(--void); padding: 28px 24px; text-align: center; }
+        .os-cell .os-icon { font-size: 1.6rem; margin-bottom: 12px; display: block; }
+        .os-cell .os-name { font-family: var(--display); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 6px; }
+        .os-cell .os-ver { font-family: var(--mono); font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); }
+
+        /* Pricing */
+        .pricing-block { background: #060408; border: 1px solid rgba(166,137,76,0.15); padding: 40px 48px; }
+        .pricing-block .pb-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; opacity: 0.8; }
+        .pricing-block p { font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); line-height: 2; margin-bottom: 20px; }
+        .tier-list { list-style: none; padding: 0; margin: 16px 0; }
+        .tier-list li { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); padding: 8px 0; border-bottom: 1px solid rgba(166,137,76,0.08); }
+        .tier-list li::before { content: '// '; color: var(--gold); opacity: 0.5; }
+        .tier-list li:last-child { border-bottom: none; }
+        .cta-btn { display: inline-block; margin-top: 28px; padding: 14px 36px; border: 1px solid var(--gold); font-family: var(--mono); font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); transition: background 0.2s, color 0.2s; }
+        .cta-btn:hover { background: var(--gold); color: var(--void); }
+
+        /* AcerbE badge */
+        .acerbe-badge { display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; border: 1px solid rgba(166,137,76,0.2); font-family: var(--mono); font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+        /* Footer */
+        footer { width: 100%; padding: 0 40px 20px; font-family: var(--mono); font-size: 8px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-top: auto; position: relative; z-index: 1; }
+        .footer-line { width: 100%; height: 1px; background: var(--gold); opacity: 0.6; margin-bottom: 12px; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; }
+        .footer-center { font-family: var(--display); font-size: 9px; letter-spacing: 3px; }
+
+        @media (max-width: 720px) {
+            .prod-body { padding: 0 24px 80px; }
+            .prod-hero { padding: 60px 24px 40px; }
+            .state-block { grid-template-columns: 1fr; gap: 8px; }
+            .step { grid-template-columns: 1fr; gap: 8px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <div class="h-meta">
-            <span>BIN 754975035 // ARCHER CHAIN ANALYTICS</span>
-            <span>2026.04.28 // 02:30:00</span>
-        </div>
-        <div class="tax-id">GST/HST REGISTERED // SOVEREIGN_ENTITY_PROVISION</div>
-        <h1>ARGOS</h1>
-        <span class="val-sub">ACQUISITION_VALUE: $8,400,000.00 USD</span>
-    </header>
-
-    <div class="ledger-title">CLASS_A_COMMON_STOCK_LEDGER</div>
-
-    <div class="ledger-block">
-        <div class="row">
-            <span>VALUATION_OF_INVESTMENTS</span>
-            <span class="val">21,796,595.75</span>
-        </div>
-        <div class="row">
-            <span>NET_OPERATING_LOSS_CARRYFORWARDS_FED</span>
-            <span class="val">52,499,216.36</span>
-        </div>
-        <div class="row">
-            <span class="red-text">TOTAL_DEFERRED_TAX_ASSETS</span>
-            <span class="val red-text">317,784,385.41</span>
-        </div>
-    </div>
-
-    <div class="ledger-block" style="margin-top: 40px;">
-        <div class="row">
-            <span>DEFERRED_TAX_LIABILITY: INVESTMENTS</span>
-            <span class="val">42,589,685.01</span>
-        </div>
-        <div class="row">
-            <span>DEFERRED_MANAGEMENT_FEES</span>
-            <span class="val">81,244,342.87</span>
-        </div>
-        <div class="row">
-            <span>TOTAL_DEFERRED_TAX_LIABILITIES</span>
-            <span class="val">23,723,927.65</span>
-        </div>
-    </div>
-
-    <div class="asset-box">
-        <span class="sum-label">NET_DEFERRED_TAX_ASSETS [SVRN_POSITION]</span>
-        <span class="sum-total">$615,194,700.72</span>
-    </div>
+<!-- CORPORATE HEADER -->
+<div class="corporate-header">
+    <div>BIN754975035</div>
+    <div class="header-center">Archer Chain Analytics</div>
+    <div>GST/HST754975035RT0001</div>
 </div>
+<div class="gold-line"></div>
+
+<!-- NAV -->
+<nav class="site-nav">
+    <div class="nav-inner">
+        <div class="nav-item">
+            <button class="nav-trigger">Products <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <span class="dd-label">Sovereign Infrastructure</span>
+                <a href="aletheia.html">Alētheia™ x101 Array</a>
+                <a href="inxs.html">INxS™ — Inexorabilis</a>
+                <a href="argos.html">Argos™ Autonomous Sentinel</a>
+                <a href="acerbe.html">AcerbE™ Digital Fingerprinting</a>
+                <span class="dd-label">Automation &amp; Delivery</span>
+                <a href="rapax.html">RaPaX™ Sovereign Vending</a>
+                <a href="salvagbotx.html">SalvageBotX™ Code Recycler</a>
+                <a href="formdepot.html">FormDepot™</a>
+                <a href="compliance-app.html">New Business Compliance App</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-trigger">Services <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <a href="../services.html#consulting">Consulting</a>
+                <a href="../services.html#installation">Installation</a>
+                <a href="../services.html#whitelabel">White-Label Licensing</a>
+                <a href="../services.html#warranty">The AcerbE™ FAFO Guarantee</a>
+            </div>
+        </div>
+        <div class="nav-item hor">
+            <button class="nav-trigger">Alētheia™ Array Hall of Records <span class="chevron">▾</span></button>
+            <div class="nav-dropdown">
+                <a href="../hall-of-records.html">Hall of Records — Main</a>
+                <a href="../signin.html">Sign In / Register</a>
+                <a href="../hall-of-records.html#access">Access Tiers</a>
+                <a href="../hall-of-records.html#tools">Available Tools</a>
+                <a href="../hall-of-records.html#charity">The Alētheia Charity</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="prod-hero">
+    <div class="prod-eyebrow">Archer Chain Analytics — ACA-ARG-001 // Autonomous Security Division</div>
+    <div class="prod-name"><em>Argos™</em></div>
+    <div class="prod-tagline">Autonomous Bug-Bounty Sentinel · Architectural Design Brief</div>
+    <p class="prod-subtitle">Sovereign-grade threat intelligence powered by the Alētheia™ x101 Array</p>
+    <span class="prod-status-dev">Live Design / In Development</span>
+    <span class="doc-ref">ACA-ARG-001</span>
+</div>
+<div class="gold-rule"></div>
+
+<main class="prod-body" id="main">
+
+    <!-- NOT AI -->
+    <div class="not-ai-block">
+        <div class="na-label">On the Record — What This Is</div>
+        <p><strong>Argos™ is not a SIEM dashboard that sends you alerts you act on manually. It is not a vulnerability scanner that produces a PDF report and considers its job done. It is not machine learning guessing at threats based on pattern proximity.</strong> It is an autonomous security monitoring and bug-bounty execution engine that ingests live chain state via Alētheia™ x101 across 115+ verified listener packages, identifies anomalies deterministically, forks the chain state in an isolated environment, reproduces the candidate condition, and packages the result as submission-ready forensic evidence — <strong>without a human in the loop between detection and proof.</strong> The distinction between a notification service and a sentinel is the difference between being told something happened and having the evidence already in your hand when you find out.</p>
+    </div>
+
+    <!-- SECTION 01: OBSERVER ARCHITECTURE -->
+    <div class="section-block">
+        <div class="sb-label">Section 01</div>
+        <h2>Observer Architecture</h2>
+        <p class="sec-desc">How 115+ listeners feed a centralized threat intelligence core</p>
+
+        <div class="two-col">
+            <div class="module">
+                <span class="module-title">Alētheia™ x101 Array — Input Layer</span>
+                <span class="listener-badge">115+ Verified Listener Packages</span>
+                <div class="listener-grid">
+                    <div class="listener-item">EthereumMainnet</div>
+                    <div class="listener-item">SolanaMainnet</div>
+                    <div class="listener-item">BitcoinMainnet</div>
+                    <div class="listener-item">AvalancheMainnet</div>
+                    <div class="listener-item">ArbitrumMainnet</div>
+                    <div class="listener-item">PolygonMainnet</div>
+                    <div class="listener-item">BaseMainnet</div>
+                    <div class="listener-item">OptimismMainnet</div>
+                    <div class="listener-item">BnbMainnet</div>
+                    <div class="listener-item">CardanoMainnet</div>
+                    <div class="listener-item">SuiMainnet</div>
+                    <div class="listener-item">+ 104 more</div>
+                </div>
+                <p class="muted-note">Ring 0/1 direct ingest. No public relay. Zero intermediary latency.</p>
+            </div>
+
+            <div class="module">
+                <span class="module-title">Threat Intelligence Core</span>
+                <div class="stat-row">
+                    <div class="stat-item">
+                        <span class="stat-label">Verified listener packages</span>
+                        <span class="stat-value gold">115+ — Version 2.0-Hardened</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Parallel observer threads</span>
+                        <span class="stat-value">115+ asyncio workers</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Evaluation latency target</span>
+                        <span class="stat-value gold">&lt;50ms per block event</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Fork instantiation target</span>
+                        <span class="stat-value">&lt;200ms at block height</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Package integrity</span>
+                        <span class="stat-value">SHA-256 fingerprinted — AcerbE™</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="op-quote" style="margin-top:24px;">
+            <p>"Argos™ exists inside the blast radius of block production — not outside it."</p>
+            <cite>Operational Principle — ACA-ARG-001</cite>
+        </div>
+    </div>
+
+    <!-- SECTION 02: STATE TRANSITION -->
+    <div class="section-block">
+        <div class="sb-label">Section 02</div>
+        <h2>State Transition Logic</h2>
+        <p class="sec-desc">Watching → Alerting → Proving → Reporting</p>
+
+        <div class="state-grid">
+            <div class="state-block">
+                <div class="state-num">01</div>
+                <div class="state-body">
+                    <span class="state-name">Watching</span>
+                    <p>Argos™ continuously observes all 115+ listener feeds and accumulates block-state data in real time. <strong>Nothing is sampled. Nothing is polled.</strong> Every event is evaluated as it arrives.</p>
+                </div>
+            </div>
+            <div class="state-block">
+                <div class="state-num">02</div>
+                <div class="state-body">
+                    <span class="state-name">Alerting</span>
+                    <p>A candidate anomaly is scored against severity thresholds, queued, and <strong>cross-referenced against active bug-bounty registries</strong> to determine submission eligibility and potential payout before proof generation begins.</p>
+                </div>
+            </div>
+            <div class="state-block">
+                <div class="state-num">03</div>
+                <div class="state-body">
+                    <span class="state-name">Proving</span>
+                    <p>The system snapshots the chain state at the exact block height and <strong>replays the candidate condition in an isolated ephemeral fork.</strong> Opcode traces, storage mutations, and execution diffs are captured as verifiable evidence.</p>
+                </div>
+            </div>
+            <div class="state-block">
+                <div class="state-num">04</div>
+                <div class="state-body">
+                    <span class="state-name">Reporting</span>
+                    <p>Validated findings are packaged with execution traces, impact analysis, severity classification, and submission metadata — <strong>formatted for direct handoff to bug-bounty platforms or private disclosure pipelines.</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 03: SIMULATION LOOP -->
+    <div class="section-block">
+        <div class="sb-label">Section 03</div>
+        <h2>Simulation Loop</h2>
+        <p class="sec-desc">Ephemeral fork execution and proof generation</p>
+
+        <div class="step-list">
+            <div class="step">
+                <div class="step-num">01</div>
+                <div class="step-content">
+                    <span class="sc-title">Fork Instantiation</span>
+                    <p>Capture live state at the exact block height. Spawn an isolated ephemeral fork in under 200ms. No impact on mainnet state. No observer effect on the target condition.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">02</div>
+                <div class="step-content">
+                    <span class="sc-title">Exploit Execution</span>
+                    <p>Reproduce the candidate condition in the sandboxed fork environment. Record all opcode-level mutations, storage state changes, and balance deltas generated by the reproduction.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">03</div>
+                <div class="step-content">
+                    <span class="sc-title">Proof Capture</span>
+                    <p>Package execution traces, diff output, severity signal classification, and estimated impact in USD. Output is AcerbE™-fingerprinted and chain-anchored for integrity attestation.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="terminal" style="margin-top:32px;">
+            <div class="terminal-line"><span class="tl-gold">ARGOS</span> // fork instantiated at block <span class="tl-gold" id="block-num">21,847,392</span></div>
+            <div class="terminal-line">candidate: <span class="tl-gold">re-entrancy pattern — EthereumMainnet</span></div>
+            <div class="terminal-line">severity scored: <span class="tl-red">CRITICAL</span> // impact_usd: <span class="tl-gold" id="impact-val">$4,200,000</span></div>
+            <div class="terminal-line">reproducing in ephemeral fork...</div>
+            <div class="terminal-line"><span class="tl-green">✓ condition reproduced // opcode trace captured // diff packaged</span></div>
+            <div class="terminal-line"><span class="tl-green">✓ AcerbE™ fingerprint applied // chain anchor pending</span></div>
+            <div class="terminal-line">status: <span class="tl-gold">REPORT READY — submission pipeline queued</span></div>
+        </div>
+    </div>
+
+    <!-- SECTION 04: LIVE THREAT FEED -->
+    <div class="section-block">
+        <div class="sb-label">Section 04</div>
+        <h2>Live Threat Feed</h2>
+        <p class="sec-desc">Real-time anomaly tracking across active listener chains</p>
+
+        <div class="module">
+            <span class="module-title">
+                Anomaly Stream
+                <span id="feed-counter" style="color:var(--gold);margin-left:12px;">0</span> detected
+            </span>
+            <div id="feed-list" class="feed" aria-live="polite" aria-atomic="false" aria-relevant="additions">
+                <!-- populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 05: REVENUE LOGIC -->
+    <div class="section-block">
+        <div class="sb-label">Section 05</div>
+        <h2>Revenue Logic</h2>
+        <p class="sec-desc">Economic impact scoring and bounty optimization</p>
+
+        <div class="two-col">
+            <div class="module">
+                <span class="module-title">Bounty Payout Formula</span>
+                <div class="formula-block">
+                    bounty = impact_usd<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× severity_multiplier<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× program_rate
+                </div>
+                <p style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);margin-top:20px;line-height:2;">
+                    Severity multipliers are applied per-classification: Critical, High, Medium, Low. Program rate is determined by the target bounty program's published payout scale. All values calculated prior to proof generation — <strong style="color:var(--white);">unprofitable candidates are dropped before simulation resources are allocated.</strong>
+                </p>
+            </div>
+
+            <div class="module">
+                <span class="module-title">ROI Gatekeeper — Architecture Phase</span>
+                <div class="roi-value">47.3x</div>
+                <p class="roi-note">Illustrative ROI target — architectural modelling</p>
+                <div class="roi-notice">
+                    Figure based on architectural modelling only.<br>
+                    Not a guarantee of performance or bounty yield.<br>
+                    Actual ROI subject to program availability, severity classification, and disclosure outcome.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 06: PLATFORM + DEV STATUS -->
+    <div class="section-block">
+        <div class="sb-label">Section 06</div>
+        <h2>Deployment Environments</h2>
+        <p class="sec-desc">Target operating systems at production release</p>
+
+        <div class="os-grid">
+            <div class="os-cell"><span class="os-icon">🐧</span><span class="os-name">Linux</span><span class="os-ver">Ubuntu 20.04+ · Debian 11+ · RHEL 8+</span></div>
+            <div class="os-cell"><span class="os-icon">☁️</span><span class="os-name">Cloud / VPS</span><span class="os-ver">Self-hosted · Any Linux-based host</span></div>
+            <div class="os-cell"><span class="os-icon">🪟</span><span class="os-name">Windows</span><span class="os-ver">Server 2019+ · Windows 10/11</span></div>
+            <div class="os-cell"><span class="os-icon">🔒</span><span class="os-name">Zero-Trust</span><span class="os-ver">Cloudflare Zero-Trust — All Deployments</span></div>
+        </div>
+
+        <div class="dev-notice" style="margin-top:32px;">
+            <div class="dn-label">Development Status — Live Design / In Development</div>
+            <p>
+                Argos™ is in active architecture and development.<br>
+                Observer core and listener integration are being built against live Alētheia™ x101 data.<br>
+                Simulation loop and proof packaging pipeline: design finalized, implementation in progress.<br>
+                Production timeline: to be confirmed. Pre-release partnerships and enterprise design integrations available now.<br>
+                Contact: sales@mahihkan.com
+            </p>
+        </div>
+    </div>
+
+    <!-- SECTION 07: PRICING -->
+    <div class="section-block">
+        <div class="sb-label">Section 07</div>
+        <h2>Licensing &amp; Pricing</h2>
+
+        <div class="pricing-block">
+            <div class="pb-label">Pricing Structure — All Tiers in USD · Pre-Release</div>
+            <p>Argos™ pricing confirmed at production release. Pre-release design partnerships and early access agreements available now.</p>
+            <ul class="tier-list">
+                <li>Individual License — single deployment, local or VPS</li>
+                <li>Enterprise — multi-chain coverage, custom detection playbooks, SLA-backed</li>
+                <li>Bug Bounty Division Access — automated finding pipeline, submission integration</li>
+                <li>White-Label — deploy autonomous sentinel under your security brand</li>
+                <li>Pre-Release Partnership — design input, priority access at production launch</li>
+                <li>Preventative Maintenance — detection signature updates, listener patches</li>
+            </ul>
+            <a href="mailto:sales@mahihkan.com?subject=Argos Pre-Release Inquiry" class="cta-btn">Express Interest</a>
+        </div>
+    </div>
+
+    <div class="acerbe-badge"><span class="dot"></span>AcerbE™ Forensic Fingerprint Active — All Proof Packages Chain-Anchored</div>
+
+</main>
 
 <footer>
-    <div class="left-footer">
-        TEL: (306) 912-9347<br>
-        INFO@MAHIHKAN.COM
-    </div>
-    <div class="right-footer">
-        ©CANADA 2026<br>
-        ALL RIGHTS RESERVED
+    <div class="footer-line"></div>
+    <div class="footer-content">
+        <div><a href="mailto:sales@mahihkan.com">sales@mahihkan.com</a></div>
+        <div class="footer-center">Sovereignty // Integrity // Inexorabilis</div>
+        <div>© 2026 All Rights Reserved</div>
     </div>
 </footer>
 
-<div class="inexorabilis">INEXORABILIS</div>
+<script>
+(function () {
+    const ANOMALIES = [
+        "Uniswap V3 liquidity imbalance",
+        "Solana program anomaly detected",
+        "Arbitrum bridge inconsistency",
+        "Ethereum re-entrancy candidate",
+        "BNB Chain oracle deviation",
+        "Polygon validator gap",
+        "Avalanche subnet irregularity",
+        "Base L2 sequencer latency spike",
+        "Optimism withdrawal anomaly",
+        "Aave interest rate manipulation candidate",
+        "Curve pool imbalance detected",
+        "StarkNet state diff mismatch",
+        "Hyperliquid liquidation edge case",
+        "Sui object mutation anomaly",
+        "THORChain swap deviation detected",
+    ];
 
+    const SEVERITY = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'];
+    const SEV_COLOR = {
+        CRITICAL: '#FF0000',
+        HIGH:     '#d4844c',
+        MEDIUM:   '#a6894c',
+        LOW:      '#4caf82',
+    };
+
+    const feedList = document.getElementById('feed-list');
+    const counter  = document.getElementById('feed-counter');
+    let count = 0;
+    const MAX = 6;
+
+    function addEntry() {
+        const label = ANOMALIES[Math.floor(Math.random() * ANOMALIES.length)];
+        const sev   = SEVERITY[Math.floor(Math.random() * SEVERITY.length)];
+        const now   = new Date().toLocaleTimeString('en-CA', { hour12: false });
+
+        const el = document.createElement('div');
+        el.className = 'feed-entry new-entry';
+        el.innerHTML =
+            `<span><span class="feed-label">${label.toUpperCase()}</span><span class="feed-sev" style="color:${SEV_COLOR[sev]};letter-spacing:0.2em;">${sev}</span></span>` +
+            `<span class="feed-time">${now}</span>`;
+
+        feedList.prepend(el);
+        count++;
+        counter.textContent = count;
+
+        while (feedList.children.length > MAX) feedList.removeChild(feedList.lastChild);
+    }
+
+    // Seed 3 entries on load
+    addEntry(); addEntry(); addEntry();
+
+    // Randomized intervals — 4–8s
+    function scheduleNext() {
+        setTimeout(() => { addEntry(); scheduleNext(); }, 4200 + Math.random() * 3800);
+    }
+    scheduleNext();
+
+    // Terminal block number drift
+    const blockEl  = document.getElementById('block-num');
+    const impactEl = document.getElementById('impact-val');
+    const IMPACTS  = ['$1,840,000','$4,200,000','$780,000','$12,500,000','$350,000','$6,100,000'];
+    let block = 21847392;
+
+    setInterval(() => {
+        block += Math.floor(Math.random() * 12) + 1;
+        blockEl.textContent  = block.toLocaleString('en-US');
+        impactEl.textContent = IMPACTS[Math.floor(Math.random() * IMPACTS.length)];
+    }, 6000);
+})();
+</script>
 </body>
 </html>
